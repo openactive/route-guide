@@ -23,7 +23,7 @@ Routes started life as a proposal related to the Opportunity specification: see 
 
 OpenActive W3C calls discussing Routes can be found at:
 
-* [8 March 2019]](https://www.youtube.com/watch?v=1bXzFY72wbs)
+* [8 March 2019](https://www.youtube.com/watch?v=1bXzFY72wbs)
 * [22 March 2019](https://www.youtube.com/watch?v=pR9YL6GAXWU&t=8s)
 
 Outputs from the Routes Use-Case Workshop held on 4 July 2019 are available in the [Workshop shared folder](https://drive.google.com/drive/u/0/folders/1mR_dov8w33tdWPdnRBiwW4eBxqyTmQQL).
