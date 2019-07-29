@@ -24,7 +24,7 @@ Materials related to the W3C calls discussing Routes on the dates below can be f
 
 * [8 March 2019](https://w3c.openactive.io/meetings/2019-05-08-routes-and-accessibility-planning)
 * [22 March 2019](https://w3c.openactive.io/meetings/2019-05-22-routes-data-exploration)
-* [03 July 2019](https://w3c.openactive.io/meetings/2019-07-03-routes-workshop-preparation)
+* [3 July 2019](https://w3c.openactive.io/meetings/2019-07-03-routes-workshop-preparation)
 * [17 July 2019](https://w3c.openactive.io/meetings/2019-07-17-routes-workshop-follow-up)
 
 
