@@ -33,16 +33,12 @@ function respec2html {
 }
 
 echo Copying static files
-cp -r ../1.0 .
-cp -r ../1.1 .
-cp -r ../2.0 .
 cp -r ../EditorsDraft .
 
 # Remove edit versions
 # rm **/edit.html
 
 # Current latest version
-cp -r ../2.0/* .
 
 cd ..
 
