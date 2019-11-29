@@ -1,12 +1,12 @@
 sudo: false
 language: node_js
 node_js:
-- "10"
+- '10'
 script: bash ./deploy.sh
 branches:
   only:
   - master
 env:
   global:
-    - GH_REF: github.com/routes.git
-    - secure: "VxCbYbrb9zhw7hQ7WtRJaqyVPIn+68OLmKmF0L8yt25COxiBMwEHxeyJdG0s5ZytIyAMnCSEGgdc87vcTO7bvBvc+LamhX1k8v2TdzZsIFVrE6hGgDn16Sh7WDLuGtDB2An0jk4sBwEljq9qVrxvycOJgiOwTcL9xwgSPeeYIdU/hvLzxcpEMLjx/zvRo6amA3k+aLxutZaTkIAyLnyNZYZtIrxyDx/df6T6PTxJEFEEygf1fwDnClSFjkjSlLeb+tC3eaxhMiHlTAi3/mYLx9+ZIjCu0G3KXMGRFqJgMDUnCXEg5Lokehr3HPV1NvdLDtUabOl+dVDsdwxMr3gdmrN/Kr7tWCfQASJXLDNKWxEpC7MItSQwWFzeJuru5aH4GVLcpldohCAZLrGt477sFjuh7aGY8rLmaFVL10KoK8xOjq8guDGWv1LIF4CInznG3r+pkwU/28ww7vJDW7qLItUFXFxXBMY+VaxjiM5ExqWVcipunKGSyQv/pZeFbPS7ESBd2Xq+Tv4ofJ5lOW9XgemI9LQA+LLMHvE4xTNH/PR9uSbr3cokQLWCieQPAHfO3U/PN2u6TR4ZzksefK+oaVseGZN8p8l/4/YhA9idbjEDhkQsDx6x/FuQB8siwxxAw17zxk+QW52m7Y9Hl9yLo4uJTNx/DPkJwkWN88DaXgo="
+    - GH_REF: github.com/openactive/routes.git
+    - secure: "IYj5D7xAgNeqdrG35rEb8Q8zeG6XGSxQpvbRz7CN/OXgVmaVW3FRvPbrkC5EQ2Tm4pSRkPjIt6/uNtwjbdz4QGDjfdbgnkH8lBSho1oA2ujFtdG4vSXo1fKaWGhUIbuCRco/YaimRp81jXd++rbkez6S7Zz4jYMzU6qkd7skkBf8arIF4jPsM+GQ5gn3r8qNn8WiWQN0QJuk8RdOqVT994ztGs2+kFlqvDUSPq4RR2QVCoMXKVzpriDEYir/ncAlY9uH2Eyzhi+wrbLwzBT9VpceGO8FWA8dFv3Eo7s9sL0v2PT2iNwyaq9nvRnTrUIUsMy7usnSalCvF/dbfjkjYipYFZvVzxJTbTZYf8aMbh3ofQK++HX9GyNm9M2HTO+6AxfDMI1R6QgNB+7F4P0X1dgmRNIXSy0kvIYqvSKk29OzKiry6/MYDhiMMY6Lr/1ZP5TtgacoBKVpOWbrzx03Mq2AjHlBo70haakR6w2Mcw9EAhyqntYCoPVSri3QmqRonDGdzVfFaD40y5sD2ybB6SzyuyyPCN2pLw4/5B4WLMxN+UJNLxCgVg+qV3Xx7mqY70TOclNTXE/sH/C/ZI+Or1aZEUGGA1r8KW463dMg2qYbbiFoGlu8UEBT8jAhtoOF8FMdSbDUGF0j+WUWivSEWJxPBuF3jgkWKMDb20QHYqc="
