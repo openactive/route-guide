@@ -311,10 +311,11 @@ Modelling booking can be complex. Readers with this use-case in mind are advised
 
 ## Structure of this document
 
-This specification is divided into two main sections:
+This specification is divided into three main sections:
 
 1. **Introduction** - provides a broad definition of Route Guide data and goals for this specification
 2. **Data Model** - a data model that maps the key concepts to some standard vocabularies
+3. **Worked Example** - in order to ground the specification and illustrate its application, an extensive worked example (The Avebury Archaeology Walk) is provided.
 
   </section>
 
@@ -351,6 +352,10 @@ Examples are in light khaki boxes, with khaki left border, and with a
 numbered "Example" header in khaki. Examples are always informative.
 The content of the example is in monospace font and may be syntax colored.
 </pre>
+<div class="advisement">
+  <div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Advisement</span></div>
+Advisements are used to highlight important normative statements, in particular best practices.
+</div>
 
   </section>
   <section>
@@ -455,16 +460,15 @@ If applicable then publishers may choose to use the same URI for these two prope
 applications <em class="rfc2119">MAY</em> choose to rely on the value of the [schema:url](https://schema.org/url) property as a unique identifier.
 
 The option to use two different URLs is useful when there is a need to distinguish between a unique identifier and a
-public resource. For example a platform hosting opportunity data may need to assign a unique identifier to a resource
-that is separate to its public web page.
+public resource. For example a platform hosting opportunity data may need to assign a unique identifier to a resource that is separate to its public web page.
 
 <pre class="example" title="Simple route description"><code>
   {
     "@context": "https://openactive.io/",
     "type": "RouteGuide",
-    "id": "http://host.routes-data.com/id/12345",
-    "url": "http://my-outdoors-org.example.org/events/1",
-    "name": "Peak District Walk"
+    "id": "http://routes.openactive.io/id/12345",
+    "url": "https://www.nationaltrust.org.uk/avebury/trails/avebury-archaeology-walk",
+    "name": "Avebury Archaeology Walk"
   }
 </code>
 </pre>
@@ -557,11 +561,12 @@ Note that `RouteGuide` is a subclass of [`schema:CreativeWork`](https://schema.o
 |[oa:pointOfInterest](https://openactive.io/pointOfInterest)|OPTIONAL|Array of [oa:RoutePoint](https://openactive.io/RoutePoint)|Noteworthy points along the Route. On modelling values here, see below: [Describing Route Points](#describing-route-points-start-end-and-of-interest-schema-place).|
 |[oa:accessibiltyDescription](https://openactive.io/accessibiltyDescription)|RECOMMENDED|Array of [schema:Text](https://schema.org/Text)|e.g. 'wheelchair friendly', 'hearing loop'|
 |[oa:gradient](https://openactive.io/gradient)|RECOMMENDED|[oa:RouteGradient](https://openactive.io/RouteGradient)||
-|[oa:surface](https://openactive.io/surface)|RECOMMENDED|Array of [schema:Text](https://schema.org/Text)|Suggested values include "Gravel", "Paved", "Bare Earth or Bedrock", "Short Vegetation", "Rough Vegetation or Crop", "Hard Surface (Stoney)", "Hard Surface (Sealed)", and "Boardwalk or Timber"|
+|[oa:surface](https://openactive.io/surface)|RECOMMENDED|Array of [schema:URL](https://schema.org/URL) or [schema:Text](https://schema.org/Text)|If a URL, MUST be drawn from https://openactive.io/Gravel, https://openactive.io/Paved, https://openactive.io/BareEarthOrBedrock, https://openactive.io/ShortVegetation, https://openactive.io/RoughVegetationOrCrop, https://openactive.io/HardSurface(Stoney), https://openactive.io/HardSurface(Sealed), and https://openactive.io/BoardwalkOrTimber|
 |[oa:routeDifficulty](https://openactive.io/routeDifficulty)|OPTIONAL|Array of [oa:RouteDifficulty](https://openactive.io/RouteDifficulty)|Although typically only one `RouteDiffulty` is expected, Routes suitable for more than one kind of activity (e.g., walking and horse-riding) may require multiple values here.|
 |[oa:geoPath](https://openactive.io/geoPath)|RECOMMENDED|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no mapImage is provided. URL MUST resolve to a file in a format that natively supports geo encoding, e.g. geoJSON or GPX|
 |[oa:mapImage](https://openactive.io/mapImage)|OPTIONAL|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no geoPath is provided.|
 |[oa:category](https://openactive.io/category)|OPTIONAL|Array of [schema:Text](https://schema.org/Text) or [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|e.g. "pushchair-friendly", "family", "forest walk"|
+|[oa:additionalInformation](https://openactive.io/additionalInformation)|OPTIONAL|Array of [schema:Article](https://schema.org/Article)|Historical, scientific, or any other information providing interesting background detail regarding the Route. If this information relates to a specific point or structure along the Route, it may be more appropriate to model this as a `pointOfInterest`.|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|e.g., “Parking”, “Toilets”. Where an `amenityFeature` may be modelled as a feature either of `RouteGuide` or of a `RoutePoint`, preference should be given to the `RoutePoint` (that is to say, to the more-specific level of modelling). For further guidance on modelling amenities, see [Describing Amenities](https://www.openactive.io/modelling-opportunity-data/#describing-amenities) in the [Opportunity Specification](https://www.openactive.io/modelling-opportunity-data/)|
 |[oa:isLoop](https://openactive.io/isLoop)|OPTIONAL|Boolean|Whether the route returns to its point of origin|
 |[oa:riskInformation](https://openactive.io/riskInformation)|RECOMMENDED|[oa:RouteRiskAdvisory](https://openactive.io/RouteRiskAdvisory)||
@@ -658,14 +663,15 @@ It is important that the gradient information conveyed by the `RouteGradient` ob
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"TransportNote"|
-|[oa:transportMode](https://openactive.io/transportMode)|REQUIRED|[schema:Text](https://schema.org/Text)|It is RECOMMENDED that the value of `oa:transportMode` be taken from the following list: "https://openactive.io/Bus", "https://openactive.io/Rail", "https://openactive.io/Bicycle", "https://openactive.io/Road", or "https://openactive.io/Foot".|
+|[oa:transportMode](https://openactive.io/transportMode)|REQUIRED|[schema:Text](https://schema.org/Text)|It is RECOMMENDED that the value of `oa:transportMode` be taken from the following list: https://openactive.io/Bus, https://openactive.io/Rail, https://openactive.io/Bicycle, https://openactive.io/Road, or https://openactive.io/Foot.|
 |[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|Instructions for navigation to the destination by means of the `oa:transportMode`|
 
 ### Describing Route Difficulty (`oa:RouteDifficulty`)
 
 The `oa:RouteDifficulty` model describes the effort and level of fitness required to successfully complete a Route. Such assessments necessarily contain a strong subjective component, and data publishers are therefore encouraged to use the [`schema:description`](https://schema.org/description) field to ground their assessment in more concrete terms such as `oa:distance`, `oa:gradient`, or `oa:indicativeDuration`, and/or to provide a `difficultyDefinitionURL` further explaining the rationale behind their assessment of difficulty. In addition, values provided in `oa:category` (such as e.g. 'pushchair-friendly') may provide valuable additional context.
 
-<div class="warning" title="Difficulty Level and Novice Users">
+<div class="advisement">
+  <div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Difficulty Level and Novice Users</span></div>
 Data publishers are advised that prospective Route users - and in particular novice or beginning walkers - often have difficulty assessing the degree of challenge involved in traversing a Route, either being readily discouraged from Routes they are in fact capable of or, more rarely, finding themselves exhausted or lost in the midst of difficult Routes they are as yet unprepared for. Publishers are accordingly recommended to devote care and attention to the difficulty information they provide, in particular to articulating the significance of the different components (gradient, distance, conditions, etc.) involved in accurately conveying difficulty.
 </div>
 
@@ -770,8 +776,8 @@ To avoid potential confusion between absence of risk information and absence of 
 |[oa:riskMitigators](https://openactive.io/riskMitigators)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors reducing knownRisks, e.g. "guardrails provided", "well-lit"|
 |[oa:riskDescription](https://openactive.io/riskDescription)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
 |[oa:userSafetyFeedback](https://openactive.io/userSafetyFeedback)|OPTIONAL|[schema:Review](https://schema.org/Review)||
-|[oa:isMaintained](https://openactive.io/isMaintained)|OPTIONAL|Boolean|Indicates whether the Route is actively maintained by e.g. a landowner or charitable organisational. Typically does not apply to urban Routes.|
-|[oa:isMaintainedBy](https://openactive.io/isMaintainedBy)|OPTIONAL|[schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|REQUIRED if isMaintained is 'true'|
+|[oa:isMaintained](https://openactive.io/isMaintained)|OPTIONAL|Boolean|Indicates whether the Route is actively maintained by e.g. a landowner or charitable organisation. Typically does not apply to urban Routes.|
+|[oa:isMaintainedBy](https://openactive.io/isMaintainedBy)|OPTIONAL|[schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|The Organization or or Person responsible for maintaining the Route. MUST NOT have a value if isMaintained is 'false'.|
 |[oa:riskInformationURL](https://openactive.io/riskInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to a formal definition outlining risk and mitigating factors, e.g. https://vscg.org/guiding-principles/risk-control|
 |[oa:trafficDescription](https://openactive.io/trafficDescription)|OPTIONAL|[schema:Text](https://schema.org/Text)||
 
@@ -820,6 +826,7 @@ In addition, the following structural constraints apply:
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
+|@type|REQUIRED|"RouteSegmentGuide"||
 |[oa:sequence](https://openactive.io/sequence)|RECOMMENDED|Integer|Indicates the presentation order of `Route Segment`s within the parent Route. This ordering should normally be present, except for unusual situations such as e.g., modelling `RouteGuide`s that are otherwise unsegmented but for access points. In cases where `RouteSegmentGroup`s are provided, this property is REQUIRED (See below, [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)).|
 |[schema:alternativeRouteSegmentGuide](https://schema.org/alternativeSegmentTo)|OPTIONAL|Array of schema:URL|An array of `@id` values pointing to Route Segment Guides describing alternative Route Segments that may be taken in preference to the declaring `Segment`.|
 
@@ -827,7 +834,8 @@ In addition, the following structural constraints apply:
 The intention of the `sequence` attribute is to provide a guide regarding presentational order of the `Route Segments` to client applications, which will not necessarily correspond with the physical ordering of `Segments` along the Route. Ordering must thus be sequential even in cases where multiple alternative `Segments` exist.
 </div>
 
-<div class="warning" title="Alternative Segments and Route Properties">
+<div class="advisement">
+  <div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Alternative Segments and Route Properties</span></div>
 Data publishers are cautioned to ensure that properties defined for the `RouteGuide` as a whole - in particular, `routeDifficulty` - remain applicable even once alternative segments are taken into account. If, for instance, one segment is quite difficult and another fairly easy, this SHOULD be indicated clearly at both the Route and Route Segment levels.
 </div>
 
@@ -835,7 +843,7 @@ Data publishers are cautioned to ensure that properties defined for the `RouteGu
 
 Given that, for the most part, Route Guides and Route Segment Guides contain the same properties, how are they to be distributed between these two similar, but not identical, objects?
 
-Modelling here is to be guided by the principle that some properties (e.g., `originatingPublisher`, `createdBy`) are relatively generic, and hence heritable downwards from parent Route Guides to their Route Segment Guide children. Others, however, are specific to one level or another (for example, `distance`: the total length of a Route will necessarily be different from that of its individual Segments).
+Modelling here is to be guided by the principle that some properties (e.g., `publisher`, `author`) are relatively generic, and hence heritable downwards from parent Route Guides to their Route Segment Guide children. Others, however, are specific to one level or another (for example, `distance`: the total length of a Route will necessarily be different from that of its individual Segments).
 
 The table below indicates which Route Guide properties should be viewed as inherited, and which not. A 'Yes' value indicates that values for these properties defined on the parent `Route Guide` should be assumed to be shared by and relevant to children, unless values these properties are also declared on the children. `Route Segment Guide`s. A 'No' indicates they should not: the values given at the `Route Guide` level can be assumed to be untrue or inaccurate in relation to individual Segments.
 
@@ -864,6 +872,7 @@ The table below indicates which Route Guide properties should be viewed as inher
 |[oa:mapImage](https://openactive.io/mapImage)|Yes|
 |[oa:category](https://openactive.io/category)|Yes|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|No|
+|[schema:additionalInformation](https://schema.org/additionalInformation)|Yes|
 |[oa:isLoop](https://openactive.io/isLoop)|No|
 |[oa:riskInformation](https://openactive.io/riskInformation)|Yes|
 |[oa:legalAdvisory](https://openactive.io/legalAdvisory)|Yes|
@@ -923,6 +932,248 @@ To assist users and curators, it is therefore RECOMMENDED to provide links back 
 |[schema:url](https://schema.org/url)|RECOMMENDED|[schema:URL](https://schema.org/URL)|Link to original hosting site, which may contain additional or contextual information if available.|
 |[oa:version](https://openactive.io/version)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|The date upon which this `RouteGuide` information was harvested from the providing `schema:publisher`|
 |[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)|Any further relevant information relevant to previous publications of the `RouteGuide` - e.g., any paper publications that might exist, etc.|
+
+# Worked Example - The Wildlife Walk at Attingham Park
+
+As the specification above is complex and somewhat abstract, a worked, real-life example illustrating one approach to Route Guide modelling is provided here. The data is drawn from The National Trust's Wildlife Walk at Attingham Park; to follow the example, it may be helpful to consult [the originating website](https://www.nationaltrust.org.uk/attingham-park/trails/wildlife-walk-at-attingham-park).
+
+As will be evident from what follows, the intention of the example is not to demonstrate every aspect of the specification's use, nor to indicate how to resolve particularly problematic aspects of modelling e.g. complex paths. It is simply to illustrate a general approach to representation supporting a common use-case, and hence to provide concrete starting points for further work and consideration.
+
+<pre class="example">
+{
+   "@id":"https://routes.openactive.io/nt/12345",
+   "@type":"RouteGuide",
+   "name":"Wildlife walk at Attingham Park",
+   "publisher":{
+      "@type":"Organization",
+      "name":"National Trust",
+      "url":"https://www.nationaltrust.org.uk/"
+   },
+   "url":"https://www.nationaltrust.org.uk/attingham-park/trails/wildlife-walk-at-attingham-park",
+   "distance":{
+      "@type":"QuantitativeValue",
+      "value":4,
+      "unitCode":"KTM"
+   },
+   "activity":"https://activity-list-editor.openactive.io/_95092977-5a20-4d6e-b312-8fddabe71544",
+   "mapReference":[
+      {
+         "@type":"MapReference",
+         "publisher":"Ordnance Survey",
+         "mapSeries":"Landranger",
+         "mapNumber":"126"
+      }
+   ],
+   "gradient":{
+      "@type":"RouteGradient",
+      "gradientTerm":"Moderate"
+   },
+   "category":[
+      "Dog-friendly"
+   ],
+   "indicativeDuration":[
+      {
+         "@type":"IndicativeDuration",
+         "activity":"https://activity-list-editor.openactive.io/_95092977-5a20-4d6e-b312-8fddabe71544",
+         "duration":"P45M"
+      },
+      {
+         "@type":"IndicativeDuration",
+         "activity":"https://activity-list-editor.openactive.io/_95092977-5a20-4d6e-b312-8fddabe71544",
+         "duration":"P1H"
+      }
+   ],
+   "image":"https://nt.global.ssl.fastly.net/images/1431730349476-attinghamparkwildlifewalk.jpg?width=1920&auto=webp&crop=16:7",
+   "startPoint":{
+      "@type":"RoutePoint",
+      "landmark":"Attingham Park",
+      "village":"Atcham",
+      "town":"Shrewsbury",
+      "region":"Shropshire",
+      "postalCode":"SY4 4TP",
+      "description":"Visitor Reception",
+      "mapReference":{
+         "@type":"MapReference",
+         "publisher":"Ordnance Survey",
+         "gridReference":"SJ5501109896"
+      },
+      "transportNote":[
+         {
+            "@type":"TransportNote",
+            "transportMode":"https://openactive.io/Foot",
+            "description":"0.5 miles (0.8km) along drive from main gates"
+         },
+         {
+            "@type":"TransportNote",
+            "transportMode":"https://openactive.io/Train",
+            "description":"Shrewsbury, 5 miles (8km)"
+         },
+         {
+            "@type":"TransportNote",
+            "transportMode":"https://openactive.io/Bus",
+            "description":"Please check routes with Arriva bus services, then 0.5 miles (0.8km) walk along drive from main gates"
+         },
+         {
+            "@type":"TransportNote",
+            "transportMode":"https://openactive.io/Road",
+            "description":"The main entrance to Attingham Park is on the B43850 in the village of Atcham, 4 miles (6.4km) south of Shrewsbury"
+         }
+      ]
+   },
+   "isLoop":true,
+   "mapImage":{
+      "@type":"Map",
+      "mapType":"https://openactive.io/RouteMap",
+      "encodingFormat":"image/jpeg",
+      "url":"https://nt.global.ssl.fastly.net/images/mapattinghamwildlifewalkmap.jpg?width=1170&auto=webp&crop=16:9"
+   },
+   "amenityFeature":[
+      {
+         "@type":"LocationFeatureSpecification",
+         "value":"Toilets are in the Stables Courtyard, Bothy and Brewhouse."
+      },
+      {
+         "@type":"LocationFeatureSpecification",
+         "value":"Carriage House café and Mansion tea-room serve a range of food and drink."
+      },
+      {
+         "@type":"LocationFeatureSpecification",
+         "value":"Car parking is free (disabled bays available)."
+      },
+      {
+         "@type":"LocationFeatureSpecification",
+         "value":"Mobility scooters are available to borrow (first come, first served)."
+      },
+      {
+         "@type":"LocationFeatureSpecification",
+         "value":"Normal admission charges to the park apply."
+      }
+   ],
+   "contactPoint":{
+      "telephone":"01743 708162",
+      "email":"attingham@nationaltrust.org.uk",
+      "url":"http://www.nationaltrust.org.uk/attingham-park/"
+   },
+   "description":"This circular walk starts in the Stables Courtyard at Attingham Park and follows the Deer Park walk in the beautiful parkland of this great estate.",
+   "surface":"Walking on a mixture of grass, hoggin and woodland paths, this route is on a combination of level terrain and a few short inclines in the deer park. Paths may be uneven in places and may not be suitable for buggies or mobility scooters in muddy conditions. Please be careful on steps to the ice house.",
+   "segments":[
+      {
+         "@type":"RouteSegmentGuide",
+         "sequence":1,
+         "description":"From the car park make your way to Visitor Reception and through the Stables Courtyard bearing left towards the Walled Garden. As you walk towards the Walled Garden you are on part of the Mile Walk - a hoggin path designed by Thomas Leggett in 1770 for Noel Hill, the first Lord Berwick of Attingham Park. Hoggin is a mix of gravel, sand and clay ideal for building paths. In 2009, we restored the pond in the adjacent paddock and dugout hundreds of tonnes of hoggin to rebuild the Mile Walk."
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "sequence":2,
+         "description":"You will pass the Walled Garden on your left as you continue along this section of the Mile Walk. Stop in on your way past to see our historic bee house and new observation bee hive. The observation hive is made of clear acrylic and allows visitors to see the busy bees at work.",
+         "pointofInterest":{
+            "@type":"RoutePoint",
+            "landmark":"Walled Garden",
+            "description":"Attingham's walled garden and orchard were probably built at the same time as the mansion in the 1780s for the first Lord Berwick. This productive area provided the Berwicks with a constant supply of fruit, flowers, vegetables and honey. It is still home to the Attingham bees who can safely be seen hard at work in the observation hive. Family activity: make your way through the orchard to the Shoulder of Mutton playfield to run off some steam or head to the frame yard to help our gardeners water the flowers, fruits and vegetables growing here.",
+            "category":[
+               "Garden"
+            ]
+         }
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "sequence":3,
+         "description":"At this point the path diverges - bear left following signs for the Deer Park Walk."
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "sequence":4,
+         "description":"Cross the cable stay bridge over the river Tern. With funding from Natural England this cable stay bridge was constructed in 2009. The new bridge provides improved access for buggies and mobility scooters. Attingham is host to around 5 miles of river, featuring beautiful stretches of the Severn and Tern. Our many ponds are a haven for wildlife of all sorts, from ducks, swans and otters to dragonflies.",
+         "pointofInterest":[
+            {
+               "@type":"RoutePoint",
+               "landmark":"River Tern",
+               "description":"The River Tern is only 30 miles long flowing into the River Severn about a mile downstream. Its source is considered to be a lake in the grounds of Maer Hall in Staffordshire. Family activity: otters have been spotted from the bridge. Is there one in the river or on the river banks today?",
+               "category":[
+                  "Natural"
+               ]
+            }
+         ]
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "sequence":5,
+         "alternativeRouteSegment":{
+            "@type":"alternativeRouteSegment",
+            "alternativeSegmentTo":8
+         },
+         "description":"At this fork in the path carry straight on up a gentle incline to continue with the walk. At further forks in the path follow signs for the 'Deer Park Walk'. For buggies (in muddy conditions) and mobility scooters follow the right fork labelled 'Shortcut' through the gate which takes you along the bank of the Tern to rejoin the walk at point 8.",
+         "pointofInterest":{
+            "@type":"RoutePoint",
+            "description":"At this point, just through the gate to the deer park you will see an area where families have been building dens. Why not have a go as part of our '50 Things to do before you're 11&#190;'? Please stay in front of the signs that ask you to not go any further into the area due to the deer sanctuary.",
+            "category":[
+               "Activity"
+            ]
+         }
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "sequence":6,
+         "description":"After walking through the woodland the path opens out along the top of the Deer Park, with the woodland on your left and the deer park to your right. Look closely in the bracken and ferns and you might be lucky to spot some of our deer herd! Please note: during parts of the year sections of the Deer Park may be closed, please follow any signed diversions on your route.",
+         "pointofInterest":{
+            "@type":"RoutePoint",
+            "landmark":"Attingham Deer",
+            "description":"Attingham is home to approximately 250 semi-wild fallow deer, all direct descendents of the fallow deer here at the creation of the Deer Park in 1797. Attingham's last lord Thomas was particularly fond of the deer and fed them daily, with special favourites eating from his hand. Family activity: during the winter you can watch the deer being fed at 2pm on Saturdays, Sundays and every day in the Christmas and half term school holidays (except 25 December).",
+            "category":[
+               "Wildlife"
+            ]
+         }
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "sequence":7,
+         "description":"Keep walking along the grass path with the woodland on your left, until you get to the Repton Oak. Lots of different animals live in the deer park and woodland areas at Attingham, especially in old trees which are havens for wildlife, bats, birds, insects, mosses and lichens. There are five species of bats at Attingham including over 1,000 pipistrelle bats. Family activity: the barn owl, raven and buzzard are the top predators here - can you spot any flying over the deer park?",
+         "pointofInterest":[
+            {
+               "@type":"RoutePoint",
+               "landmark":"The Repton Oak",
+               "description":"This venerable oak may have started life in the reign of King Edward III (1327-1377), our best guess is that it is about 650 years old. Originally marking the boundary between the parishes of Wroxeter and Atcham this old oak is now one of the wonders of Attingham park.",
+               "category":[
+                  "Historic"
+               ]
+            }
+         ]
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "sequence":8,
+         "description":"A short while after passing the Repton Oak the path will begin to lead you down the hill towards the mansion. Go through the gate, across the bridge and turn right to take a look at the Ice House. Please note: There is no light in the ice house and is lit by natural light from its entrance. Be careful walking down the narrow uneven steps into the ice house. After you've visited the ice house follow the path passing the mansion on your right hand side and continue to bear right, past the tea-room and toilets before turning left to return to the Stables Courtyard.",
+         "pointofInterest":{
+            "@type":"RoutePoint",
+            "landmark":"The ice house",
+            "description":"This mound was an ice house probably built for Noel Hill, the first Lord Berwick in the late 18th century; it was converted in 1850 when a wheel pump was installed to provide the mansion with water from the River Tern. Before that, there was a corn mill on this site from the 13th century. Family activity: the ice house is dark and damp and the perfect home for lots of insects - can you find any?",
+            "category":[
+               "Historic"
+            ]
+         },
+         "amenityFeature":[
+            {
+               "@type":"Toilets",
+               "name":"Toilets",
+               "value":true
+            },
+            {
+               "@type":"LocationFeatureSpecification",
+               "name":"Stables Courtyard",
+               "value":true
+            },
+            {
+               "@type":"LocationFeatureSpecification",
+               "name":"Tea-room",
+               "value":true
+            }
+         ]
+      }
+   ]
+}
+</pre>
+
+All example data provided by kind permission of the National Trust
 
 ## Extending the Model
 
