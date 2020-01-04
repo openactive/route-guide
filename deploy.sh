@@ -40,6 +40,8 @@ cp -r ../EditorsDraft .
 # rm **/edit.html
 
 # Current latest version
+# Current latest version
+cp -r ../1.0/* .
 
 cd ..
 
