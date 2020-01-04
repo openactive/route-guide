@@ -477,6 +477,52 @@ In the above example the `@id` property provides a unique identifier across
 the hosting application. But the public URL for the RouteGuide uses a separate,
 customer-specific domain.
 
+## Publishing Route Guide Data
+
+As [noted above](#realtime-paged-data-exchange-rpde), it is possible (and in many cases desirable) to publish Route Guide data as an RPDE feed. In this case, the Route Guide will necessarily be expressed in JSON in a manner conformant to the RPDE specification.
+
+However, the Route Guide specification is in itself format-agnostic. Route Guide data may be published through a variety of channels (downloaded in .zip file, embedded on a web-page, etc.) and in a variety of formats (JSON, XML, microformats, etc.). Considered in terms of the specification itself, the following two expressions are identical:
+
+<pre class="example" title="Simple route description as JSON">
+<code>
+  {
+    "@context": "https://openactive.io/",
+    "@type": "RouteGuide",
+    "@id": "https://routes.openactive.io/id/12345",
+    "url": "https://www.nationaltrust.org.uk/avebury/trails/avebury-archaeology-walk",
+    "name": "Avebury Archaeology Walk"
+  }
+</code>
+</pre>
+
+<pre class="example" title="Simple route description as XML">
+  &lt;oa:RouteGuide xmlns:oa="https://openactive.io/" xmlns:schema="https://schema.org"&gt;
+      &lt;oa:id&gt;https://routes.openactive.io/id/12345&lt;/oa:id&gt;
+      &lt;schema:name&gt;Avebury Archaeology Walk&lt;/schema:name&gt;
+      &lt;schema:url&gt;https://www.nationaltrust.org.uk/avebury/trails/avebury-archaeology-walk&lt;/schema:url&gt;
+  &lt;/oa:RouteGuide&gt;
+</pre>
+It is expected that data publishers will adopt whatever format best suits their use-case and supports their frequency of updating.
+
+<div class="note" title="Embedding RouteGuide JSON in an HTML 5 page">
+In cases where publication is as a JSON object within an HTML 5 page, it is RECOMMENDED that the object be encoded as the contents of a [script element](https://html.spec.whatwg.org/#the-script-element) with a `type` value of `application/json`.
+
+E.g.:
+
+<code>
+  &lt;script type="application/json" id="example"&gt;
+  {
+    "@context": "https://openactive.io/",
+    "@type": "RouteGuide",
+    "@id": "https://routes.openactive.io/id/12345",
+    "url": "https://www.nationaltrust.org.uk/avebury/trails/avebury-archaeology-walk",
+    "name": "Avebury Archaeology Walk"
+  }
+  &lt;/script&gt;
+
+</code>
+</div>
+
 ## Required and Optional Properties
 
 The following sections include more detail about the properties available to
@@ -852,44 +898,44 @@ The table below indicates which Route Guide properties should be viewed as inher
 |`@type`|No|
 |`@id`|Yes|
 |[schema:name](https://schema.org/name)|Yes|
-|[oa:createdBy](https://openactive.io/createdBy)|Yes|
+|[schema:url](https://schema.org/url)|Yes|
+|[schema:author](https://schema.org/author)|Yes|
 |[schema:datePublished](https://schema.org/datePublished)|Yes|
-|[oa:dateModified](https://openactive.io/dateModified)|Yes|
+|[schema:dateModified](https://schema.org/dateModified)|Yes|
 |[oa:verificationRecord](https://openactive.io/verificationRecord)|Yes|
-|[schema:url](https://openactive.io/url)|Yes|
 |[schema:description](https://schema.org/description)|Yes|
-|[oa:shortDescription](https://openactive.io/shortDescription)|Yes|
+|[schema:headline](https://schema.org/headline)|Yes|
 |[oa:activity](https://openactive.io/activity)|Yes|
-|oa:distance|No|
+|[oa:distance](https://openactive.io/distance)|No|
+|[oa:indicativeDuration](https://openactive.io/indicativeDuration)|No|
 |[oa:startPoint](https://openactive.io/startPoint)|No|
 |[oa:endPoint](https://openactive.io/endPoint)|No|
 |[oa:pointOfInterest](https://openactive.io/pointOfInterest)|No|
-|[oa:accessibiltyDescription](https://openactive.io/accessibilityDescription)|Yes|
+|[oa:accessibiltyDescription](https://openactive.io/accessibiltyDescription)|Yes|
 |[oa:gradient](https://openactive.io/gradient)|No|
 |[oa:surface](https://openactive.io/surface)|Yes|
 |[oa:routeDifficulty](https://openactive.io/routeDifficulty)|Yes|
 |[oa:geoPath](https://openactive.io/geoPath)|Yes|
 |[oa:mapImage](https://openactive.io/mapImage)|Yes|
 |[oa:category](https://openactive.io/category)|Yes|
+|[oa:additionalInformation](https://openactive.io/additionalInformation)|Yes|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|No|
-|[schema:additionalInformation](https://schema.org/additionalInformation)|Yes|
 |[oa:isLoop](https://openactive.io/isLoop)|No|
 |[oa:riskInformation](https://openactive.io/riskInformation)|Yes|
 |[oa:legalAdvisory](https://openactive.io/legalAdvisory)|Yes|
 |[oa:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|Yes|
+|[oa:suggestedEquipment](https://openactive.io/suggestedEquipment)|Yes|
 |[schema:image](https://schema.org/image)|Yes|
 |[schema:review](https://schema.org/review)|Yes|
-|[schema:isBasedOn](https://schema.org/isBasedOn)|Yes|
-|[oa:indicativeDuration](https://schema.org/indicativeDuration)|No|
-|[oa:suggestedEquipment](https://schema.org/suggestedEquipment)|Yes|
 |[schema:contactPoint](https://schema.org/contactPoint)|Yes|
-|[oa:userContributedContent](https://schema.org/userContributedContent)|No|
-|[oa:isJoinableThroughoutLength](https://schema.org/isJoinableThroughoutLength)|Yes|
-|[oa:segmentGroups](https://schema.org/segmentGroups)|N/A|
+|[oa:userContributedContent](https://openactive.io/userContributedContent)|No|
+|[schema:isBasedOn](https://schema.org/isBasedOn)|Yes|
+|[oa:isJoinableThroughoutLength](https://openactive.io/isJoinableThroughoutLength)|Yes|
 |[oa:segments](https://openactive.io/segments)|N/A|
+|[oa:segmentGroups](https://openactive.io/segmentGroupings)|N/A|
 |[oa:alternativeSegmentTo](https://openactive.io/alternativeSegmentTo)|N/A|
 
-When it comes to cases where a property may be declared either at the level of the Route or Route Segment Guide, modelling decisions must simply be made on the basis of scope: properties declared at the Route level apply to the Route as a whole, and hence of each Segment within it; those declared on a Segment apply ONLY to that particular Segment.
+When it comes to cases where a property may be declared either at the level of the Route or Route Segment Guide, modelling decisions must simply be made on the basis of scope: properties declared at the Route Guide level apply to the Route as a whole, and hence of each Segment within it; those declared on a Segment apply ONLY to that particular Segment.
 
 ### Grouping Route Segments (`oa:RouteSegmentGroup`)
 
@@ -941,6 +987,7 @@ As will be evident from what follows, the intention of the example is not to dem
 
 <pre class="example">
 {
+   "@context": ["https://openactive.io", "https://schema.org"],
    "@id":"https://routes.openactive.io/nt/12345",
    "@type":"RouteGuide",
    "name":"Wildlife walk at Attingham Park",
