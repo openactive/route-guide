@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://openactive.io/routes/validation/routeguide.schema.json",
+  "$vocabulary": {
+      "https://json-schema.org/draft/2019-09/vocab/core": true
+  },
+  "type": "object",
+  "title": "JSON-LD schema for RouteGuide objects.",
+  "required":["@context", "@id", "@type", "name", "description", "activity", "distance", "startPoint"],
+  "properties": {
+    "@context":{
+
+
+    },
+    "@id":{
+
+
+    },
+    "@type": {
+      "type" : "string",
+      "pattern" : "RouteGuide"
+    },
+    "name":{
+    	"type" : "string"
+     },
+    "url":{
+    	"type" : "string"
+     },
+    "author":{
+    	"type" : "string"
+     },
+    "datePublished":{
+    	"type" : "string"
+     },
+    "dateModified":{
+    	"type" : "string"
+     },
+    "verificationRecord":{
+    	"$ref" : "#/definitions/VerificationRecord"
+     },
+    "description":{
+    	"type" : "string"
+     },
+    "headline":{
+    	"type" : "string"
+     },
+    "activity":{
+    	"type" : "string"
+     },
+    "distance":{
+      "$ref" : "#/definitions/QuantitativeValue"
+     },
+    "indicativeDuration":{
+      "$ref" : "#/definitions/IndicativeDuration"
+     },
+    "startPoint":{
+    	"$ref" : "#/definitions/RoutePoint"
+     },
+    "endPoint":{
+      "$ref" : "#/definitions/RoutePoint"
+     },
+    "pointOfInterest":{
+    	"type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/RoutePoint"
+      }
+     },
+    "accessibilityDescription":{
+    	"type" : "string"
+     },
+    "gradient":{
+      "$ref" : "#/definitions/RouteGradient"
+     },
+    "surface":{
+// enum here
+
+     },
+    "routeDifficulty":{
+      "$ref" : "#/definitions/RouteDifficulty"
+     },
+    "geoPath":{
+      "$ref" : "#/definitions/MapAsGeo"
+     },
+    "mapImage":{
+      "$ref" : "#/definitions/MapAsImage"
+     },
+    "category":{
+    	"type" : "string"
+     },
+    "additionalInformation":{
+    	"type" : "string"
+     },
+    "amenityFeature":{
+      "$ref" : "#/definitions/LocationFeatureSpecification"
+     },
+    "isLoop":{
+    	"type" : "boolean"
+     },
+    "riskInformation":{
+      "$ref" : "#/definitions/RouteRiskAdvisory"
+     },
+    "legalAdvisory":{
+      "$ref" : "#/definitions/RouteLegalAdvisory"
+     },
+    "routeAccessRestriction":{
+      "$ref" : "#/definitions/RouteAccessRestriction"
+     },
+    "suggestedEquipment":{
+    	"type" : "string"
+     },
+    "image":{
+      "$ref" : "#/definitions/ImageObject"
+     },
+    "review":{
+      "$ref" : "#/definitions/Review"
+     },
+    "contactPoint":{
+      "$ref" : "#/definitions/ContactPoint"
+     },
+    "userContributedContent":{
+      "$ref" : "#/definitions/CreativeWork"
+     },
+    "isBasedOn":{
+    	"type" : "string"
+     },
+    "isJoinableThroughoutLength":{
+    	"type" : "boolean"
+     },
+    "segments":{
+    	"type" : "array",
+      "items": {
+        "$ref" : "#/definitions/RouteSegmentGuide"
+      }
+     },
+    "segmentGroups":{
+    	"type" : "string"
+     }
+  },
+  "definitions":{
+    "Person" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "Organization" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "Date" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "DateTime" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "VerificationRecord" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "QuantitativeValue" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "IndicativeDuration" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "RoutePoint" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "RouteGradient" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "RouteDifficulty" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "Map" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "Concept" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "Article" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "LocationFeatureSpecification" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "RouteRiskAdvisory" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "RouteLegalAdvisory" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "RouteAccessRestriction" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "ImageObject" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "Review" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "ContactPoint" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "CreativeWork" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "RouteSegmentGuide" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    },
+    "MapAsImage" : {
+      "type" : "object",
+      "properties" : {
+
+     }
+    },
+    "MapAsGeo" : {
+      "type" : "object",
+      "properties" : {
+
+     }
+    },
+    "RouteSegmentGroup" : {
+    	"type" : "object",
+    	"properties" : {
+
+     }
+    }
+  }
+}
