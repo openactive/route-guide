@@ -947,8 +947,8 @@ In the case of exceptionally lengthy routes (see e.g. ExploreKent's [Elham Valle
 |@id|RECOMMENDED|URI|A URI providing a unique, stable identifier for the resource. Note that an `@id` value is REQUIRED if `alternativeGroupTo` is supplied.|
 |[schema:name](https://schema.org/name)|REQUIRED|String|The name of the grouping.|
 |[schema:description](https://schema.org/description)|RECOMMENDED|String|A free text description of the grouping, and the rationale for seeing its member Route Segments as related in some way.|
-|[oa:includesSegments](https://openactive.io/includesSegments)|Array of [URL](http://schema.org/URL)|The individual `RouteSegmentGuide` objects the `RouteSegmentGroup` comprises, as identified by the value of their `@id`.|
-|[alternativeGroupTo](https://openactive.io/isAlternativeGroupTo)|Array of [URL](http://schema.org/URL)|Used to indicate that this `RouteSegmentGroup`'s collection of `RouteSegmentGuide`s serves as an alternative to the list of Route Segments given in this `Array` and expressed as a list of `RouteSegmentGuide` `@id`s. Where this value is provided, it is RECOMMENDED that the `description` supply reasons why one or another alternative (e.g. distance, accessibility) might be preferred.  |
+|[oa:includesSegments](https://openactive.io/includesSegments)|REQUIRED|Array of [URL](http://schema.org/URL)|The individual `RouteSegmentGuide` objects the `RouteSegmentGroup` comprises, as identified by the value of their `@id`.|
+|[alternativeGroupTo](https://openactive.io/isAlternativeGroupTo)|REQUIRED|Array of [URL](http://schema.org/URL)|Used to indicate that this `RouteSegmentGroup`'s collection of `RouteSegmentGuide`s serves as an alternative to the list of Route Segments given in this `Array` and expressed as a list of `RouteSegmentGuide` `@id`s. Where this value is provided, it is RECOMMENDED that the `description` supply reasons why one or another alternative (e.g. distance, accessibility) might be preferred.  |
 <p></p>
 
 ### Describing User Generated Content (`oa:userGeneratedContent`)
