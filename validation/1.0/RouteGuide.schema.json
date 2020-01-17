@@ -1,0 +1,736 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"$id": "https://openactive.io/routes/validation/RouteGuide.schema.json",
+	"$vocabulary": {
+		"https://json-schema.org/draft/2019-09/vocab/core": true
+	},
+	"type": "object",
+	"title": "JSON-LD schema for RouteGuide objects.",
+	"required": [
+		"@context",
+		"@id",
+		"@type",
+		"name",
+		"description",
+		"activity",
+		"distance",
+		"startPoint"
+	],
+	"properties": {
+		"@context": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/URL"
+			}
+		},
+		"@id": {
+			"$ref": "#/definitions/URL"
+		},
+		"@type": {
+			"type": "string",
+			"pattern": "RouteGuide"
+		},
+		"name": {
+			"type": "string",
+			"minLength": 4,
+			"maxLength": 1024
+		},
+		"url": {
+			"type": "string",
+			"pattern": "http(s)?://.+"
+		},
+		"author": {
+			"type": "array",
+			"items": {
+				"anyOf": [{
+						"$ref": "#/definitions/Person"
+					},
+					{
+						"$ref": "#/definitions/Organization"
+					}
+				]
+			}
+		},
+		"datePublished": {
+			"type": "string",
+			"minLength": 8,
+			"maxLength": 128
+		},
+		"dateModified": {
+			"type": "string",
+			"minLength": 8,
+			"maxLength": 128
+		},
+		"verificationRecord": {
+			"$ref": "#/definitions/VerificationRecord"
+		},
+		"description": {
+			"$ref": "#/definitions/Description"
+		},
+		"headline": {
+			"$ref": "#/definitions/Headline"
+		},
+		"activity": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/Concept"
+			}
+		},
+		"distance": {
+			"$ref": "#/definitions/QuantitativeValue"
+		},
+		"indicativeDuration": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/IndicativeDuration"
+			}
+		},
+		"startPoint": {
+			"$ref": "#/definitions/RoutePoint"
+		},
+		"endPoint": {
+			"$ref": "#/definitions/RoutePoint"
+		},
+		"pointOfInterest": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/RoutePoint"
+			}
+		},
+		"accessibilityDescription": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 4
+			}
+		},
+		"gradient": {
+			"$ref": "#/definitions/RouteGradient"
+		},
+		"surface": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"routeDifficulty": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/RouteDifficulty"
+			}
+		},
+		"geoPath": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/MapAsGeo"
+			}
+		},
+		"mapImage": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/MapAsImage"
+			}
+		},
+		"category": {
+			"type": "array",
+			"items": {
+				"anyOf": [{
+						"type": "string"
+					},
+					{
+						"$ref": "#/definitions/Concept"
+					}
+				]
+			}
+		},
+		"additionalInformation": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/Article"
+			}
+		},
+		"amenityFeature": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/LocationFeatureSpecification"
+			}
+		},
+		"isLoop": {
+			"type": "boolean"
+		},
+		"riskInformation": {
+			"$ref": "#/definitions/RouteRiskAdvisory"
+		},
+		"legalAdvisory": {
+			"$ref": "#/definitions/RouteLegalAdvisory"
+		},
+		"routeAccessRestriction": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/RouteAccessRestriction"
+			}
+		},
+		"suggestedEquipment": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"image": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/ImageObject"
+			}
+		},
+		"review": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/Review"
+			}
+		},
+		"contactPoint": {
+			"$ref": "#/definitions/ContactPoint"
+		},
+		"userContributedContent": {
+			"$ref": "#/definitions/UserContributedContent"
+		},
+		"isJoinableThroughoutLength": {
+			"type": "boolean"
+		},
+		"segmentGroups": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/RouteSegmentGroup"
+			}
+		}
+	},
+		"definitions": {
+			"Person": {
+				"type": "object",
+				"required": ["name"],
+				"patternProperties": {
+					".*": {}
+				}
+			},
+			"Organization": {},
+			"Date": {
+				"type": "string",
+				"format": "date"
+			},
+			"DateTime": {
+				"type": "string",
+				"format": "date-time"
+			},
+			"VerificationRecord": {
+				"type": "object",
+				"properties": {
+					"dateVerified": {
+						"type": "string",
+						"format": "date"
+					},
+					"verifiedBy": {
+						"type": "array",
+						"items": {
+							"anyOf": [{
+									"$ref": "#/definitions/Person"
+								},
+								{
+									"$ref": "#/definitions/Organization"
+								}
+							]
+						}
+					}
+				}
+			},
+			"QuantitativeValue": {
+				"type": "object",
+				"required": ["value", "unitCode"],
+				"patternProperties": {
+					".*": {}
+				}
+			},
+			"IndicativeDuration": {
+				"type": "object",
+				"properties": {
+					"@type": {
+						"type": "string",
+						"pattern": "IndicativeDuration"
+					},
+					"activity": {
+						"$ref": "#/definitions/Concept"
+					},
+					"duration": {
+						"type": "string",
+						"minLength": 2,
+						"maxLength": 32
+					}
+				}
+			},
+			"RoutePoint": {
+				"type": "object",
+				"required": [
+					"type",
+					"description"
+				],
+				"properties": {
+					"@type": {
+						"type": "string",
+						"pattern": "RoutePoint"
+					},
+					"name": {
+						"type": "string",
+						"minLength": 4,
+						"maxLength": 256
+					},
+					"geo": {
+						"$ref": "#/definitions/GeoCoordinates"
+					},
+					"isAccessPoint": {
+						"type": "boolean"
+					},
+					"isRecommendedAccessPoint": {
+						"type": "boolean"
+					},
+					"mapReference": {
+						"$ref": "#/definitions/MapReference"
+					},
+					"transportNote": {
+						"$ref": "#/definitions/TransportNote"
+					},
+					"headline": {
+						"$ref": "#/definitions/Headline"
+					},
+					"description": {
+						"$ref": "#/definitions/Description"
+					},
+					"amenityFeature": {
+						"$ref": "#/definitions/AmenityFeature"
+					},
+					"userContributedContent": {
+						"$ref": "#/definitions/UserContributedContent"
+					},
+					"sameAs": {
+						"$ref": "#/definitions/URL"
+					}
+				}
+			},
+			"RouteGradient": {
+				"type": "object",
+				"properties": {
+					"@type": {
+						"type": "string",
+						"pattern": "RouteGradient"
+					},
+					"maxGradient": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 24
+					},
+					"avgGradient": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 24
+					},
+					"totalElevationGain": {
+						"type": "integer"
+					},
+					"totalElevationLoss": {
+						"type": "integer"
+					},
+					"gradientTerm": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 96
+					},
+					"gradientDefinitionURL": {
+						"$ref": "#/definitions/URL"
+					},
+					"description": {
+						"$ref": "#/definitions/Description"
+					}
+				}
+			},
+			"RouteDifficulty": {
+				"type": "object",
+				"properties": {
+					"difficultyTerm": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 48
+					},
+					"activity": {
+						"$ref": "#/definitions/Concept"
+					},
+					"description": {
+						"$ref": "#/definitions/Description"
+					},
+					"difficultyDefinitionURL": {
+						"$ref": "#/definitions/URL"
+					}
+				}
+			},
+			"Map": {
+				"type": "object",
+				"properties": {
+
+				}
+			},
+			"Concept": {
+				"type": "object",
+				"properties": {
+					"@type": {
+						"type": "string",
+						"pattern": "Concept"
+					},
+					"@id": {
+						"$ref": "#/definitions/URL"
+					},
+					"broadMatch": {
+						"$ref": "#/definitions/URL"
+					},
+					"narrowMatch": {
+						"$ref": "#/definitions/URL"
+					},
+					"broader": {
+						"$ref": "#/definitions/URL"
+					},
+					"narrower": {
+						"$ref": "#/definitions/URL"
+					},
+					"inScheme": {
+						"$ref": "#/definitions/URL"
+					},
+					"prefLabel": {
+						"type": "string",
+						"minLength": 2,
+						"maxLength": 128
+					},
+					"definition": {
+						"type": "string",
+						"minLength": 4,
+						"maxLength": 4096
+					},
+					"note": {
+						"type": "string",
+						"minLength": 4,
+						"maxLength": 4096
+					}
+				}
+			},
+			"Article": {
+				"type": "object",
+				"properties": {
+
+				}
+			},
+			"LocationFeatureSpecification": {
+				"type": "object",
+				"properties": {
+
+				}
+			},
+			"RouteRiskAdvisory": {
+				"type": "object",
+				"required": ["@type"],
+				"properties": {
+					"knownRisks": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"riskModifiers": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"riskMitigators": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"riskDescription": {
+						"type": "string",
+						"minLength": 3,
+						"maxLength": 512
+					},
+					"userSafetyFeedback": {
+						"$ref": "#/definitions/Review"
+					},
+					"isMaintained": {
+						"type": "boolean"
+					},
+					"isMaintainedBy": {
+						"anyOf": [{
+								"$ref": "#/definitions/Person"
+							},
+							{
+								"$ref": "#/definitions/Organization"
+							}
+
+						]
+					},
+					"riskInformationURL": {
+						"$ref": "#/definitions/URL"
+					},
+					"trafficDescription": {
+						"type": "string",
+						"minLength": 3,
+						"maxLength": 512
+					}
+				}
+			},
+			"RouteLegalAdvisory": {
+				"type": "object",
+				"properties": {
+					"@type": {
+						"type": "string",
+						"pattern": "RouteLegalAdvisory"
+
+					},
+					"routeDesignation": {
+						"$ref": "#/definitions/RouteDesignation"
+					},
+					"description": {
+						"$ref": "#/definitions/Description"
+					},
+					"legalInformationURL": {
+						"$ref": "#/definitions/URL"
+					}
+
+				}
+			},
+			"RouteAccessRestriction": {
+				"type": "object",
+				"properties": {
+					"@type": {
+						"type": "string",
+						"pattern": "RouteAccessRestriction"
+					},
+					"routeAccessRestrictionInformationURL": {
+						"$ref": "#/definitions/URL"
+
+					},
+					"routeAccessRestrictionTimeSpan": {
+						"type": "string",
+						"minLength": 4,
+						"maxLength": 36
+
+					},
+					"routeAccessRestrictionTerm": {
+						"type": "string",
+						"minLength": 4,
+						"maxLength": 36
+
+					},
+					"description": {
+						"$ref": "#/definitions/Description"
+					}
+				}
+			},
+			"ImageObject": {
+				"type": "object",
+				"properties": {
+
+				}
+			},
+			"RouteDesignation": {
+				"type": "object",
+				"properties": {
+					"@type": {
+						"type": "string",
+						"pattern": "RouteDesignation"
+					},
+					"routeDesignationTerm": {
+						"type": "string",
+						"minLength": 5,
+						"maxLength": 36
+					},
+					"description": {
+						"$ref": "#/definitions/Description"
+					},
+					"url": {
+						"$ref": "#/definitions/URL"
+					}
+				}
+			},
+			"Review": {
+				"type": "object",
+				"properties": {
+
+				}
+			},
+			"ContactPoint": {
+				"type": "object",
+				"properties": {
+
+				}
+			},
+			"CreativeWork": {
+				"type": "object",
+				"properties": {
+
+				}
+			},
+			"MapAsImage": {
+				"type": "object",
+				"properties": {
+					"@type": {
+						"type": "string",
+						"pattern": "Map"
+					},
+					"image": {
+						"$ref": "#/definitions/ImageObject"
+					},
+					"encodingFormat": {
+						"oneOf": [{
+								"type": "string"
+							},
+							{
+								"$ref": "#/definitions/URL"
+							}
+						]
+					}
+				}
+			},
+			"MapAsGeo": {
+				"type": "object",
+				"properties": {
+					"@type": {
+						"type": "string",
+						"pattern": "Map"
+					},
+					"url": {
+						"$ref": "#/definitions/URL"
+					},
+					"encodingFormat": {
+						"oneOf": [{
+								"type": "string"
+							},
+							{
+								"$ref": "#/definitions/URL"
+							}
+						]
+					}
+				}
+			},
+			"RouteSegmentGroup": {
+				"type": "object",
+				"required": ["@id", "@type", "name", "includesSegments", "alternativeGroupTo"],
+				"properties": {
+					"@id": {
+						"$ref": "#/definitions/URL"
+					},
+					"@type": {
+						"type": "string",
+						"pattern": "RouteSegmentGroup"
+					},
+					"name": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 256
+					},
+					"description": {
+						"$ref": "#/definitions/Description"
+					},
+					"includesSegments": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/URL"
+						}
+					},
+					"alternativeGroupTo": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/URL"
+						}
+					}
+				}
+			},
+				"GeoCoordinates": {
+					"type": "object",
+					"properties": {
+
+					}
+				},
+				"MapReference": {
+					"type": "object",
+					"properties": {
+						"@type": {
+							"type": "string",
+							"pattern": "MapReference"
+						},
+						"publisher": {
+							"type": "array",
+							"items": {
+								"anyOf": [{
+										"$ref": "#/definitions/Person"
+									},
+									{
+										"$ref": "#/definitions/Person"
+									}
+								]
+							}
+						},
+						"mapSeries": {
+							"type": "string",
+							"minLength": 4,
+							"maxLength": 128
+						},
+						"mapNumber": {
+							"type": "string",
+							"minLength": 4,
+							"maxLength": 128
+						},
+						"gridReference": {
+							"type": "string",
+							"minLength": 4,
+							"maxLength": 128
+						}
+					}
+				},
+				"TransportNote": {
+					"type": "object",
+					"required": ["@type", "transportMode", "description"],
+					"properties": {
+						"@type": {
+							"type": "string",
+							"pattern": "TransportNote"
+						},
+						"transportMode": {
+							"$ref": "#/definitions/URL"
+						},
+						"description": {
+							"$ref": "#/definitions/Description"
+						}
+					}
+				},
+					"Headline": {
+						"type": "string",
+						"minLength": 4,
+						"maxLength": 512
+					},
+					"Description": {
+						"type": "string",
+						"minLength": 4
+					},
+					"AmenityFeature": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/LocationFeatureSpecification"
+						}
+					},
+					"UserContributedContent": {
+						"type": "array",
+						"items": {
+							"$ref": "#/definitions/CreativeWork"
+						}
+					},
+					"URL": {
+						"type": "string",
+						"pattern": "http(s)?://.+"
+					}
+				}
+			}
