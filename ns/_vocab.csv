@@ -1,3 +1,4 @@
+"id","type","label","subClassOf","domain","range","@type","@container","required","term","@reverse","comment"
 oa,prefix,,https://www.openactive.org/ns#,,,,,,,,
 dc,prefix,,http://purl.org/dc/terms/,,,,,,,,
 owl,prefix,,http://www.w3.org/2002/07/owl#,,,,,,,,
@@ -51,14 +52,14 @@ isAccessPoint,rdf:Property,"isAccessPoint",,RoutePoint,xsd:boolean,Whether or no
 isRecommendedAccessPoint,rdf:Property,"isRecommendedAccessPoint",,RoutePoint,schema:Boolean,Whether or not it is recommended to join the Route as a whole at this point, because of e.g. particular amentities at this point, or because the RouteGuide has been specifically tailored to facilitate this particular experience of it. On RouteGuide startPoint and endPoint attributes this defaults to true; otherwise it defaults to false.
 mapReference,rdf:Property,"mapReference",,RouteGuide or RouteSegmentGuide,schema:Text,,
 transportNote,rdf:Property,"transportNote",,RoutePoint,TransportNote,Information about how to reach the RoutePoint.
-mapSeries,rdf:Property,"mapSeries",,MapReference,schema:Text,e.g. 'Explorer', 'Landranger'
+mapSeries,rdf:Property,"mapSeries",,MapReference,schema:Text,e.g. 'Explorer'; 'Landranger'
 mapNumber,rdf:Property,"mapNumber",,MapReference,schema:Text,Required if no gridReference supplied.
 gridReference,rdf:Property,"gridReference",,MapReference,schema:Text,Required if no mapNumber supplied
-maxGradient,rdf:Property,"maxGradient",,RouteGradient,schema:Text,e.g. "7.5%" or "4.2°"
-avgGradient,rdf:Property,"maxGradient",,RouteGradient,schema:Text,e.g. "7.5%" or "4.2°"
+maxGradient,rdf:Property,"maxGradient",,RouteGradient,schema:Text,e.g. '7.5%' or '4.2°'
+avgGradient,rdf:Property,"maxGradient",,RouteGradient,schema:Text,e.g. '7.5%' or '4.2°'
 totalElevationGain,rdf:Property,"totalElevationGain",,RouteGradient,xsd:integer,Unit is metres.
 totalElevationLoss,rdf:Property,"totalElevationLoss",,RouteGradient,xsd:integer,Unit is metres.
-gradientTerm,rdf:Property,"gradientTerm",,RouteGradient,schema:Text,e.g. "Easy"; "Moderate";"3"
+gradientTerm,rdf:Property,"gradientTerm",,RouteGradient,schema:Text,e.g. 'Easy'; 'Moderate'; '3'
 gradientDefinitionURL,rdf:Property,"gradientDefinitionURL",,RouteGradient,schema:URL,This will typically be a link to a page describing the meaning of the gradientTerm in more detail.
 transportMode,rdf:Property,"transportMode",,TransportNote,schema:Text,It is recommended that the value of transportMode be taken from the following list: https://openactive.io/Bus, https://openactive.io/Rail, https://openactive.io/Bicycle, https://openactive.io/Road, or https://openactive.io/Foot.
 difficultyTerm,rdf:Property,"difficultyTerm",,RouteDifficulty,schema:Text,e.g. 'Easy'; 'Strenuous'. If this value is taken from a controlled vocabulary a difficultyDefinitionURL should be provided pointing to the definition of these terms.
@@ -66,18 +67,18 @@ difficultyDefinitionURL,rdf:Property,"difficultyDefinitionURL",,RouteDifficulty,
 routeDesignation,rdf:Property,"routeDesignation",,RouteGuide or RouteSegmentGuide,RouteDesignation,
 legalInformationURL,rdf:Property,"legalInformationURL",,RouteLegalAdvisory,schema:URL,
 routeDesignationTerm,rdf:Property,"routeDesignationTerm",,RouteDesignation,schema:Text,
-knownRisks,rdf:Property,"knownRisks",,RouteRiskAdvisory,schema:Text,e.g."crime incidence"; "harrassment reported"; "shared with heavy traffic".
-riskModifiers,rdf:Property,"riskModifiers",,RouteRiskAdvisory,schema:Text,Contextual factors influencing knownRisks - e.g. "time of day"; "season".
-riskMitigators,rdf:Property,"riskMitigators",,RouteRiskAdvisory,Array of schema:Text,Contextual factors reducing knownRisks - e.g. "guardrails provided";"well-lit".
+knownRisks,rdf:Property,"knownRisks",,RouteRiskAdvisory,schema:Text,e.g.'crime incidence'; 'harrassment reported'; 'shared with heavy traffic'.
+riskModifiers,rdf:Property,"riskModifiers",,RouteRiskAdvisory,schema:Text,Contextual factors influencing knownRisks - e.g. 'time of day'; 'season'.
+riskMitigators,rdf:Property,"riskMitigators",,RouteRiskAdvisory,Array of schema:Text,Contextual factors reducing knownRisks - e.g. 'guardrails provided';'well-lit'.
 riskDescription,rdf:Property,"riskDescription",,RouteRiskAdvisory,schema:Text,
 userSafetyFeedback,rdf:Property,"userSafetyFeedback",,RouteRiskAdvisory,schema:Review,
 isMaintained,rdf:Property,"isMaintained",,RouteRiskAdvisory,xsd:boolean,Indicates whether the Route is actively maintained by e.g. a landowner or charitable organisation. Typically does not apply to urban Routes.
 isMaintainedBy,rdf:Property,"isMaintainedBy",,RouteRiskAdvisory,schema:Person or schema:Organization,The Organization or or Person responsible for maintaining the Route. Must not have a value if isMaintained is 'false'.
 riskInformationURL,rdf:Property,"riskDescription",,RouteRiskAdvisory,schema:URL,Should point to a formal definition outlining risk and mitigating factora.
 trafficDescription,rdf:Property,"trafficDescription",,RouteRiskAdvisory,schema:Text,
-routeAccessRestrictionTerm,rdf:Property,"routeAccessRestrictionTerm",,RouteRiskAdvisory,schema:Text,e.g. "Routine maintenance"; "Closed in deer mating season"; "Dogs not allowed".
+routeAccessRestrictionTerm,rdf:Property,"routeAccessRestrictionTerm",,RouteRiskAdvisory,schema:Text,e.g. 'Routine maintenance'; 'Closed in deer mating season'; 'Dogs not allowed'.
 routeAccessRestrictionInformationURL,rdf:Property,"routeAccessRestrictionInformationURL",,RouteRiskAdvisory,schema:URL,Should point to further advice about the restriction.
-routeAccessRestrictionTimeSpan,rdf:Property,"routeAccessRestrictionTimeSpan",,RouteRiskAdvisory,schema:Text,Brief text indicating when a restriction applies - e.g. "Winter"; "2020-01-01 to 2020-03-31".
+routeAccessRestrictionTimeSpan,rdf:Property,"routeAccessRestrictionTimeSpan",,RouteRiskAdvisory,schema:Text,Brief text indicating when a restriction applies - e.g. 'Winter'; '2020-01-01 to 2020-03-31'.
 verifiedBy,rdf:Property,"verifiedBy",,VerificationRecord,schema:Person or schema:Organization,Person or organisation who has confirmed accuracy of Route information.
 dateVerified,rdf:Property,"dateVerified",,VerificationRecord,schema:Date or schema:DateTime,The most recent date upon which accuracy of Route information was verified by the schema:Person or schema:Organization responsible.
 sequence,rdf:Property,"sequence",,RouteSegmentGuide,xsd:integer,Indicates the presentation order of Route Segments within the parent Route. This ordering should normally be present except for unusual situations such as e.g. modelling RouteGuides that are otherwise unsegmented but for access points. In cases where RouteSegmentGroups are provided this property is required.
@@ -85,14 +86,14 @@ alternativeRouteSegmentGuide,rdf:Property,"alternativeRouteSegmentGuide",,RouteS
 includesSegments,rdf:Property,"includesSegments",,RouteSegmentGroup, RouteSegmentGuide,The individual RouteSegmentGuide objects the RouteSegmentGroup comprises as identified by the value of their @id.
 alternativeGroupTo,rdf:Property,"alternativeGroupTo",,RouteSegmentGroup,RouteSegmentGroup,Used to indicate that this RouteSegmentGroup's collection of RouteSegmentGuides serves as an alternative to the list of Route Segments given in this Array and expressed as a list of RouteSegmentGuide @ids. Where this value is provided, it is recommended that the description supply reasons why one or another alternative (e.g. distance; accessibility) might be preferred.
 version,rdf:Property,"version",,RouteGuide,schema:Date or schema:DateTime,The date upon which this RouteGuide information was harvested from the providing schema:publisher
-https://openactive.io/Gravel,rdfs:Class, "Gravel",RouteSurfaceType,,,,,,,,
-https://openactive.io/Paved,rdfs:Class, "Paved",RouteSurfaceType,,,,,,,,
-https://openactive.io/BareEarthOrBedrock,rdfs:Class, "Bare Earth or Bedrock",RouteSurfaceType,,,,,,,,
-https://openactive.io/ShortVegetation,rdfs:Class, "Short Vegetation",RouteSurfaceType,,,,,,,,
-https://openactive.io/RoughVegetationOrCrop,rdfs:Class, "Rough Vegetation or Crop",RouteSurfaceType,,,,,,,,
-https://openactive.io/HardSurface(Stoney),rdfs:Class, "Hard Surface (Stoney)",RouteSurfaceType,,,,,,,,
-https://openactive.io/HardSurface(Sealed),rdfs:Class, "Hard Surface (Sealed)",RouteSurfaceType,,,,,,,,
-https://openactive.io/BoardwalkOrTimber,rdfs:Class, "Boardwalk or Timber",RouteSurfaceType,,,,,,,,
+https://openactive.io/Gravel,rdfs:Class, 'Gravel',RouteSurfaceType,,,,,,,,
+https://openactive.io/Paved,rdfs:Class, 'Paved',RouteSurfaceType,,,,,,,,
+https://openactive.io/BareEarthOrBedrock,rdfs:Class, 'Bare Earth or Bedrock',RouteSurfaceType,,,,,,,,
+https://openactive.io/ShortVegetation,rdfs:Class, 'Short Vegetation',RouteSurfaceType,,,,,,,,
+https://openactive.io/RoughVegetationOrCrop,rdfs:Class, 'Rough Vegetation or Crop',RouteSurfaceType,,,,,,,,
+https://openactive.io/HardSurface(Stoney),rdfs:Class, 'Hard Surface (Stoney)',RouteSurfaceType,,,,,,,,
+https://openactive.io/HardSurface(Sealed),rdfs:Class, 'Hard Surface (Sealed)',RouteSurfaceType,,,,,,,,
+https://openactive.io/BoardwalkOrTimber,rdfs:Class, 'Boardwalk or Timber',RouteSurfaceType,,,,,,,,
 https://openactive.io/Bus,rdfs:Class,"Bus",TransportToRoutePointType,,,,,,,,
 https://openactive.io/Rail,rdfs:Class,"Rail",TransportToRoutePointType,,,,,,,,
 https://openactive.io/Bicycle,rdfs:Class,"Bicycle",TransportToRoutePointType,,,,,,,,
