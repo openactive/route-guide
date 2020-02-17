@@ -33,7 +33,7 @@ function respec2html {
 }
 
 echo Copying static files
-cp -r ../1.0 .
+# cp -r ../1.0 .
 cp -r ../EditorsDraft .
 
 # Remove edit versions
