@@ -43,7 +43,7 @@
 			"type": "array",
 			"items": {
 				"anyOf": [{
-						"$ref": "#/definitions/Person"
+					"$ref": "file:Person.schema.json"
 					},
 					{
 						"$ref": "#/definitions/Organization"
@@ -205,14 +205,6 @@
 		}
 	},
 		"definitions": {
-			"Person": {
-				"type": "object",
-				"required": ["name"],
-				"patternProperties": {
-					".*": {}
-				}
-			},
-			"Organization": {},
 			"Date": {
 				"type": "string",
 				"format": "date"
@@ -232,7 +224,7 @@
 						"type": "array",
 						"items": {
 							"anyOf": [{
-									"$ref": "#/definitions/Person"
+								"$ref": "file:Person.schema.json"
 								},
 								{
 									"$ref": "#/definitions/Organization"
@@ -464,10 +456,10 @@
 					},
 					"isMaintainedBy": {
 						"anyOf": [{
-								"$ref": "#/definitions/Person"
+							"$ref": "file:Person.schema.json"
 							},
 							{
-								"$ref": "#/definitions/Organization"
+								"$ref": "file:Organization.schema.json"
 							}
 
 						]
@@ -666,10 +658,10 @@
 							"type": "array",
 							"items": {
 								"anyOf": [{
-										"$ref": "#/definitions/Person"
+									"$ref": "file:Person.schema.json"
 									},
 									{
-										"$ref": "#/definitions/Person"
+										"$ref": "#/definitions/Organization"
 									}
 								]
 							}

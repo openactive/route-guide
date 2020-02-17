@@ -54,7 +54,7 @@ class Vocab
   end
 
   def namespaced(term)
-    term.include?(":") ? term : "oa:#{term}"
+    term.include?(":") ? term : "rt:#{term}"
   end
 
   def to_jsonld
@@ -182,10 +182,10 @@ class Vocab
       }
     end
 
-    # Use separate rdfs context so as not to polute the OA context.
+    # Use separate rdfs context so as not to pollute the OA context.
     ontology = {
       "@context" => rdfs_context,
-      "@id" => prefixes["oa"][:subClassOf],
+      "@id" => prefixes["rt"][:subClassOf],
       "@type" => "owl:Ontology",
       "dc:title" => {"en" => TITLE},
       "dc:description" => {"en" => DESCRIPTION},
@@ -217,7 +217,7 @@ class Vocab
     @prefixes.each {|id, entry| output << "@prefix #{id}: <#{entry[:subClassOf]}> ."}
 
     output << "\n# OpenActive Ontology definition"
-    output << "oa: a owl:Ontology;"
+    output << "rt: a owl:Ontology;"
     output << %(  dc:title "#{TITLE}"@en;)
     output << %(  dc:description """#{DESCRIPTION}"""@en;)
     output << %(  dc:date "#{date}"^^xsd:date;)
@@ -226,16 +226,16 @@ class Vocab
 
     output << "\n# Class definitions"#{
     @classes.each do |id, entry|
-      output << "oa:#{id} a rdfs:Class;"
+      output << "rt:#{id} a rdfs:Class;"
       output << %(  rdfs:label "#{entry[:label]}"@en;)
       output << %(  rdfs:comment """#{entry[:comment]}"""@en;)
       output << %(  rdfs:subClassOf #{namespaced(entry[:subClassOf])};) if entry[:subClassOf]
-      output << %(  rdfs:isDefinedBy oa: .)
+      output << %(  rdfs:isDefinedBy rt: .)
     end
 
     output << "\n# Property definitions"
     @properties.each do |id, entry|
-      output << "oa:#{id} a rdf:Property;"
+      output << "rt:#{id} a rdf:Property;"
       output << %(  rdfs:label "#{entry[:label]}"@en;)
       output << %(  rdfs:comment """#{entry[:comment]}"""@en;)
       output << %(  rdfs:subPropertyOf #{namespaced(entry[:subClassOf])};) if entry[:subClassOf]
@@ -254,24 +254,24 @@ class Vocab
       else
         output << %(  rdfs:range [ owl:unionOf (#{ranges.map {|d| namespaced(d)}.join(' ')})];)
       end
-      output << %(  rdfs:isDefinedBy oa: .)
+      output << %(  rdfs:isDefinedBy rt: .)
     end
 
     output << "\n# Datatype definitions"
     @datatypes.each do |id, entry|
-      output << "oa:#{id} a rdfs:Datatype;"
+      output << "rt:#{id} a rdfs:Datatype;"
       output << %(  rdfs:label "#{entry[:label]}"@en;)
       output << %(  rdfs:comment """#{entry[:comment]}"""@en;)
       output << %(  rdfs:subClassOf #{namespaced(entry[:subClassOf])};) if entry[:subClassOf]
-      output << %(  rdfs:isDefinedBy oa: .)
+      output << %(  rdfs:isDefinedBy rt: .)
     end
 
     output << "\n# Instance definitions"
     @instances.each do |id, entry|
-      output << "oa:#{id} a #{namespaced(entry[:type])};"
+      output << "rt:#{id} a #{namespaced(entry[:type])};"
       output << %(  rdfs:label "#{entry[:label]}"@en;)
       output << %(  rdfs:comment """#{entry[:comment]}"""@en;)
-      output << %(  rdfs:isDefinedBy oa: .)
+      output << %(  rdfs:isDefinedBy rt: .)
     end
 
     output.join("\n")
@@ -322,7 +322,7 @@ when :ttl     then options[:output].puts(vocab.to_ttl)
 when :html    then options[:output].puts(vocab.to_html)
 else
   %w(jsonld ttl html).each do |format|
-    File.open(format == 'html' ? 'index.html' : "oa.#{format}", "w") do |output|
+    File.open(format == 'html' ? 'index.html' : "rt.#{format}", "w") do |output|
       output.puts(vocab.send("to_#{format}".to_sym))
     end
   end
