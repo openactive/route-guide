@@ -16,8 +16,10 @@ cd out
 git init
 
 # inside this git repo we'll pretend to be a new user
-git config user.name "Travis CI"
-git config user.email "travis@openactive.org"
+openssl aes-256-cbc -k "$travis_key_password" -d -md sha256 -a -in travis_key.enc -out travis_key
+echo "Host github.com" > ~/.ssh/config
+echo "  IdentityFile  $(pwd)/travis_key" >> ~/.ssh/config
+chmod 400 travis_key
 
 # compile using respec2html (handling each version separately)
 function respec2html {
@@ -39,7 +41,6 @@ cp -r ../EditorsDraft .
 # Remove edit versions
 # rm **/edit.html
 
-# Current latest version
 # Current latest version
 cp -r ../1.0/* .
 
