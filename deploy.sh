@@ -16,10 +16,10 @@ cd out
 git init
 
 # inside this git repo we'll pretend to be a new user
-openssl aes-256-cbc -k "$travis_key_password" -d -md sha256 -a -in ../deploy_key.enc -out deploy_key
-echo "Host github.com" > ~/.ssh/config
-echo "  IdentityFile  $(pwd)/deploy_key" >> ~/.ssh/config
-chmod 400 deploy_key
+#openssl aes-256-cbc -k "$travis_key_password" -d -md sha256 -a -in ../deploy_key.enc -out deploy_key
+#echo "Host github.com" > ~/.ssh/config
+#echo "  IdentityFile  $(pwd)/deploy_key" >> ~/.ssh/config
+#chmod 400 deploy_key
 
 # compile using respec2html (handling each version separately)
 function respec2html {
