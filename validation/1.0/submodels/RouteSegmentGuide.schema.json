@@ -1,0 +1,216 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"$id": "https://openactive.io/routes/validation/submodels/RouteSegmentGuide.schema.json",
+	"$vocabulary": {
+		"https://json-schema.org/draft/2019-09/vocab/core": true
+	},
+	"type": "object",
+	"title": "JSON-LD schema for RouteSegmentGuides.",
+	"required": [
+
+	],
+	"properties": {
+		"@context": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/URL"
+			}
+		},
+		"@id": {
+			"$ref": "#/definitions/URL"
+		},
+		"@type": {
+			"type": "string",
+			"pattern": "RouteGuide"
+		},
+		"name": {
+			"type": "string",
+			"minLength": 4,
+			"maxLength": 1024
+		},
+		"url": {
+			"type": "string",
+			"pattern": "http(s)?://.+"
+		},
+		"author": {
+			"type": "array",
+			"items": {
+				"anyOf": [{
+						"$ref": "#/definitions/Person"
+					},
+					{
+						"$ref": "#/definitions/Organization"
+					}
+				]
+			}
+		},
+		"datePublished": {
+			"type": "string",
+			"minLength": 8,
+			"maxLength": 128
+		},
+		"dateModified": {
+			"type": "string",
+			"minLength": 8,
+			"maxLength": 128
+		},
+		"verificationRecord": {
+			"$ref": "#/definitions/VerificationRecord"
+		},
+		"description": {
+			"$ref": "../definitions/Description"
+		},
+		"headline": {
+			"$ref": "#/definitions/Headline"
+		},
+		"activity": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/Concept"
+			}
+		},
+		"distance": {
+			"$ref": "#/definitions/QuantitativeValue"
+		},
+		"indicativeDuration": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/IndicativeDuration"
+			}
+		},
+		"startPoint": {
+			"$ref": "#/definitions/RoutePoint"
+		},
+		"endPoint": {
+			"$ref": "#/definitions/RoutePoint"
+		},
+		"pointOfInterest": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/RoutePoint"
+			}
+		},
+		"accessibilityDescription": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 4
+			}
+		},
+		"gradient": {
+			"$ref": "#/definitions/RouteGradient"
+		},
+		"surface": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"routeDifficulty": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/RouteDifficulty"
+			}
+		},
+		"geoPath": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/MapAsGeo"
+			}
+		},
+		"mapImage": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/MapAsImage"
+			}
+		},
+		"category": {
+			"type": "array",
+			"items": {
+				"anyOf": [{
+						"type": "string"
+					},
+					{
+						"$ref": "#/definitions/Concept"
+					}
+				]
+			}
+		},
+		"additionalInformation": {
+			"type": "array",
+			"items": {
+				"$ref": "#definitions/Article"
+			}
+		},
+		"amenityFeature": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/LocationFeatureSpecification"
+			}
+		},
+		"isLoop": {
+			"type": "boolean"
+		},
+		"riskInformation": {
+			"$ref": "#/definitions/RouteRiskAdvisory"
+		},
+		"legalAdvisory": {
+			"$ref": "#/definitions/RouteLegalAdvisory"
+		},
+		"routeAccessRestriction": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/RouteAccessRestriction"
+			}
+		},
+		"suggestedEquipment": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"image": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/ImageObject"
+			}
+		},
+		"review": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/Review"
+			}
+		},
+		"contactPoint": {
+			"$ref": "#/definitions/ContactPoint"
+		},
+		"userContributedContent": {
+			"$ref": "#/definitions/UserContributedContent"
+		},
+		"isJoinableThroughoutLength": {
+			"type": "boolean"
+		},
+		"segmentGroups": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/RouteSegmentGroup"
+			}
+		},
+		"segments": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/RouteSegmentGuide"
+			}
+		},
+		"isBasedOn": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/RouteGuideCore"
+			}
+		}
+	}
+
+			}
+		}
+	}
+}

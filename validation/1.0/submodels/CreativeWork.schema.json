@@ -1,0 +1,10 @@
+{
+   "$schema": "http://json-schema.org/draft-06/schema#",
+   "$id": "https://openactive.io/routes/validation/submodels/CreativeWork.schema.json",
+   "type" : "object",
+   "additionalProperties" : false,
+   "required" : [],
+   "patternProperties" :{
+       ".*" : {}
+   }
+ }
