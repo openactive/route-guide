@@ -13,11 +13,11 @@
 		"@context": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/URL"
+				"$ref": "lib.schema.json#/definitions/URL"
 			}
 		},
 		"@id": {
-			"$ref": "#/definitions/URL"
+			"$ref": "lib.schema.json#/definitions/URL"
 		},
 		"@type": {
 			"type": "string",
@@ -29,17 +29,16 @@
 			"maxLength": 1024
 		},
 		"url": {
-			"type": "string",
-			"pattern": "http(s)?://.+"
+			"$ref": "lib.schema.json#/definitions/URL"
 		},
 		"author": {
 			"type": "array",
 			"items": {
 				"anyOf": [{
-						"$ref": "#/definitions/Person"
+						"$ref": "Person.schema.json"
 					},
 					{
-						"$ref": "#/definitions/Organization"
+						"$ref": "Organization.schema.json"
 					}
 				]
 			}
@@ -55,39 +54,39 @@
 			"maxLength": 128
 		},
 		"verificationRecord": {
-			"$ref": "#/definitions/VerificationRecord"
+			"$ref": "lib.schema.json#/definitions/VerificationRecord"
 		},
 		"description": {
-			"$ref": "../definitions/Description"
+			"$ref": "lib.schema.json#/definitions/Description"
 		},
 		"headline": {
-			"$ref": "#/definitions/Headline"
+			"$ref": "lib.schema.json#/definitions/Headline"
 		},
 		"activity": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/Concept"
+				"$ref": "lib.schema.json#/definitions/Concept"
 			}
 		},
 		"distance": {
-			"$ref": "#/definitions/QuantitativeValue"
+			"$ref": "lib.schema.json#/definitions/QuantitativeValue"
 		},
 		"indicativeDuration": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/IndicativeDuration"
+				"$ref": "lib.schema.json#/definitions/IndicativeDuration"
 			}
 		},
 		"startPoint": {
-			"$ref": "#/definitions/RoutePoint"
+			"$ref": "lib.schema.json#/definitions/RoutePoint"
 		},
 		"endPoint": {
-			"$ref": "#/definitions/RoutePoint"
+			"$ref": "lib.schema.json#/definitions/RoutePoint"
 		},
 		"pointOfInterest": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/RoutePoint"
+				"$ref": "lib.schema.json#/definitions/RoutePoint"
 			}
 		},
 		"accessibilityDescription": {
@@ -98,7 +97,7 @@
 			}
 		},
 		"gradient": {
-			"$ref": "#/definitions/RouteGradient"
+			"$ref": "lib.schema.json#/definitions/RouteGradient"
 		},
 		"surface": {
 			"type": "array",
@@ -109,19 +108,19 @@
 		"routeDifficulty": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/RouteDifficulty"
+				"$ref": "lib.schema.json#/definitions/RouteDifficulty"
 			}
 		},
 		"geoPath": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/MapAsGeo"
+				"$ref": "lib.schema.json#/definitions/MapAsGeo"
 			}
 		},
 		"mapImage": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/MapAsImage"
+				"$ref": "lib.schema.json#/definitions/MapAsImage"
 			}
 		},
 		"category": {
@@ -131,7 +130,7 @@
 						"type": "string"
 					},
 					{
-						"$ref": "#/definitions/Concept"
+						"$ref": "lib.schema.json#/definitions/Concept"
 					}
 				]
 			}
@@ -139,28 +138,28 @@
 		"additionalInformation": {
 			"type": "array",
 			"items": {
-				"$ref": "#definitions/Article"
+				"$ref": "Article.schema.json"
 			}
 		},
 		"amenityFeature": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/LocationFeatureSpecification"
+				"$ref": "lib.schema.json#/definitions/LocationFeatureSpecification"
 			}
 		},
 		"isLoop": {
 			"type": "boolean"
 		},
 		"riskInformation": {
-			"$ref": "#/definitions/RouteRiskAdvisory"
+			"$ref": "lib.schema.json#/definitions/RouteRiskAdvisory"
 		},
 		"legalAdvisory": {
-			"$ref": "#/definitions/RouteLegalAdvisory"
+			"$ref": "lib.schema.json#/definitions/RouteLegalAdvisory"
 		},
 		"routeAccessRestriction": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/RouteAccessRestriction"
+				"$ref": "lib.schema.json#/definitions/RouteAccessRestriction"
 			}
 		},
 		"suggestedEquipment": {
@@ -172,45 +171,23 @@
 		"image": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/ImageObject"
+				"$ref": "lib.schema.json#/definitions/ImageObject"
 			}
 		},
 		"review": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/Review"
+				"$ref": "lib.schema.json#/definitions/Review"
 			}
 		},
 		"contactPoint": {
-			"$ref": "#/definitions/ContactPoint"
+			"$ref": "lib.schema.json#/definitions/ContactPoint"
 		},
 		"userContributedContent": {
-			"$ref": "#/definitions/UserContributedContent"
+			"$ref": "lib.schema.json#/definitions/UserContributedContent"
 		},
 		"isJoinableThroughoutLength": {
 			"type": "boolean"
-		},
-		"segmentGroups": {
-			"type": "array",
-			"items": {
-				"$ref": "#/definitions/RouteSegmentGroup"
-			}
-		},
-		"segments": {
-			"type": "array",
-			"items": {
-				"$ref": "#/definitions/RouteSegmentGuide"
-			}
-		},
-		"isBasedOn": {
-			"type": "array",
-			"items": {
-				"$ref": "#/definitions/RouteGuideCore"
-			}
-		}
-	}
-
-			}
 		}
 	}
 }

@@ -20,11 +20,11 @@
       "@context":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/URL"
+            "$ref":"submodels/lib.schema.json#/definitions/URL"
          }
       },
       "@id":{
-         "$ref":"#/definitions/URL"
+         "$ref":"submodels/lib.schema.json#/definitions/URL"
       },
       "@type":{
          "type":"string",
@@ -36,8 +36,7 @@
          "maxLength":1024
       },
       "url":{
-         "type":"string",
-         "pattern":"http(s)?://.+"
+        "$ref":"submodels/lib.schema.json#/definitions/URL"
       },
       "author":{
          "type":"array",
@@ -63,39 +62,39 @@
          "maxLength":128
       },
       "verificationRecord":{
-         "$ref":"#/definitions/VerificationRecord"
+         "$ref":"submodels/lib.schema.json#/definitions/VerificationRecord"
       },
       "description":{
-         "$ref":"#/definitions/Description"
+         "$ref":"submodels/lib.schema.json#/definitions/Description"
       },
       "headline":{
-         "$ref":"#/definitions/Headline"
+         "$ref":"submodels/lib.schema.json#/definitions/Headline"
       },
       "activity":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/Concept"
+            "$ref":"submodels/lib.schema.json#/definitions/Concept"
          }
       },
       "distance":{
-         "$ref":"#/definitions/QuantitativeValue"
+         "$ref":"submodels/lib.schema.json#/definitions/QuantitativeValue"
       },
       "indicativeDuration":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/IndicativeDuration"
+            "$ref":"submodels/lib.schema.json#/definitions/IndicativeDuration"
          }
       },
       "startPoint":{
-         "$ref":"#/definitions/RoutePoint"
+         "$ref":"submodels/lib.schema.json#/definitions/RoutePoint"
       },
       "endPoint":{
-         "$ref":"#/definitions/RoutePoint"
+         "$ref":"submodels/lib.schema.json#/definitions/RoutePoint"
       },
       "pointOfInterest":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/RoutePoint"
+            "$ref":"submodels/lib.schema.json#/definitions/RoutePoint"
          }
       },
       "accessibilityDescription":{
@@ -106,7 +105,7 @@
          }
       },
       "gradient":{
-         "$ref":"#/definitions/RouteGradient"
+         "$ref":"submodels/lib.schema.json#/definitions/RouteGradient"
       },
       "surface":{
          "type":"array",
@@ -117,19 +116,19 @@
       "routeDifficulty":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/RouteDifficulty"
+            "$ref":"submodels/lib.schema.json#/definitions/RouteDifficulty"
          }
       },
       "geoPath":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/MapAsGeo"
+            "$ref":"submodels/lib.schema.json#/definitions/MapAsGeo"
          }
       },
       "mapImage":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/MapAsImage"
+            "$ref":"submodels/lib.schema.json#/definitions/MapAsImage"
          }
       },
       "category":{
@@ -140,7 +139,7 @@
                   "type":"string"
                },
                {
-                  "$ref":"#/definitions/Concept"
+                  "$ref":"submodels/lib.schema.json#/definitions/Concept"
                }
             ]
          }
@@ -154,22 +153,22 @@
       "amenityFeature":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/LocationFeatureSpecification"
+            "$ref":"submodels/lib.schema.json#/definitions/LocationFeatureSpecification"
          }
       },
       "isLoop":{
          "type":"boolean"
       },
       "riskInformation":{
-         "$ref":"#/definitions/RouteRiskAdvisory"
+         "$ref":"submodels/lib.schema.json#/definitions/RouteRiskAdvisory"
       },
       "legalAdvisory":{
-         "$ref":"#/definitions/RouteLegalAdvisory"
+         "$ref":"submodels/lib.schema.json#/definitions/RouteLegalAdvisory"
       },
       "routeAccessRestriction":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/RouteAccessRestriction"
+            "$ref":"submodels/lib.schema.json#/definitions/RouteAccessRestriction"
          }
       },
       "suggestedEquipment":{
@@ -181,7 +180,7 @@
       "image":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/ImageObject"
+            "$ref":"submodels/lib.schema.json#/definitions/ImageObject"
          }
       },
       "review":{
@@ -191,10 +190,10 @@
          }
       },
       "contactPoint":{
-         "$ref":"#/definitions/ContactPoint"
+         "$ref":"submodels/lib.schema.json#/definitions/ContactPoint"
       },
       "userContributedContent":{
-         "$ref":"#/definitions/UserContributedContent"
+         "$ref":"submodels/lib.schema.json#/definitions/UserContributedContent"
       },
       "isJoinableThroughoutLength":{
          "type":"boolean"
@@ -202,7 +201,7 @@
       "segmentGroups":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/RouteSegmentGroup"
+            "$ref":"submodels/lib.schema.json#/definitions/RouteSegmentGroup"
          }
       },
       "segments":{
@@ -263,7 +262,7 @@
                "pattern":"IndicativeDuration"
             },
             "activity":{
-               "$ref":"#/definitions/Concept"
+               "$ref":"submodels/lib.schema.json#/definitions/Concept"
             },
             "duration":{
                "type":"string",
@@ -298,25 +297,25 @@
                "type":"boolean"
             },
             "mapReference":{
-               "$ref":"#/definitions/MapReference"
+               "$ref":"submodels/lib.schema.json#/definitions/MapReference"
             },
             "transportNote":{
-               "$ref":"#/definitions/TransportNote"
+               "$ref":"submodels/lib.schema.json#/definitions/TransportNote"
             },
             "headline":{
-               "$ref":"#/definitions/Headline"
+               "$ref":"submodels/lib.schema.json#/definitions/Headline"
             },
             "description":{
-               "$ref":"#/definitions/Description"
+               "$ref":"submodels/lib.schema.json#/definitions/Description"
             },
             "amenityFeature":{
-               "$ref":"#/definitions/AmenityFeature"
+               "$ref":"submodels/lib.schema.json#/definitions/AmenityFeature"
             },
             "userContributedContent":{
-               "$ref":"#/definitions/UserContributedContent"
+               "$ref":"submodels/lib.schema.json#/definitions/UserContributedContent"
             },
             "sameAs":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             }
          }
       },
@@ -349,10 +348,10 @@
                "maxLength":96
             },
             "gradientDefinitionURL":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "description":{
-               "$ref":"#/definitions/Description"
+               "$ref":"submodels/lib.schema.json#/definitions/Description"
             }
          }
       },
@@ -365,13 +364,13 @@
                "maxLength":48
             },
             "activity":{
-               "$ref":"#/definitions/Concept"
+               "$ref":"submodels/lib.schema.json#/definitions/Concept"
             },
             "description":{
-               "$ref":"#/definitions/Description"
+               "$ref":"submodels/lib.schema.json#/definitions/Description"
             },
             "difficultyDefinitionURL":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             }
          }
       },
@@ -389,22 +388,22 @@
                "pattern":"Concept"
             },
             "@id":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "broadMatch":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "narrowMatch":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "broader":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "narrower":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "inScheme":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "prefLabel":{
                "type":"string",
@@ -465,7 +464,7 @@
                "maxLength":512
             },
             "userSafetyFeedback":{
-               "$ref":"#/definitions/Review"
+               "$ref":"submodels/lib.schema.json#/definitions/Review"
             },
             "isMaintained":{
                "type":"boolean"
@@ -481,7 +480,7 @@
                ]
             },
             "riskInformationURL":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "trafficDescription":{
                "type":"string",
@@ -498,13 +497,13 @@
                "pattern":"RouteLegalAdvisory"
             },
             "routeDesignation":{
-               "$ref":"#/definitions/RouteDesignation"
+               "$ref":"submodels/lib.schema.json#/definitions/RouteDesignation"
             },
             "description":{
-               "$ref":"#/definitions/Description"
+               "$ref":"submodels/lib.schema.json#/definitions/Description"
             },
             "legalInformationURL":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             }
          }
       },
@@ -516,7 +515,7 @@
                "pattern":"RouteAccessRestriction"
             },
             "routeAccessRestrictionInformationURL":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "routeAccessRestrictionTimeSpan":{
                "type":"string",
@@ -529,7 +528,7 @@
                "maxLength":36
             },
             "description":{
-               "$ref":"#/definitions/Description"
+               "$ref":"submodels/lib.schema.json#/definitions/Description"
             }
          }
       },
@@ -549,10 +548,10 @@
                "maxLength":36
             },
             "description":{
-               "$ref":"#/definitions/Description"
+               "$ref":"submodels/lib.schema.json#/definitions/Description"
             },
             "url":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             }
          }
       },
@@ -579,7 +578,7 @@
                "pattern":"Map"
             },
             "image":{
-               "$ref":"#/definitions/ImageObject"
+               "$ref":"submodels/lib.schema.json#/definitions/ImageObject"
             },
             "encodingFormat":{
                "oneOf":[
@@ -587,7 +586,7 @@
                      "type":"string"
                   },
                   {
-                     "$ref":"#/definitions/URL"
+                     "$ref":"submodels/lib.schema.json#/definitions/URL"
                   }
                ]
             }
@@ -601,7 +600,7 @@
                "pattern":"Map"
             },
             "url":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "encodingFormat":{
                "oneOf":[
@@ -609,7 +608,7 @@
                      "type":"string"
                   },
                   {
-                     "$ref":"#/definitions/URL"
+                     "$ref":"submodels/lib.schema.json#/definitions/URL"
                   }
                ]
             }
@@ -626,7 +625,7 @@
          ],
          "properties":{
             "@id":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "@type":{
                "type":"string",
@@ -638,18 +637,18 @@
                "maxLength":256
             },
             "description":{
-               "$ref":"#/definitions/Description"
+               "$ref":"submodels/lib.schema.json#/definitions/Description"
             },
             "includesSegments":{
                "type":"array",
                "items":{
-                  "$ref":"#/definitions/URL"
+                  "$ref":"submodels/lib.schema.json#/definitions/URL"
                }
             },
             "alternativeGroupTo":{
                "type":"array",
                "items":{
-                  "$ref":"#/definitions/URL"
+                  "$ref":"submodels/lib.schema.json#/definitions/URL"
                }
             }
          }
@@ -710,26 +709,17 @@
                "pattern":"TransportNote"
             },
             "transportMode":{
-               "$ref":"#/definitions/URL"
+               "$ref":"submodels/lib.schema.json#/definitions/URL"
             },
             "description":{
-               "$ref":"#/definitions/Description"
+               "$ref":"submodels/lib.schema.json#/definitions/Description"
             }
          }
-      },
-      "Headline":{
-         "type":"string",
-         "minLength":4,
-         "maxLength":512
-      },
-      "Description":{
-         "type":"string",
-         "minLength":4
       },
       "AmenityFeature":{
          "type":"array",
          "items":{
-            "$ref":"#/definitions/LocationFeatureSpecification"
+            "$ref":"submodels/lib.schema.json#/definitions/LocationFeatureSpecification"
          }
       },
       "UserContributedContent":{
