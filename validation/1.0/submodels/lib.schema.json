@@ -70,7 +70,7 @@
 		"RoutePoint": {
 			"type": "object",
 			"required": [
-				"type",
+				"@type",
 				"description"
 			],
 			"properties": {
@@ -96,7 +96,10 @@
 					"$ref": "#/definitions/MapReference"
 				},
 				"transportNote": {
-					"$ref": "#/definitions/TransportNote"
+          "type" : "array",
+          "$items" : {
+					       "$ref": "#/definitions/TransportNote"
+               }
 				},
 				"headline": {
 					"$ref": "#/definitions/Headline"
