@@ -1,0 +1,518 @@
+@prefix oa: <https://www.openactive.org/ns#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfa: <http://www.w3.org/ns/rdfa#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix pending: <http://pending.schema.org/> .
+@prefix rt: <https://www.openactive.org/routes/ns#> .
+
+# OpenActive Ontology definition
+rt: a owl:Ontology;
+  dc:title "OpenActive Namespace Vocabulary Terms"@en;
+  dc:description """This document describes the vocabulary used in the Modelling Opportunity Data specification."""@en;
+  dc:date "2020-02-14"^^xsd:date;
+  owl:versionInfo <https://github.com/openactive/routes/ns/commit/6f3321d10e71905ff039c7ef0e27162916f91877>;
+  .
+
+
+# Class definitions
+rt:RouteGuide a rdfs:Class;
+  rdfs:label "RouteGuide"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf https://schema.org/CreativeWork;
+  rdfs:isDefinedBy rt: .
+rt:RouteGuideSegment a rdfs:Class;
+  rdfs:label "RouteGuideSegment"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf https://www.openactive.org/routes/ns#RouteGuide;
+  rdfs:isDefinedBy rt: .
+rt:VerificationRecord a rdfs:Class;
+  rdfs:label "VerificationRecord"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:IndicativeDuration a rdfs:Class;
+  rdfs:label "IndicativeDuration"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:RoutePoint a rdfs:Class;
+  rdfs:label "RoutePoint"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf https://schema.org/Place;
+  rdfs:isDefinedBy rt: .
+rt:RouteGradient a rdfs:Class;
+  rdfs:label "RouteGradient"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:RouteDifficulty a rdfs:Class;
+  rdfs:label "RouteDifficulty"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:RouteRiskAdvisory a rdfs:Class;
+  rdfs:label "RouteRiskAdvisory"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:RouteLegalAdvisory a rdfs:Class;
+  rdfs:label "RouteLegalAdvisory"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:RouteAccessRestriction a rdfs:Class;
+  rdfs:label "RouteAccessRestriction"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:RouteSegmentGuide a rdfs:Class;
+  rdfs:label "RouteSegmentGuide"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:RouteSegmentGroup a rdfs:Class;
+  rdfs:label "RouteSegmentGroup"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:MapReference a rdfs:Class;
+  rdfs:label "MapReference"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:TransportNote a rdfs:Class;
+  rdfs:label "TransportNote"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:RouteDesignation a rdfs:Class;
+  rdfs:label "RouteDesignation"@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:RouteSurfaceType a rdfs:Class;
+  rdfs:label ""@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:TransportToRoutePointType a rdfs:Class;
+  rdfs:label ""@en;
+  rdfs:comment """"""@en;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/Gravel a rdfs:Class;
+  rdfs:label " 'Gravel'"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:RouteSurfaceType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/Paved a rdfs:Class;
+  rdfs:label " 'Paved'"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:RouteSurfaceType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/BareEarthOrBedrock a rdfs:Class;
+  rdfs:label " 'Bare Earth or Bedrock'"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:RouteSurfaceType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/ShortVegetation a rdfs:Class;
+  rdfs:label " 'Short Vegetation'"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:RouteSurfaceType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/RoughVegetationOrCrop a rdfs:Class;
+  rdfs:label " 'Rough Vegetation or Crop'"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:RouteSurfaceType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/HardSurface(Stoney) a rdfs:Class;
+  rdfs:label " 'Hard Surface (Stoney)'"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:RouteSurfaceType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/HardSurface(Sealed) a rdfs:Class;
+  rdfs:label " 'Hard Surface (Sealed)'"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:RouteSurfaceType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/BoardwalkOrTimber a rdfs:Class;
+  rdfs:label " 'Boardwalk or Timber'"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:RouteSurfaceType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/Bus a rdfs:Class;
+  rdfs:label "Bus"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:TransportToRoutePointType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/Rail a rdfs:Class;
+  rdfs:label "Rail"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:TransportToRoutePointType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/Bicycle a rdfs:Class;
+  rdfs:label "Bicycle"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:TransportToRoutePointType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/Road a rdfs:Class;
+  rdfs:label "Road"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:TransportToRoutePointType;
+  rdfs:isDefinedBy rt: .
+rt:https://openactive.io/Foot a rdfs:Class;
+  rdfs:label "Foot"@en;
+  rdfs:comment """"""@en;
+  rdfs:subClassOf rt:TransportToRoutePointType;
+  rdfs:isDefinedBy rt: .
+
+# Property definitions
+rt:verificationRecord a rdf:Property;
+  rdfs:label "verificationRecord"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:VerificationRecord;
+  rdfs:isDefinedBy rt: .
+rt:distance a rdf:Property;
+  rdfs:label "distance"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range schema:QuantitativeValue;
+  rdfs:isDefinedBy rt: .
+rt:indicativeDuration a rdf:Property;
+  rdfs:label "indicativeDuration"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:IndicativeDuration;
+  rdfs:isDefinedBy rt: .
+rt:startPoint a rdf:Property;
+  rdfs:label "startPoint"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:RoutePoint;
+  rdfs:isDefinedBy rt: .
+rt:endPoint a rdf:Property;
+  rdfs:label "endPoint"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:RoutePoint;
+  rdfs:isDefinedBy rt: .
+rt:pointOfInterest a rdf:Property;
+  rdfs:label "pointOfInterest"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:RoutePoint;
+  rdfs:isDefinedBy rt: .
+rt:accessibilityDescription a rdf:Property;
+  rdfs:label "accessibilityDescription"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:gradient a rdf:Property;
+  rdfs:label "gradient"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:RouteGradient;
+  rdfs:isDefinedBy rt: .
+rt:surface a rdf:Property;
+  rdfs:label "surface"@en;
+  rdfs:comment """ https://openactive.io/HardSurface(Stoney)"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range schema:URL or schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:routeDifficulty a rdf:Property;
+  rdfs:label "routeDifficulty"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:RouteDifficulty;
+  rdfs:isDefinedBy rt: .
+rt:geoPath a rdf:Property;
+  rdfs:label "geoPath"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range schema:Map;
+  rdfs:isDefinedBy rt: .
+rt:mapImage a rdf:Property;
+  rdfs:label "mapImage"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range schema:Map;
+  rdfs:isDefinedBy rt: .
+rt:additionalInformation a rdf:Property;
+  rdfs:label "additionalInformation"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range schema:Article;
+  rdfs:isDefinedBy rt: .
+rt:isLoop a rdf:Property;
+  rdfs:label "isLoop"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range xsd:boolean;
+  rdfs:isDefinedBy rt: .
+rt:riskInformation a rdf:Property;
+  rdfs:label "gradient"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:RouteRiskAdvisory;
+  rdfs:isDefinedBy rt: .
+rt:legalAdvisory a rdf:Property;
+  rdfs:label "legalAdvisory"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range oa:RouteLegalAdvisory;
+  rdfs:isDefinedBy rt: .
+rt:routeAccessRestriction a rdf:Property;
+  rdfs:label "routeAccessRestriction"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:RouteAccessRestriction;
+  rdfs:isDefinedBy rt: .
+rt:userContributedContent a rdf:Property;
+  rdfs:label "userContributedContent"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range schema:CreativeWork;
+  rdfs:isDefinedBy rt: .
+rt:isJoinableThroughoutLength a rdf:Property;
+  rdfs:label "isJoinableThroughoutLength"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range xsd:boolean;
+  rdfs:isDefinedBy rt: .
+rt:segments a rdf:Property;
+  rdfs:label "segments"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:RouteSegmentGuide;
+  rdfs:isDefinedBy rt: .
+rt:segmentGroups a rdf:Property;
+  rdfs:label "segmentGroups"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:RouteSegmentGroup;
+  rdfs:isDefinedBy rt: .
+rt:isAccessPoint a rdf:Property;
+  rdfs:label "isAccessPoint"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RoutePoint;
+  rdfs:range xsd:boolean;
+  rdfs:isDefinedBy rt: .
+rt:isRecommendedAccessPoint a rdf:Property;
+  rdfs:label "isRecommendedAccessPoint"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RoutePoint;
+  rdfs:range schema:Boolean;
+  rdfs:isDefinedBy rt: .
+rt:mapReference a rdf:Property;
+  rdfs:label "mapReference"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:transportNote a rdf:Property;
+  rdfs:label "transportNote"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RoutePoint;
+  rdfs:range rt:TransportNote;
+  rdfs:isDefinedBy rt: .
+rt:mapSeries a rdf:Property;
+  rdfs:label "mapSeries"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:MapReference;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:mapNumber a rdf:Property;
+  rdfs:label "mapNumber"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:MapReference;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:gridReference a rdf:Property;
+  rdfs:label "gridReference"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:MapReference;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:maxGradient a rdf:Property;
+  rdfs:label "maxGradient"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGradient;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:avgGradient a rdf:Property;
+  rdfs:label "maxGradient"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGradient;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:totalElevationGain a rdf:Property;
+  rdfs:label "totalElevationGain"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGradient;
+  rdfs:range xsd:integer;
+  rdfs:isDefinedBy rt: .
+rt:totalElevationLoss a rdf:Property;
+  rdfs:label "totalElevationLoss"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGradient;
+  rdfs:range xsd:integer;
+  rdfs:isDefinedBy rt: .
+rt:gradientTerm a rdf:Property;
+  rdfs:label "gradientTerm"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGradient;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:gradientDefinitionURL a rdf:Property;
+  rdfs:label "gradientDefinitionURL"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGradient;
+  rdfs:range schema:URL;
+  rdfs:isDefinedBy rt: .
+rt:transportMode a rdf:Property;
+  rdfs:label "transportMode"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:TransportNote;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:difficultyTerm a rdf:Property;
+  rdfs:label "difficultyTerm"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteDifficulty;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:difficultyDefinitionURL a rdf:Property;
+  rdfs:label "difficultyDefinitionURL"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteDifficulty;
+  rdfs:range schema:URL;
+  rdfs:isDefinedBy rt: .
+rt:routeDesignation a rdf:Property;
+  rdfs:label "routeDesignation"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide or RouteSegmentGuide;
+  rdfs:range rt:RouteDesignation;
+  rdfs:isDefinedBy rt: .
+rt:legalInformationURL a rdf:Property;
+  rdfs:label "legalInformationURL"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteLegalAdvisory;
+  rdfs:range schema:URL;
+  rdfs:isDefinedBy rt: .
+rt:routeDesignationTerm a rdf:Property;
+  rdfs:label "routeDesignationTerm"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteDesignation;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:knownRisks a rdf:Property;
+  rdfs:label "knownRisks"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:riskModifiers a rdf:Property;
+  rdfs:label "riskModifiers"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:riskMitigators a rdf:Property;
+  rdfs:label "riskMitigators"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range Array of schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:riskDescription a rdf:Property;
+  rdfs:label "riskDescription"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:userSafetyFeedback a rdf:Property;
+  rdfs:label "userSafetyFeedback"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range schema:Review;
+  rdfs:isDefinedBy rt: .
+rt:isMaintained a rdf:Property;
+  rdfs:label "isMaintained"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range xsd:boolean;
+  rdfs:isDefinedBy rt: .
+rt:isMaintainedBy a rdf:Property;
+  rdfs:label "isMaintainedBy"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range schema:Person or schema:Organization;
+  rdfs:isDefinedBy rt: .
+rt:riskInformationURL a rdf:Property;
+  rdfs:label "riskDescription"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range schema:URL;
+  rdfs:isDefinedBy rt: .
+rt:trafficDescription a rdf:Property;
+  rdfs:label "trafficDescription"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:routeAccessRestrictionTerm a rdf:Property;
+  rdfs:label "routeAccessRestrictionTerm"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:routeAccessRestrictionInformationURL a rdf:Property;
+  rdfs:label "routeAccessRestrictionInformationURL"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range schema:URL;
+  rdfs:isDefinedBy rt: .
+rt:routeAccessRestrictionTimeSpan a rdf:Property;
+  rdfs:label "routeAccessRestrictionTimeSpan"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteRiskAdvisory;
+  rdfs:range schema:Text;
+  rdfs:isDefinedBy rt: .
+rt:verifiedBy a rdf:Property;
+  rdfs:label "verifiedBy"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:VerificationRecord;
+  rdfs:range schema:Person or schema:Organization;
+  rdfs:isDefinedBy rt: .
+rt:dateVerified a rdf:Property;
+  rdfs:label "dateVerified"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:VerificationRecord;
+  rdfs:range schema:Date or schema:DateTime;
+  rdfs:isDefinedBy rt: .
+rt:sequence a rdf:Property;
+  rdfs:label "sequence"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteSegmentGuide;
+  rdfs:range xsd:integer;
+  rdfs:isDefinedBy rt: .
+rt:alternativeRouteSegmentGuide a rdf:Property;
+  rdfs:label "alternativeRouteSegmentGuide"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteSegmentGuide;
+  rdfs:range rt:RouteSegmentGuide;
+  rdfs:isDefinedBy rt: .
+rt:includesSegments a rdf:Property;
+  rdfs:label "includesSegments"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteSegmentGroup;
+  rdfs:range rt: RouteSegmentGuide;
+  rdfs:isDefinedBy rt: .
+rt:alternativeGroupTo a rdf:Property;
+  rdfs:label "alternativeGroupTo"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteSegmentGroup;
+  rdfs:range rt:RouteSegmentGroup;
+  rdfs:isDefinedBy rt: .
+rt:version a rdf:Property;
+  rdfs:label "version"@en;
+  rdfs:comment """"""@en;
+  rdfs:domain rt:RouteGuide;
+  rdfs:range schema:Date or schema:DateTime;
+  rdfs:isDefinedBy rt: .
+
+# Datatype definitions
+
+# Instance definitions

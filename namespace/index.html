@@ -1,0 +1,1769 @@
+<html lang="en">
+  <head>
+    <meta charset='utf-8'/>
+    <title>OpenActive Namespace Vocabulary Terms</title>
+    <script class="remove">
+        var respecConfig = {
+          // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
+          specStatus:           "CG-FINAL",
+
+          // the specification's short name, as in http://www.w3.org/TR/short-name/
+          shortName:            "vocabulary",
+
+
+          // if you wish the publication date to be other than today, set this
+          publishDate:  "2020-02-14",
+
+          // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
+          // and its maturity status
+          // previousPublishDate:  "1977-03-15",
+          // previousMaturity:  "WD",
+
+          // if there a publicly available Editor's Draft, this is the link
+          edDraftURI:           "https://www.openactive.io/routes/vocabulary",
+          //prevED:  "https://www.openactive.io/spec-template/",
+          //previousURI:  "https://www.openactive.io/realtime-paged-data-exchange/0.2.3/",
+          //testSuiteURI: "https://www.openactive.io/endpoint-validator/",
+          copyrightStart: 2020,
+
+          // if this is a LCWD, uncomment and set the end of its review period
+          // lcEnd: "2009-08-05",
+
+          // editors, add as many as you like
+          // only "name" is required
+          editors: [
+              { name: "Tim Hill",
+                company: "Open Data Institute", companyURL: "http://opendata.institute/",
+                w3cid: 55359 }
+          ],
+
+          // authors, add as many as you like.
+          // This is optional, uncomment if you have authors as well as editors.
+          // only "name" is required. Same format as editors.
+
+          authors: [
+          ],
+
+          otherLinks: [{
+                key: "Repo",
+                value: "We are on Github",
+                href: "https://github.com/openactive/routes/",
+                class: "repo"
+            }, {
+                key: "Issues",
+                href: "https://github.com/openactive/routes/issues/"
+            }, {
+                key: "Version",
+                value: "1.0"
+            }
+          ],
+
+          logos: [
+            {
+              src: 'https://www.openactive.io/assets/openactive-logo-large.png',
+              href: "https://www.openactive.io",
+              alt: "openactive.io",
+              width: 255, //170
+              height: 43, //22
+              id: 'logo'
+            }
+          ],
+
+          // extend the bibliography entries
+          //localBiblio: {},
+
+          // name of the WG
+          wg:           "OpenActive Community Group",
+
+          // URI of the public WG page
+          wgURI:        "http://www.w3.org/community/openactive/",
+
+          // name (with the @w3c.org) of the public mailing to which comments are due
+          wgPublicList: "public-openactive",
+
+          // URI of the patent status for this WG, for Rec-track documents
+          // !!!! IMPORTANT !!!!
+          // This is important for Rec-track documents, do not copy a patent URI from a random
+          // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+          // Team Contact.
+          wgPatentURI:  "",
+          maxTocLevel: 4,
+          preProcess: [ ] ,
+          alternateFormats: [ {uri: "diff-previous.html", label: "diff to previous version"} ],
+          isRecTrack:   true,
+          isNoTrack:    true,
+          issueBase:    "https://github.com/openactive/routes/issues/",
+          localBiblio: {
+            "JSON-LD": {
+                "href": "https://www.w3.org/TR/json-ld/",
+                "title": "JSON-LD 1.0",
+                "status": "REC",
+                "publisher": "W3C",
+            },
+            "SCHEMA-ORG": {
+                "href": "http://schema.org/",
+                "title": "Schema.org"
+
+            },
+            "OpenActive-Community-Group": {
+                "href": "http://www.w3.org/community/openactive/",
+                "title": "OpenActive Community Group"
+            },
+            "SKOS": {
+                "href": "https://www.w3.org/TR/skos-primer",
+                "title": "SKOS Simple Knowledge Organization System Primer",
+                "status": "NOTE",
+                "publisher": "W3C",
+            },
+            "Modelling-Opportunity-Data": {
+                "href": "https://www.openactive.io/modelling-opportunity-data/",
+                "title": "Modelling Opportunity Data",
+                "status": "CG-FINAL",
+                "publisher": "OpenActive Community Group",
+            }
+          }
+        };
+    </script>
+    <script src='https://www.openactive.io/respec/builds/respec-w3c-common.js' class='remove'></script>
+
+    <style>
+      dl.terms dt {
+        float: left;
+        clear: left;
+        width: 17vw;
+      }
+      dl.terms dd:after {
+          content: '';
+          display: block;
+          clear: both;
+          margin-bottom: 5px;
+      }
+      table.rdfs-definition td {vertical-align: top;}
+      .bold {font-weight: bold;}
+    </style>
+
+  </head>
+  <body resource="http://openactive.org/routes/ns#" typeof="owl:Ontology">
+    <style>
+    html {
+      background-image: none !important;
+    }
+    body {
+      background: white top left fixed no-repeat !important;
+      background-size: 25px auto !important;
+      background-image: url('https://www.openactive.io/assets/openactive-label-specification.png') !important;
+    }
+    body.toc-sidebar #toc {
+      background-attachment: fixed !important;
+    }
+    h1 {
+      font-family: 'Open Sans',sans-serif !important;
+      font-weight: 300 !important;
+      color: #69b9ff !important;
+      font-size: 220%;
+    }
+    #toc {
+      padding-top: 0px !important;
+    }
+    .remove {
+      background-colour: yellow;
+    }
+    code {
+        color: #C83500;
+    }
+    </style>
+
+    <section id="abstract">
+      <p>The <span property="dc:title">OpenActive Namespace Vocabulary Terms</span> provides both the RDFS [[RDF-SCHEMA]] vocabulary definitions for
+        terms defined in [[Modelling-Opportunity-Data]] and a description of the JSON-LD context definition for use when publishing opportunity data.</p>
+      <p>Alternate versions of the vocabulary definition exist in
+        <a rel="alternate" href="oa.ttl">Turtle</a> and
+        <a rel="alternate" href="oa.jsonld">JSON-LD</a>,
+        which also includes the <code>@context</code> required for metadata descriptions.
+      </p>
+    </section>
+    <section id="sotd">
+      <p>
+      This document is an output of the [[OpenActive-Community-Group]]. The community group was established with the objective of facilitating the sharing and use of physical activity data.
+      </p>
+      <p>
+      The [[OpenActive-Community-Group]] has produced a specification ([[Modelling-Opportunity-Data]]) that describes how to publish open data about opportunities to take part in physical activities. That specification introduces a number of new types and properties which are described in this document.
+      </p>
+    </section>
+    <section>
+      <h2>Introduction</h2>
+      <p property="dc:description">This document describes the vocabulary used in the Modelling Opportunity Data specification.</p>
+      <p>This specification makes use of the following namespaces:</p>
+      <dl class="terms">
+        <dt><code>dc</code>:</dt>
+        <dd><code>http://purl.org/dc/terms/</code></dd>
+        <dt><code>oa</code>:</dt>
+        <dd><code>https://www.openactive.io/ns#</code></dd>
+        <dt><code>rt</code>:</dt>
+        <dd><code>https://www.openactive.io/routes/ns#</code></dd>
+        <dt><code>rdf</code>:</dt>
+        <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></dd>
+        <dt><code>rdfs</code>:</dt>
+        <dd><code>http://www.w3.org/2000/01/rdf-schema#</code></dd>
+        <dt><code>schema</code>:</dt>
+        <dd><code>http://schema.org/</code></dd>
+        <dt><code>skos</code>:</dt>
+        <dd><code>http://www.w3.org/2004/02/skos/core#</code></dd>
+        <dt><code>xsd</code>:</dt>
+        <dd><code>http://www.w3.org/2001/XMLSchema#</code></dd>
+      </dl>
+    </section>
+    <section>
+      <h2>Class Definitions</h2>
+      <p>The following are class definitions in the <code>oa</code> namespace:</p>
+      <table class="rdfs-definition">
+
+        <tr id="RouteGuide"><td class="bold">RouteGuide</td>
+          <td resource="rt:RouteGuide" typeof="rdfs:Class">
+            <em property="rdfs:label">RouteGuide</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="https://schema.org/CreativeWork">https://schema.org/CreativeWork</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="RouteGuideSegment"><td class="bold">RouteGuideSegment</td>
+          <td resource="rt:RouteGuideSegment" typeof="rdfs:Class">
+            <em property="rdfs:label">RouteGuideSegment</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="https://www.openactive.org/routes/ns#RouteGuide">https://www.openactive.org/routes/ns#RouteGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="VerificationRecord"><td class="bold">VerificationRecord</td>
+          <td resource="rt:VerificationRecord" typeof="rdfs:Class">
+            <em property="rdfs:label">VerificationRecord</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="IndicativeDuration"><td class="bold">IndicativeDuration</td>
+          <td resource="rt:IndicativeDuration" typeof="rdfs:Class">
+            <em property="rdfs:label">IndicativeDuration</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="RoutePoint"><td class="bold">RoutePoint</td>
+          <td resource="rt:RoutePoint" typeof="rdfs:Class">
+            <em property="rdfs:label">RoutePoint</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="https://schema.org/Place">https://schema.org/Place</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="RouteGradient"><td class="bold">RouteGradient</td>
+          <td resource="rt:RouteGradient" typeof="rdfs:Class">
+            <em property="rdfs:label">RouteGradient</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="RouteDifficulty"><td class="bold">RouteDifficulty</td>
+          <td resource="rt:RouteDifficulty" typeof="rdfs:Class">
+            <em property="rdfs:label">RouteDifficulty</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="RouteRiskAdvisory"><td class="bold">RouteRiskAdvisory</td>
+          <td resource="rt:RouteRiskAdvisory" typeof="rdfs:Class">
+            <em property="rdfs:label">RouteRiskAdvisory</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="RouteLegalAdvisory"><td class="bold">RouteLegalAdvisory</td>
+          <td resource="rt:RouteLegalAdvisory" typeof="rdfs:Class">
+            <em property="rdfs:label">RouteLegalAdvisory</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="RouteAccessRestriction"><td class="bold">RouteAccessRestriction</td>
+          <td resource="rt:RouteAccessRestriction" typeof="rdfs:Class">
+            <em property="rdfs:label">RouteAccessRestriction</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="RouteSegmentGuide"><td class="bold">RouteSegmentGuide</td>
+          <td resource="rt:RouteSegmentGuide" typeof="rdfs:Class">
+            <em property="rdfs:label">RouteSegmentGuide</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="RouteSegmentGroup"><td class="bold">RouteSegmentGroup</td>
+          <td resource="rt:RouteSegmentGroup" typeof="rdfs:Class">
+            <em property="rdfs:label">RouteSegmentGroup</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="MapReference"><td class="bold">MapReference</td>
+          <td resource="rt:MapReference" typeof="rdfs:Class">
+            <em property="rdfs:label">MapReference</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="TransportNote"><td class="bold">TransportNote</td>
+          <td resource="rt:TransportNote" typeof="rdfs:Class">
+            <em property="rdfs:label">TransportNote</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="RouteDesignation"><td class="bold">RouteDesignation</td>
+          <td resource="rt:RouteDesignation" typeof="rdfs:Class">
+            <em property="rdfs:label">RouteDesignation</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="RouteSurfaceType"><td class="bold">RouteSurfaceType</td>
+          <td resource="rt:RouteSurfaceType" typeof="rdfs:Class">
+            <em property="rdfs:label"></em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="TransportToRoutePointType"><td class="bold">TransportToRoutePointType</td>
+          <td resource="rt:TransportToRoutePointType" typeof="rdfs:Class">
+            <em property="rdfs:label"></em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/Gravel"><td class="bold">ps://openactive.io/Gravel</td>
+          <td resource="https://openactive.io/Gravel" typeof="rdfs:Class">
+            <em property="rdfs:label"> 'Gravel'</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:RouteSurfaceType">rt:RouteSurfaceType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/Paved"><td class="bold">ps://openactive.io/Paved</td>
+          <td resource="https://openactive.io/Paved" typeof="rdfs:Class">
+            <em property="rdfs:label"> 'Paved'</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:RouteSurfaceType">rt:RouteSurfaceType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/BareEarthOrBedrock"><td class="bold">ps://openactive.io/BareEarthOrBedrock</td>
+          <td resource="https://openactive.io/BareEarthOrBedrock" typeof="rdfs:Class">
+            <em property="rdfs:label"> 'Bare Earth or Bedrock'</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:RouteSurfaceType">rt:RouteSurfaceType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/ShortVegetation"><td class="bold">ps://openactive.io/ShortVegetation</td>
+          <td resource="https://openactive.io/ShortVegetation" typeof="rdfs:Class">
+            <em property="rdfs:label"> 'Short Vegetation'</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:RouteSurfaceType">rt:RouteSurfaceType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/RoughVegetationOrCrop"><td class="bold">ps://openactive.io/RoughVegetationOrCrop</td>
+          <td resource="https://openactive.io/RoughVegetationOrCrop" typeof="rdfs:Class">
+            <em property="rdfs:label"> 'Rough Vegetation or Crop'</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:RouteSurfaceType">rt:RouteSurfaceType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/HardSurface(Stoney)"><td class="bold">ps://openactive.io/HardSurface(Stoney)</td>
+          <td resource="https://openactive.io/HardSurface(Stoney)" typeof="rdfs:Class">
+            <em property="rdfs:label"> 'Hard Surface (Stoney)'</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:RouteSurfaceType">rt:RouteSurfaceType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/HardSurface(Sealed)"><td class="bold">ps://openactive.io/HardSurface(Sealed)</td>
+          <td resource="https://openactive.io/HardSurface(Sealed)" typeof="rdfs:Class">
+            <em property="rdfs:label"> 'Hard Surface (Sealed)'</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:RouteSurfaceType">rt:RouteSurfaceType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/BoardwalkOrTimber"><td class="bold">ps://openactive.io/BoardwalkOrTimber</td>
+          <td resource="https://openactive.io/BoardwalkOrTimber" typeof="rdfs:Class">
+            <em property="rdfs:label"> 'Boardwalk or Timber'</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:RouteSurfaceType">rt:RouteSurfaceType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/Bus"><td class="bold">ps://openactive.io/Bus</td>
+          <td resource="https://openactive.io/Bus" typeof="rdfs:Class">
+            <em property="rdfs:label">Bus</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:TransportToRoutePointType">rt:TransportToRoutePointType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/Rail"><td class="bold">ps://openactive.io/Rail</td>
+          <td resource="https://openactive.io/Rail" typeof="rdfs:Class">
+            <em property="rdfs:label">Rail</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:TransportToRoutePointType">rt:TransportToRoutePointType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/Bicycle"><td class="bold">ps://openactive.io/Bicycle</td>
+          <td resource="https://openactive.io/Bicycle" typeof="rdfs:Class">
+            <em property="rdfs:label">Bicycle</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:TransportToRoutePointType">rt:TransportToRoutePointType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/Road"><td class="bold">ps://openactive.io/Road</td>
+          <td resource="https://openactive.io/Road" typeof="rdfs:Class">
+            <em property="rdfs:label">Road</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:TransportToRoutePointType">rt:TransportToRoutePointType</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="ps://openactive.io/Foot"><td class="bold">ps://openactive.io/Foot</td>
+          <td resource="https://openactive.io/Foot" typeof="rdfs:Class">
+            <em property="rdfs:label">Foot</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:subClassOf</dt>
+                      <dd property="rdfs:subClassOf" resource="rt:TransportToRoutePointType">rt:TransportToRoutePointType</dd>
+              </dl>
+          </td>
+        </tr>
+      </table>
+    </section>
+    <section>
+      <h2>Property Definitions</h2>
+      <p>The following are property definitions in the <code>oa</code> namespace:</p>
+      <table class="rdfs-definition">
+
+        <tr id="verificationRecord"><td class="bold">verificationRecord</td>
+          <td resource="rt:verificationRecord" typeof="rdf:Property">
+            <em property="rdfs:label">verificationRecord</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:VerificationRecord">rt:VerificationRecord</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="distance"><td class="bold">distance</td>
+          <td resource="rt:distance" typeof="rdf:Property">
+            <em property="rdfs:label">distance</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:QuantitativeValue">schema:QuantitativeValue</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="indicativeDuration"><td class="bold">indicativeDuration</td>
+          <td resource="rt:indicativeDuration" typeof="rdf:Property">
+            <em property="rdfs:label">indicativeDuration</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:IndicativeDuration">rt:IndicativeDuration</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="startPoint"><td class="bold">startPoint</td>
+          <td resource="rt:startPoint" typeof="rdf:Property">
+            <em property="rdfs:label">startPoint</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RoutePoint">rt:RoutePoint</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="endPoint"><td class="bold">endPoint</td>
+          <td resource="rt:endPoint" typeof="rdf:Property">
+            <em property="rdfs:label">endPoint</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RoutePoint">rt:RoutePoint</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="pointOfInterest"><td class="bold">pointOfInterest</td>
+          <td resource="rt:pointOfInterest" typeof="rdf:Property">
+            <em property="rdfs:label">pointOfInterest</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RoutePoint">rt:RoutePoint</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="accessibilityDescription"><td class="bold">accessibilityDescription</td>
+          <td resource="rt:accessibilityDescription" typeof="rdf:Property">
+            <em property="rdfs:label">accessibilityDescription</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="gradient"><td class="bold">gradient</td>
+          <td resource="rt:gradient" typeof="rdf:Property">
+            <em property="rdfs:label">gradient</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RouteGradient">rt:RouteGradient</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="surface"><td class="bold">surface</td>
+          <td resource="rt:surface" typeof="rdf:Property">
+            <em property="rdfs:label">surface</em>
+            <p property="rdfs:comment"> https://openactive.io/HardSurface(Stoney)</p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:URL or schema:Text">schema:URL or schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="routeDifficulty"><td class="bold">routeDifficulty</td>
+          <td resource="rt:routeDifficulty" typeof="rdf:Property">
+            <em property="rdfs:label">routeDifficulty</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RouteDifficulty">rt:RouteDifficulty</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="geoPath"><td class="bold">geoPath</td>
+          <td resource="rt:geoPath" typeof="rdf:Property">
+            <em property="rdfs:label">geoPath</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Map">schema:Map</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="mapImage"><td class="bold">mapImage</td>
+          <td resource="rt:mapImage" typeof="rdf:Property">
+            <em property="rdfs:label">mapImage</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Map">schema:Map</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="additionalInformation"><td class="bold">additionalInformation</td>
+          <td resource="rt:additionalInformation" typeof="rdf:Property">
+            <em property="rdfs:label">additionalInformation</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Article">schema:Article</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="isLoop"><td class="bold">isLoop</td>
+          <td resource="rt:isLoop" typeof="rdf:Property">
+            <em property="rdfs:label">isLoop</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="xsd:boolean">xsd:boolean</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="riskInformation"><td class="bold">riskInformation</td>
+          <td resource="rt:riskInformation" typeof="rdf:Property">
+            <em property="rdfs:label">gradient</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="legalAdvisory"><td class="bold">legalAdvisory</td>
+          <td resource="rt:legalAdvisory" typeof="rdf:Property">
+            <em property="rdfs:label">legalAdvisory</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="oa:RouteLegalAdvisory">oa:RouteLegalAdvisory</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="routeAccessRestriction"><td class="bold">routeAccessRestriction</td>
+          <td resource="rt:routeAccessRestriction" typeof="rdf:Property">
+            <em property="rdfs:label">routeAccessRestriction</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RouteAccessRestriction">rt:RouteAccessRestriction</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="userContributedContent"><td class="bold">userContributedContent</td>
+          <td resource="rt:userContributedContent" typeof="rdf:Property">
+            <em property="rdfs:label">userContributedContent</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:CreativeWork">schema:CreativeWork</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="isJoinableThroughoutLength"><td class="bold">isJoinableThroughoutLength</td>
+          <td resource="rt:isJoinableThroughoutLength" typeof="rdf:Property">
+            <em property="rdfs:label">isJoinableThroughoutLength</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="xsd:boolean">xsd:boolean</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="segments"><td class="bold">segments</td>
+          <td resource="rt:segments" typeof="rdf:Property">
+            <em property="rdfs:label">segments</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RouteSegmentGuide">rt:RouteSegmentGuide</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="segmentGroups"><td class="bold">segmentGroups</td>
+          <td resource="rt:segmentGroups" typeof="rdf:Property">
+            <em property="rdfs:label">segmentGroups</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RouteSegmentGroup">rt:RouteSegmentGroup</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="isAccessPoint"><td class="bold">isAccessPoint</td>
+          <td resource="rt:isAccessPoint" typeof="rdf:Property">
+            <em property="rdfs:label">isAccessPoint</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="xsd:boolean">xsd:boolean</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RoutePoint">rt:RoutePoint</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="isRecommendedAccessPoint"><td class="bold">isRecommendedAccessPoint</td>
+          <td resource="rt:isRecommendedAccessPoint" typeof="rdf:Property">
+            <em property="rdfs:label">isRecommendedAccessPoint</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Boolean">schema:Boolean</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RoutePoint">rt:RoutePoint</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="mapReference"><td class="bold">mapReference</td>
+          <td resource="rt:mapReference" typeof="rdf:Property">
+            <em property="rdfs:label">mapReference</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="transportNote"><td class="bold">transportNote</td>
+          <td resource="rt:transportNote" typeof="rdf:Property">
+            <em property="rdfs:label">transportNote</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:TransportNote">rt:TransportNote</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RoutePoint">rt:RoutePoint</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="mapSeries"><td class="bold">mapSeries</td>
+          <td resource="rt:mapSeries" typeof="rdf:Property">
+            <em property="rdfs:label">mapSeries</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:MapReference">rt:MapReference</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="mapNumber"><td class="bold">mapNumber</td>
+          <td resource="rt:mapNumber" typeof="rdf:Property">
+            <em property="rdfs:label">mapNumber</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:MapReference">rt:MapReference</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="gridReference"><td class="bold">gridReference</td>
+          <td resource="rt:gridReference" typeof="rdf:Property">
+            <em property="rdfs:label">gridReference</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:MapReference">rt:MapReference</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="maxGradient"><td class="bold">maxGradient</td>
+          <td resource="rt:maxGradient" typeof="rdf:Property">
+            <em property="rdfs:label">maxGradient</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGradient">rt:RouteGradient</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="avgGradient"><td class="bold">avgGradient</td>
+          <td resource="rt:avgGradient" typeof="rdf:Property">
+            <em property="rdfs:label">maxGradient</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGradient">rt:RouteGradient</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="totalElevationGain"><td class="bold">totalElevationGain</td>
+          <td resource="rt:totalElevationGain" typeof="rdf:Property">
+            <em property="rdfs:label">totalElevationGain</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="xsd:integer">xsd:integer</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGradient">rt:RouteGradient</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="totalElevationLoss"><td class="bold">totalElevationLoss</td>
+          <td resource="rt:totalElevationLoss" typeof="rdf:Property">
+            <em property="rdfs:label">totalElevationLoss</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="xsd:integer">xsd:integer</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGradient">rt:RouteGradient</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="gradientTerm"><td class="bold">gradientTerm</td>
+          <td resource="rt:gradientTerm" typeof="rdf:Property">
+            <em property="rdfs:label">gradientTerm</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGradient">rt:RouteGradient</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="gradientDefinitionURL"><td class="bold">gradientDefinitionURL</td>
+          <td resource="rt:gradientDefinitionURL" typeof="rdf:Property">
+            <em property="rdfs:label">gradientDefinitionURL</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:URL">schema:URL</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGradient">rt:RouteGradient</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="transportMode"><td class="bold">transportMode</td>
+          <td resource="rt:transportMode" typeof="rdf:Property">
+            <em property="rdfs:label">transportMode</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:TransportNote">rt:TransportNote</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="difficultyTerm"><td class="bold">difficultyTerm</td>
+          <td resource="rt:difficultyTerm" typeof="rdf:Property">
+            <em property="rdfs:label">difficultyTerm</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteDifficulty">rt:RouteDifficulty</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="difficultyDefinitionURL"><td class="bold">difficultyDefinitionURL</td>
+          <td resource="rt:difficultyDefinitionURL" typeof="rdf:Property">
+            <em property="rdfs:label">difficultyDefinitionURL</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:URL">schema:URL</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteDifficulty">rt:RouteDifficulty</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="routeDesignation"><td class="bold">routeDesignation</td>
+          <td resource="rt:routeDesignation" typeof="rdf:Property">
+            <em property="rdfs:label">routeDesignation</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RouteDesignation">rt:RouteDesignation</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide or RouteSegmentGuide">rt:RouteGuide or RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="legalInformationURL"><td class="bold">legalInformationURL</td>
+          <td resource="rt:legalInformationURL" typeof="rdf:Property">
+            <em property="rdfs:label">legalInformationURL</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:URL">schema:URL</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteLegalAdvisory">rt:RouteLegalAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="routeDesignationTerm"><td class="bold">routeDesignationTerm</td>
+          <td resource="rt:routeDesignationTerm" typeof="rdf:Property">
+            <em property="rdfs:label">routeDesignationTerm</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteDesignation">rt:RouteDesignation</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="knownRisks"><td class="bold">knownRisks</td>
+          <td resource="rt:knownRisks" typeof="rdf:Property">
+            <em property="rdfs:label">knownRisks</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="riskModifiers"><td class="bold">riskModifiers</td>
+          <td resource="rt:riskModifiers" typeof="rdf:Property">
+            <em property="rdfs:label">riskModifiers</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="riskMitigators"><td class="bold">riskMitigators</td>
+          <td resource="rt:riskMitigators" typeof="rdf:Property">
+            <em property="rdfs:label">riskMitigators</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="Array of schema:Text">Array of schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="riskDescription"><td class="bold">riskDescription</td>
+          <td resource="rt:riskDescription" typeof="rdf:Property">
+            <em property="rdfs:label">riskDescription</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="userSafetyFeedback"><td class="bold">userSafetyFeedback</td>
+          <td resource="rt:userSafetyFeedback" typeof="rdf:Property">
+            <em property="rdfs:label">userSafetyFeedback</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Review">schema:Review</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="isMaintained"><td class="bold">isMaintained</td>
+          <td resource="rt:isMaintained" typeof="rdf:Property">
+            <em property="rdfs:label">isMaintained</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="xsd:boolean">xsd:boolean</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="isMaintainedBy"><td class="bold">isMaintainedBy</td>
+          <td resource="rt:isMaintainedBy" typeof="rdf:Property">
+            <em property="rdfs:label">isMaintainedBy</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Person or schema:Organization">schema:Person or schema:Organization</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="riskInformationURL"><td class="bold">riskInformationURL</td>
+          <td resource="rt:riskInformationURL" typeof="rdf:Property">
+            <em property="rdfs:label">riskDescription</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:URL">schema:URL</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="trafficDescription"><td class="bold">trafficDescription</td>
+          <td resource="rt:trafficDescription" typeof="rdf:Property">
+            <em property="rdfs:label">trafficDescription</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="routeAccessRestrictionTerm"><td class="bold">routeAccessRestrictionTerm</td>
+          <td resource="rt:routeAccessRestrictionTerm" typeof="rdf:Property">
+            <em property="rdfs:label">routeAccessRestrictionTerm</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="routeAccessRestrictionInformationURL"><td class="bold">routeAccessRestrictionInformationURL</td>
+          <td resource="rt:routeAccessRestrictionInformationURL" typeof="rdf:Property">
+            <em property="rdfs:label">routeAccessRestrictionInformationURL</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:URL">schema:URL</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="routeAccessRestrictionTimeSpan"><td class="bold">routeAccessRestrictionTimeSpan</td>
+          <td resource="rt:routeAccessRestrictionTimeSpan" typeof="rdf:Property">
+            <em property="rdfs:label">routeAccessRestrictionTimeSpan</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Text">schema:Text</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteRiskAdvisory">rt:RouteRiskAdvisory</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="verifiedBy"><td class="bold">verifiedBy</td>
+          <td resource="rt:verifiedBy" typeof="rdf:Property">
+            <em property="rdfs:label">verifiedBy</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Person or schema:Organization">schema:Person or schema:Organization</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:VerificationRecord">rt:VerificationRecord</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="dateVerified"><td class="bold">dateVerified</td>
+          <td resource="rt:dateVerified" typeof="rdf:Property">
+            <em property="rdfs:label">dateVerified</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Date or schema:DateTime">schema:Date or schema:DateTime</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:VerificationRecord">rt:VerificationRecord</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="sequence"><td class="bold">sequence</td>
+          <td resource="rt:sequence" typeof="rdf:Property">
+            <em property="rdfs:label">sequence</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="xsd:integer">xsd:integer</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteSegmentGuide">rt:RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="alternativeRouteSegmentGuide"><td class="bold">alternativeRouteSegmentGuide</td>
+          <td resource="rt:alternativeRouteSegmentGuide" typeof="rdf:Property">
+            <em property="rdfs:label">alternativeRouteSegmentGuide</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RouteSegmentGuide">rt:RouteSegmentGuide</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteSegmentGuide">rt:RouteSegmentGuide</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="includesSegments"><td class="bold">includesSegments</td>
+          <td resource="rt:includesSegments" typeof="rdf:Property">
+            <em property="rdfs:label">includesSegments</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt: RouteSegmentGuide">rt: RouteSegmentGuide</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteSegmentGroup">rt:RouteSegmentGroup</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="alternativeGroupTo"><td class="bold">alternativeGroupTo</td>
+          <td resource="rt:alternativeGroupTo" typeof="rdf:Property">
+            <em property="rdfs:label">alternativeGroupTo</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="rt:RouteSegmentGroup">rt:RouteSegmentGroup</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteSegmentGroup">rt:RouteSegmentGroup</dd>
+              </dl>
+          </td>
+        </tr>
+        <tr id="version"><td class="bold">version</td>
+          <td resource="rt:version" typeof="rdf:Property">
+            <em property="rdfs:label">version</em>
+            <p property="rdfs:comment"></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+              <dl class="terms">
+                  <dt>rdfs:range</dt>
+                      <dd property="rdfs:range" resource="schema:Date or schema:DateTime">schema:Date or schema:DateTime</dd>
+                  <dt>rdfs:domain</dt>
+                      <dd property="rdfs:domain" resource="rt:RouteGuide">rt:RouteGuide</dd>
+              </dl>
+          </td>
+        </tr>
+      </table>
+    </section>
+    <section>
+      <h2>Term Definitions</h2>
+      <p>
+      The following terms are all defined in the <a rel="alternate" href="oa.jsonld">OpenActive Routes Vocabulary JSON-LD Context</a>.
+      </p>
+      <dl class="terms">
+        <dt> https://openactive.io/Road</dt>
+        <dd>
+            rt:transportMode
+            with string values interpreted as It is recommended that the value of transportMode be taken from the following list: https://openactive.io/Bus
+              with array values interpreted as  https://openactive.io/Rail
+        </dd>
+        <dt> https://openactive.io/ShortVegetation</dt>
+        <dd>
+            rt:surface
+            with string values interpreted as If a URL must be drawn from https://openactive.io/Gravel
+              with array values interpreted as  https://openactive.io/Paved
+        </dd>
+        <dt>@vocab</dt>
+        <dd>
+            http://schema.org/
+        </dd>
+        <dt>IndicativeDuration</dt>
+        <dd>
+            rt:IndicativeDuration
+        </dd>
+        <dt>MapReference</dt>
+        <dd>
+            rt:MapReference
+        </dd>
+        <dt>RouteAccessRestriction</dt>
+        <dd>
+            rt:RouteAccessRestriction
+        </dd>
+        <dt>RouteDesignation</dt>
+        <dd>
+            rt:RouteDesignation
+        </dd>
+        <dt>RouteDifficulty</dt>
+        <dd>
+            rt:RouteDifficulty
+        </dd>
+        <dt>RouteGradient</dt>
+        <dd>
+            rt:RouteGradient
+        </dd>
+        <dt>RouteGuide</dt>
+        <dd>
+            rt:RouteGuide
+        </dd>
+        <dt>RouteGuideSegment</dt>
+        <dd>
+            rt:RouteGuideSegment
+        </dd>
+        <dt>RouteLegalAdvisory</dt>
+        <dd>
+            rt:RouteLegalAdvisory
+        </dd>
+        <dt>RoutePoint</dt>
+        <dd>
+            rt:RoutePoint
+        </dd>
+        <dt>RouteRiskAdvisory</dt>
+        <dd>
+            rt:RouteRiskAdvisory
+        </dd>
+        <dt>RouteSegmentGroup</dt>
+        <dd>
+            rt:RouteSegmentGroup
+        </dd>
+        <dt>RouteSegmentGuide</dt>
+        <dd>
+            rt:RouteSegmentGuide
+        </dd>
+        <dt>RouteSurfaceType</dt>
+        <dd>
+            rt:RouteSurfaceType
+        </dd>
+        <dt>TransportNote</dt>
+        <dd>
+            rt:TransportNote
+        </dd>
+        <dt>TransportToRoutePointType</dt>
+        <dd>
+            rt:TransportToRoutePointType
+        </dd>
+        <dt>VerificationRecord</dt>
+        <dd>
+            rt:VerificationRecord
+        </dd>
+        <dt>accessibilityDescription</dt>
+        <dd>
+            rt:accessibilityDescription
+            with string values interpreted as @id
+        </dd>
+        <dt>additionalInformation</dt>
+        <dd>
+            rt:additionalInformation
+            with string values interpreted as Historical or any other information providing interesting background detail regarding the Route. If this information relates to a specific point or structure along the Route it may be more appropriate to model this as a pointOfInterest.
+        </dd>
+        <dt>alternativeGroupTo</dt>
+        <dd>
+            rt:alternativeGroupTo
+            with string values interpreted as Used to indicate that this RouteSegmentGroup's collection of RouteSegmentGuides serves as an alternative to the list of Route Segments given in this Array and expressed as a list of RouteSegmentGuide @ids. Where this value is provided
+              with array values interpreted as  it is recommended that the description supply reasons why one or another alternative (e.g. distance; accessibility) might be preferred.
+        </dd>
+        <dt>alternativeRouteSegmentGuide</dt>
+        <dd>
+            rt:alternativeRouteSegmentGuide
+            with string values interpreted as @id
+        </dd>
+        <dt>avgGradient</dt>
+        <dd>
+            rt:avgGradient
+            with string values interpreted as e.g. '7.5%' or '4.2°'
+        </dd>
+        <dt>concepts</dt>
+        <dd>
+            reverse of skos:inScheme
+        </dd>
+        <dt>dateVerified</dt>
+        <dd>
+            rt:dateVerified
+            with string values interpreted as The most recent date upon which accuracy of Route information was verified by the schema:Person or schema:Organization responsible.
+        </dd>
+        <dt>dc</dt>
+        <dd>
+            http://purl.org/dc/terms/
+        </dd>
+        <dt>difficultyDefinitionURL</dt>
+        <dd>
+            rt:difficultyDefinitionURL
+            with string values interpreted as e.g. https://www.ramblers.org.uk/go-walking/about-group-walks/walks-difficulty.aspx
+        </dd>
+        <dt>difficultyTerm</dt>
+        <dd>
+            rt:difficultyTerm
+            with string values interpreted as e.g. 'Easy'; 'Strenuous'. If this value is taken from a controlled vocabulary a difficultyDefinitionURL should be provided pointing to the definition of these terms.
+        </dd>
+        <dt>distance</dt>
+        <dd>
+            rt:distance
+            with string values interpreted as The length of the Route. Must include both number and unit.
+        </dd>
+        <dt>endPoint</dt>
+        <dd>
+            rt:endPoint
+            with string values interpreted as Required if isLoop is 'false'.
+        </dd>
+        <dt>geoPath</dt>
+        <dd>
+            rt:geoPath
+            with string values interpreted as Required if no mapImage is provided. URL must resolve to a file in a format that natively supports geo encoding
+              with array values interpreted as  e.g. geoJSON or GPX
+        </dd>
+        <dt>gradient</dt>
+        <dd>
+            rt:gradient
+            with string values interpreted as @id
+        </dd>
+        <dt>gradientDefinitionURL</dt>
+        <dd>
+            rt:gradientDefinitionURL
+            with string values interpreted as This will typically be a link to a page describing the meaning of the gradientTerm in more detail.
+        </dd>
+        <dt>gradientTerm</dt>
+        <dd>
+            rt:gradientTerm
+            with string values interpreted as e.g. 'Easy'; 'Moderate'; '3'
+        </dd>
+        <dt>gridReference</dt>
+        <dd>
+            rt:gridReference
+            with string values interpreted as Required if no mapNumber supplied
+        </dd>
+        <dt>https://openactive.io/BareEarthOrBedrock</dt>
+        <dd>
+            https://openactive.io/BareEarthOrBedrock
+        </dd>
+        <dt>https://openactive.io/Bicycle</dt>
+        <dd>
+            https://openactive.io/Bicycle
+        </dd>
+        <dt>https://openactive.io/BoardwalkOrTimber</dt>
+        <dd>
+            https://openactive.io/BoardwalkOrTimber
+        </dd>
+        <dt>https://openactive.io/Bus</dt>
+        <dd>
+            https://openactive.io/Bus
+        </dd>
+        <dt>https://openactive.io/Foot</dt>
+        <dd>
+            https://openactive.io/Foot
+        </dd>
+        <dt>https://openactive.io/Gravel</dt>
+        <dd>
+            https://openactive.io/Gravel
+        </dd>
+        <dt>https://openactive.io/HardSurface(Sealed)</dt>
+        <dd>
+            https://openactive.io/HardSurface(Sealed)
+        </dd>
+        <dt>https://openactive.io/HardSurface(Stoney)</dt>
+        <dd>
+            https://openactive.io/HardSurface(Stoney)
+        </dd>
+        <dt>https://openactive.io/Paved</dt>
+        <dd>
+            https://openactive.io/Paved
+        </dd>
+        <dt>https://openactive.io/Rail</dt>
+        <dd>
+            https://openactive.io/Rail
+        </dd>
+        <dt>https://openactive.io/Road</dt>
+        <dd>
+            https://openactive.io/Road
+        </dd>
+        <dt>https://openactive.io/RoughVegetationOrCrop</dt>
+        <dd>
+            https://openactive.io/RoughVegetationOrCrop
+        </dd>
+        <dt>https://openactive.io/ShortVegetation</dt>
+        <dd>
+            https://openactive.io/ShortVegetation
+        </dd>
+        <dt>id</dt>
+        <dd>
+            @id
+        </dd>
+        <dt>includesSegments</dt>
+        <dd>
+            rt:includesSegments
+            with string values interpreted as The individual RouteSegmentGuide objects the RouteSegmentGroup comprises as identified by the value of their @id.
+        </dd>
+        <dt>indicativeDuration</dt>
+        <dd>
+            rt:indicativeDuration
+            with string values interpreted as @id
+        </dd>
+        <dt>isAccessPoint</dt>
+        <dd>
+            rt:isAccessPoint
+            with string values interpreted as Whether or not it is possible to join the Route as a whole at this point.
+        </dd>
+        <dt>isJoinableThroughoutLength</dt>
+        <dd>
+            rt:isJoinableThroughoutLength
+            with string values interpreted as Indicates whether or not it is possible to join the Route at every point along its length - for instance (as in most urban streets and roads). In cases where joining the Route is only possible at selected points (as for instance in many rural Routes with restricted public thoroughfares) these should be modelled using RoutePoints. Defaults to false.
+        </dd>
+        <dt>isLoop</dt>
+        <dd>
+            rt:isLoop
+            with string values interpreted as Whether the route returns to its point of origin
+        </dd>
+        <dt>isMaintained</dt>
+        <dd>
+            rt:isMaintained
+            with string values interpreted as Indicates whether the Route is actively maintained by e.g. a landowner or charitable organisation. Typically does not apply to urban Routes.
+        </dd>
+        <dt>isMaintainedBy</dt>
+        <dd>
+            rt:isMaintainedBy
+            with string values interpreted as The Organization or or Person responsible for maintaining the Route. Must not have a value if isMaintained is 'false'.
+        </dd>
+        <dt>isRecommendedAccessPoint</dt>
+        <dd>
+            rt:isRecommendedAccessPoint
+            with string values interpreted as Whether or not it is recommended to join the Route as a whole at this point
+              with array values interpreted as  because of e.g. particular amentities at this point
+        </dd>
+        <dt>knownRisks</dt>
+        <dd>
+            rt:knownRisks
+            with string values interpreted as e.g.'crime incidence'; 'harrassment reported'; 'shared with heavy traffic'.
+        </dd>
+        <dt>legalAdvisory</dt>
+        <dd>
+            rt:legalAdvisory
+            with string values interpreted as @id
+        </dd>
+        <dt>legalInformationURL</dt>
+        <dd>
+            rt:legalInformationURL
+            with string values interpreted as @id
+        </dd>
+        <dt>mapImage</dt>
+        <dd>
+            rt:mapImage
+            with string values interpreted as Required if no geoPath is provided.
+        </dd>
+        <dt>mapNumber</dt>
+        <dd>
+            rt:mapNumber
+            with string values interpreted as Required if no gridReference supplied.
+        </dd>
+        <dt>mapReference</dt>
+        <dd>
+            rt:mapReference
+            with string values interpreted as @id
+        </dd>
+        <dt>mapSeries</dt>
+        <dd>
+            rt:mapSeries
+            with string values interpreted as e.g. 'Explorer'; 'Landranger'
+        </dd>
+        <dt>maxGradient</dt>
+        <dd>
+            rt:maxGradient
+            with string values interpreted as e.g. '7.5%' or '4.2°'
+        </dd>
+        <dt>oa</dt>
+        <dd>
+            https://www.openactive.org/ns#
+        </dd>
+        <dt>owl</dt>
+        <dd>
+            http://www.w3.org/2002/07/owl#
+        </dd>
+        <dt>pending</dt>
+        <dd>
+            http://pending.schema.org/
+        </dd>
+        <dt>pointOfInterest</dt>
+        <dd>
+            rt:pointOfInterest
+            with string values interpreted as Noteworthy points along the Route.
+        </dd>
+        <dt>rdf</dt>
+        <dd>
+            http://www.w3.org/1999/02/22-rdf-syntax-ns#
+        </dd>
+        <dt>rdfa</dt>
+        <dd>
+            http://www.w3.org/ns/rdfa#
+        </dd>
+        <dt>rdfs</dt>
+        <dd>
+            http://www.w3.org/2000/01/rdf-schema#
+        </dd>
+        <dt>riskDescription</dt>
+        <dd>
+            rt:riskDescription
+            with string values interpreted as @id
+        </dd>
+        <dt>riskInformation</dt>
+        <dd>
+            rt:riskInformation
+            with string values interpreted as @id
+        </dd>
+        <dt>riskInformationURL</dt>
+        <dd>
+            rt:riskInformationURL
+            with string values interpreted as Should point to a formal definition outlining risk and mitigating factora.
+        </dd>
+        <dt>riskMitigators</dt>
+        <dd>
+            rt:riskMitigators
+            with string values interpreted as Contextual factors reducing knownRisks - e.g. 'guardrails provided';'well-lit'.
+        </dd>
+        <dt>riskModifiers</dt>
+        <dd>
+            rt:riskModifiers
+            with string values interpreted as Contextual factors influencing knownRisks - e.g. 'time of day'; 'season'.
+        </dd>
+        <dt>routeAccessRestriction</dt>
+        <dd>
+            rt:routeAccessRestriction
+            with string values interpreted as Restrictions on or obstacles to use of the Route
+        </dd>
+        <dt>routeAccessRestrictionInformationURL</dt>
+        <dd>
+            rt:routeAccessRestrictionInformationURL
+            with string values interpreted as Should point to further advice about the restriction.
+        </dd>
+        <dt>routeAccessRestrictionTerm</dt>
+        <dd>
+            rt:routeAccessRestrictionTerm
+            with string values interpreted as e.g. 'Routine maintenance'; 'Closed in deer mating season'; 'Dogs not allowed'.
+        </dd>
+        <dt>routeAccessRestrictionTimeSpan</dt>
+        <dd>
+            rt:routeAccessRestrictionTimeSpan
+            with string values interpreted as Brief text indicating when a restriction applies - e.g. 'Winter'; '2020-01-01 to 2020-03-31'.
+        </dd>
+        <dt>routeDesignation</dt>
+        <dd>
+            rt:routeDesignation
+            with string values interpreted as @id
+        </dd>
+        <dt>routeDesignationTerm</dt>
+        <dd>
+            rt:routeDesignationTerm
+            with string values interpreted as @id
+        </dd>
+        <dt>routeDifficulty</dt>
+        <dd>
+            rt:routeDifficulty
+            with string values interpreted as Although typically only one RouteDifficulty is expected Routes suitable for more than one kind of activity (e.g.
+              with array values interpreted as  walking and horse-riding) may require multiple values here.
+        </dd>
+        <dt>rt</dt>
+        <dd>
+            https://www.openactive.org/routes/ns#
+        </dd>
+        <dt>schema</dt>
+        <dd>
+            http://schema.org/
+        </dd>
+        <dt>segmentGroups</dt>
+        <dd>
+            rt:segmentGroups
+            with string values interpreted as @id
+        </dd>
+        <dt>segments</dt>
+        <dd>
+            rt:segments
+            with string values interpreted as @id
+        </dd>
+        <dt>sequence</dt>
+        <dd>
+            rt:sequence
+            with string values interpreted as Indicates the presentation order of Route Segments within the parent Route. This ordering should normally be present except for unusual situations such as e.g. modelling RouteGuides that are otherwise unsegmented but for access points. In cases where RouteSegmentGroups are provided this property is required.
+        </dd>
+        <dt>skos</dt>
+        <dd>
+            http://www.w3.org/2004/02/skos/core#
+        </dd>
+        <dt>startPoint</dt>
+        <dd>
+            rt:startPoint
+            with string values interpreted as @id
+        </dd>
+        <dt>totalElevationGain</dt>
+        <dd>
+            rt:totalElevationGain
+            with string values interpreted as Unit is metres.
+        </dd>
+        <dt>totalElevationLoss</dt>
+        <dd>
+            rt:totalElevationLoss
+            with string values interpreted as Unit is metres.
+        </dd>
+        <dt>trafficDescription</dt>
+        <dd>
+            rt:trafficDescription
+            with string values interpreted as @id
+        </dd>
+        <dt>transportNote</dt>
+        <dd>
+            rt:transportNote
+            with string values interpreted as Information about how to reach the RoutePoint.
+        </dd>
+        <dt>type</dt>
+        <dd>
+            @type
+        </dd>
+        <dt>userContributedContent</dt>
+        <dd>
+            rt:userContributedContent
+            with string values interpreted as Links to user-generated content such as e.g. images or descriptions of the Route or video or path-recordings of their traversal of the Route etc. If this field is populated it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.
+        </dd>
+        <dt>userSafetyFeedback</dt>
+        <dd>
+            rt:userSafetyFeedback
+            with string values interpreted as @id
+        </dd>
+        <dt>verificationRecord</dt>
+        <dd>
+            rt:verificationRecord
+            with string values interpreted as @id
+        </dd>
+        <dt>verifiedBy</dt>
+        <dd>
+            rt:verifiedBy
+            with string values interpreted as Person or organisation who has confirmed accuracy of Route information.
+        </dd>
+        <dt>version</dt>
+        <dd>
+            rt:version
+            with string values interpreted as The date upon which this RouteGuide information was harvested from the providing schema:publisher
+        </dd>
+        <dt>xsd</dt>
+        <dd>
+            http://www.w3.org/2001/XMLSchema#
+        </dd>
+      </dl>
+    </section>
+    <section class='appendix informative'>
+    <h2>Acknowledgements</h2>
+
+    <p>The editors would like to thank <a href="http://www.w3.org/community/openactive/participants">all members</a> of the OpenActive Community Group for
+    their support and contributions.
+    </p>
+    </section>
+
+  </body>
+</html>

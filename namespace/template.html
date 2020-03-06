@@ -1,0 +1,307 @@
+<html lang="en">
+  <head>
+    <meta charset='utf-8'/>
+    <title><%= ont["dc:title"]["en"] %></title>
+    <script class="remove">
+        var respecConfig = {
+          // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
+          specStatus:           "CG-FINAL",
+
+          // the specification's short name, as in http://www.w3.org/TR/short-name/
+          shortName:            "vocabulary",
+
+
+          // if you wish the publication date to be other than today, set this
+          publishDate:  "<%= Date.today.strftime("%Y-%m-%d") %>",
+
+          // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
+          // and its maturity status
+          // previousPublishDate:  "1977-03-15",
+          // previousMaturity:  "WD",
+
+          // if there a publicly available Editor's Draft, this is the link
+          edDraftURI:           "https://www.openactive.io/routes/vocabulary",
+          //prevED:  "https://www.openactive.io/spec-template/",
+          //previousURI:  "https://www.openactive.io/realtime-paged-data-exchange/0.2.3/",
+          //testSuiteURI: "https://www.openactive.io/endpoint-validator/",
+          copyrightStart: 2020,
+
+          // if this is a LCWD, uncomment and set the end of its review period
+          // lcEnd: "2009-08-05",
+
+          // editors, add as many as you like
+          // only "name" is required
+          editors: [
+              { name: "Tim Hill",
+                company: "Open Data Institute", companyURL: "http://opendata.institute/",
+                w3cid: 55359 }
+          ],
+
+          // authors, add as many as you like.
+          // This is optional, uncomment if you have authors as well as editors.
+          // only "name" is required. Same format as editors.
+
+          authors: [
+          ],
+
+          otherLinks: [{
+                key: "Repo",
+                value: "We are on Github",
+                href: "https://github.com/openactive/routes/",
+                class: "repo"
+            }, {
+                key: "Issues",
+                href: "https://github.com/openactive/routes/issues/"
+            }, {
+                key: "Version",
+                value: "1.0"
+            }
+          ],
+
+          logos: [
+            {
+              src: 'https://www.openactive.io/assets/openactive-logo-large.png',
+              href: "https://www.openactive.io",
+              alt: "openactive.io",
+              width: 255, //170
+              height: 43, //22
+              id: 'logo'
+            }
+          ],
+
+          // extend the bibliography entries
+          //localBiblio: {},
+
+          // name of the WG
+          wg:           "OpenActive Community Group",
+
+          // URI of the public WG page
+          wgURI:        "http://www.w3.org/community/openactive/",
+
+          // name (with the @w3c.org) of the public mailing to which comments are due
+          wgPublicList: "public-openactive",
+
+          // URI of the patent status for this WG, for Rec-track documents
+          // !!!! IMPORTANT !!!!
+          // This is important for Rec-track documents, do not copy a patent URI from a random
+          // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+          // Team Contact.
+          wgPatentURI:  "",
+          maxTocLevel: 4,
+          preProcess: [ ] ,
+          alternateFormats: [ {uri: "diff-previous.html", label: "diff to previous version"} ],
+          isRecTrack:   true,
+          isNoTrack:    true,
+          issueBase:    "https://github.com/openactive/routes/issues/",
+          localBiblio: {
+            "JSON-LD": {
+                "href": "https://www.w3.org/TR/json-ld/",
+                "title": "JSON-LD 1.0",
+                "status": "REC",
+                "publisher": "W3C",
+            },
+            "SCHEMA-ORG": {
+                "href": "http://schema.org/",
+                "title": "Schema.org"
+
+            },
+            "OpenActive-Community-Group": {
+                "href": "http://www.w3.org/community/openactive/",
+                "title": "OpenActive Community Group"
+            },
+            "SKOS": {
+                "href": "https://www.w3.org/TR/skos-primer",
+                "title": "SKOS Simple Knowledge Organization System Primer",
+                "status": "NOTE",
+                "publisher": "W3C",
+            },
+            "Modelling-Opportunity-Data": {
+                "href": "https://www.openactive.io/modelling-opportunity-data/",
+                "title": "Modelling Opportunity Data",
+                "status": "CG-FINAL",
+                "publisher": "OpenActive Community Group",
+            }
+          }
+        };
+    </script>
+    <script src='https://www.openactive.io/respec/builds/respec-w3c-common.js' class='remove'></script>
+
+    <style>
+      dl.terms dt {
+        float: left;
+        clear: left;
+        width: 17vw;
+      }
+      dl.terms dd:after {
+          content: '';
+          display: block;
+          clear: both;
+          margin-bottom: 5px;
+      }
+      table.rdfs-definition td {vertical-align: top;}
+      .bold {font-weight: bold;}
+    </style>
+
+  </head>
+  <body resource="http://openactive.org/routes/ns#" typeof="owl:Ontology">
+    <style>
+    html {
+      background-image: none !important;
+    }
+    body {
+      background: white top left fixed no-repeat !important;
+      background-size: 25px auto !important;
+      background-image: url('https://www.openactive.io/assets/openactive-label-specification.png') !important;
+    }
+    body.toc-sidebar #toc {
+      background-attachment: fixed !important;
+    }
+    h1 {
+      font-family: 'Open Sans',sans-serif !important;
+      font-weight: 300 !important;
+      color: #69b9ff !important;
+      font-size: 220%;
+    }
+    #toc {
+      padding-top: 0px !important;
+    }
+    .remove {
+      background-colour: yellow;
+    }
+    code {
+        color: #C83500;
+    }
+    </style>
+
+    <section id="abstract">
+      <p>The <span property="dc:title"><%= ont["dc:title"]["en"] %></span> provides both the RDFS [[RDF-SCHEMA]] vocabulary definitions for
+        terms defined in [[Modelling-Opportunity-Data]] and a description of the JSON-LD context definition for use when publishing opportunity data.</p>
+      <p>Alternate versions of the vocabulary definition exist in
+        <a rel="alternate" href="oa.ttl">Turtle</a> and
+        <a rel="alternate" href="oa.jsonld">JSON-LD</a>,
+        which also includes the <code>@context</code> required for metadata descriptions.
+      </p>
+    </section>
+    <section id="sotd">
+      <p>
+      This document is an output of the [[OpenActive-Community-Group]]. The community group was established with the objective of facilitating the sharing and use of physical activity data.
+      </p>
+      <p>
+      The [[OpenActive-Community-Group]] has produced a specification ([[Modelling-Opportunity-Data]]) that describes how to publish open data about opportunities to take part in physical activities. That specification introduces a number of new types and properties which are described in this document.
+      </p>
+    </section>
+    <section>
+      <h2>Introduction</h2>
+      <p property="dc:description"><%= ont["dc:description"]["en"] %></p>
+      <p>This specification makes use of the following namespaces:</p>
+      <dl class="terms">
+        <dt><code>dc</code>:</dt>
+        <dd><code>http://purl.org/dc/terms/</code></dd>
+        <dt><code>oa</code>:</dt>
+        <dd><code>https://www.openactive.io/ns#</code></dd>
+        <dt><code>rt</code>:</dt>
+        <dd><code>https://www.openactive.io/routes/ns#</code></dd>
+        <dt><code>rdf</code>:</dt>
+        <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></dd>
+        <dt><code>rdfs</code>:</dt>
+        <dd><code>http://www.w3.org/2000/01/rdf-schema#</code></dd>
+        <dt><code>schema</code>:</dt>
+        <dd><code>http://schema.org/</code></dd>
+        <dt><code>skos</code>:</dt>
+        <dd><code>http://www.w3.org/2004/02/skos/core#</code></dd>
+        <dt><code>xsd</code>:</dt>
+        <dd><code>http://www.w3.org/2001/XMLSchema#</code></dd>
+      </dl>
+    </section>
+    <%
+      [{
+        heading: "Class Definitions",
+        key: "rdfs_classes"
+      }, {
+        heading: "Property Definitions",
+        key: "rdfs_properties"
+      }].each do |sect|
+    %>
+    <section>
+      <h2><%= sect[:heading] %></h2>
+      <p>The following are <%= sect[:heading].downcase %> in the <code>oa</code> namespace:</p>
+      <table class="rdfs-definition">
+
+        <% ont[sect[:key]].each do |defn| -%>
+        <tr id="<%= defn['@id'][3..-1] %>"><td class="bold"><%= defn['@id'][3..-1] %></td>
+          <td resource="<%= defn['@id'] %>" typeof="<%= Array(defn['@type']).join(" ") %>">
+            <em property="rdfs:label"><%= defn['rdfs:label']['en'] %></em>
+            <p property="rdfs:comment"><%= defn['rdfs:comment']['en'] %></p>
+            <span property="rdfs:isDefinedBy" resource="oa:"></span>
+            <% if %w(rdfs:subClassOf rdfs:subPropertyOf rdfs:range rdfs:domain).any? { |p| defn.has_key?(p)} %>
+              <dl class="terms">
+                <% %w(rdfs:subClassOf rdfs:subPropertyOf rdfs:range rdfs:domain).each do |p| %>
+                  <% if defn.has_key?(p) %>
+                  <dt><%= p %></dt>
+                  <% Array(defn[p]).each do |v| %>
+                    <%if v.is_a?(Array) && v.first == 'owl:unionOf' %>
+                      <dd property="<%= p %>" resource="_:">
+                        Union of
+                        <% v.last.each do |c| %>
+                        <span property="owl:unionOf" inlist=true resource="<%= c %>"><%= c %></span>
+                        <% end%>
+                      </dd>
+                    <% else %>
+                      <dd property="<%= p %>" resource="<%= v %>"><%= v %></dd>
+                    <% end %>
+                  <% end %>
+                  <% end %>
+                <% end %>
+              </dl>
+            <% end %>
+          </td>
+        </tr>
+        <% end if ont[sect[:key]] -%>
+      </table>
+    </section>
+    <% end%>
+    <section>
+      <h2>Term Definitions</h2>
+      <p>
+      The following terms are all defined in the <a rel="alternate" href="oa.jsonld">OpenActive Routes Vocabulary JSON-LD Context</a>.
+      </p>
+      <dl class="terms">
+        <% context.keys.sort.each do |term|%>
+        <% defn = context[term] %>
+        <dt><%= term %></dt>
+        <dd>
+          <% if defn.is_a?(String) %>
+            <%= defn %>
+          <% elsif defn['@id'] %>
+            <%= defn['@id'] %>
+          <% elsif defn['@reverse'] %>
+            reverse of <%= defn['@reverse'] %>
+          <% else %>
+            <%= term %>
+          <% end %>
+          <% if defn.is_a?(Hash) && defn['@type'] %>
+            with string values interpreted as <%= defn['@type'] %>
+          <% end%>
+          <% if defn.is_a?(Hash) && defn['@container'] %>
+            <% if defn['@container'] == '@language' %>
+              with object values interpreted as language-specific, indexed by language
+            <% elsif defn['@container'] == '@index' %>
+              with object values interpreted indexed by index
+            <% else %>
+              with array values interpreted as <%= defn['@container'] %>
+            <% end %>
+          <% end%>
+        </dd>
+        <% end %>
+      </dl>
+    </section>
+    <section class='appendix informative'>
+    <h2>Acknowledgements</h2>
+
+    <p>The editors would like to thank <a href="http://www.w3.org/community/openactive/participants">all members</a> of the OpenActive Community Group for
+    their support and contributions.
+    </p>
+    </section>
+
+  </body>
+</html>
