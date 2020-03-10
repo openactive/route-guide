@@ -185,9 +185,6 @@ font-variant: small-caps;
     }
 
     </style>
-
-  </head>
-  <body >
     <style>
     body {
 background-size: 25px auto !important;
@@ -203,7 +200,9 @@ background-attachment: fixed !important;
         color:              #900;
     }
     </style>
-    <section id='abstract'>
+  </head>
+
+<section id='abstract'>
 This specification introduces a data model to support the publication of data describing
 paths and trails for recreational use. In broad terms it models the kind of information found in a guidebook or trail guide regarding the navigation, use, and enjoyment of recreational routes.
 
@@ -233,7 +232,7 @@ and pull requests. The source code is available on [GitHub](https://github.com/o
 </section>
 
     <section class="informative">
-# Introduction
+## Introduction
 
 The [W3C OpenActive Community Group](http://www.w3.org/community/openactive/) was
 established with the objective of facilitating the sharing and use of
@@ -397,12 +396,14 @@ The rest of this specification makes use of the following namespaces:
 <dd>`http://www.w3.org/2003/01/geo/wgs84_pos#`<dd>
 <dt>`oa:`</dt>
 <dd>`https://openactive.io/`</dd>
+<dt>`rt:`</dt>
+<dd>`https://openactive.io/routes/`</dd>
 </dl>
 
 <div class="note">
 <p>
 In the following sections all referenced terms have been qualified using their namespace prefix. This highlights the
-source vocabulary in which they have been defined. Terms have also been linked to their definitions.
+source vocabulary in which they have been defined. Terms have also been linked to their definitionsrt:/ad.
 </p>
 <p>
 The examples in each section use [[JSON-LD]] syntax and reference the [OpenActive JSON-LD context](https://openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]], which is accessible at `https://openactive.io/` when using an `Accept` header that includes `application/ld+json`.
@@ -440,10 +441,6 @@ If there are several different URLs that may be used to identify a resource, it 
 * a direct link to the resource that avoids redirects
 * a stable link that will resolve to a public web page, accessible to both web browsers and applications
 * a consistent link that will allow reusers to rely on the URL as an identifier, e.g. to merge in updated data
-
-<div class="warning" title="Route Guide property URLs in the oa: namespace
-currently do not resolve. Providing resolvable definitions is a work-in-progress
-to be completed 2020-01-31."></div>
 
 This specification provides three properties for identifying resources:
 
@@ -498,11 +495,11 @@ However, the Route Guide specification is in itself format-agnostic. Route Guide
 </pre>
 
 <pre class="example" title="Simple route description as XML">
-  &lt;oa:RouteGuide xmlns:oa="https://openactive.io/" xmlns:schema="https://schema.org"&gt;
+  &lt;rt:RouteGuide xmlns:oa="https://openactive.io/routes/" xmlns:schema="https://schema.org"&gt;
       &lt;oa:id&gt;https://routes.openactive.io/id/12345&lt;/oa:id&gt;
       &lt;schema:name&gt;Avebury Archaeology Walk&lt;/schema:name&gt;
       &lt;schema:url&gt;https://www.nationaltrust.org.uk/avebury/trails/avebury-archaeology-walk&lt;/schema:url&gt;
-  &lt;/oa:RouteGuide&gt;
+  &lt;/rt:RouteGuide&gt;
 </pre>
 It is expected that data publishers will adopt whatever format best suits their use-case and supports their frequency of updating.
 
@@ -581,13 +578,13 @@ some controlled vocabularies for use in these properties. At present the
 values of these properties are left deliberately open to encourage publication
 of open data that may inform future standardisation.
 
-## Describing Route Guides (`oa:RouteGuide`)
+## Describing Route Guides (`rt:RouteGuide`)
 
 The purpose of the __Route Guide__ model is to describe a __Route__: that is to say, while it concerns and points to geographic information, it is not itself a geo-information type.
 
 Route Guides are often generated over an extended period of curation: that is to say, initially sparse information about a Route is  augmented over time, until a full description of the Route emerges. While the Route Guide model is rich, then, the number of REQUIRED fields is relatively small, in keeping with this curation workflow.
 
-Note that `RouteGuide` is a subclass of [`schema:CreativeWork`](https://schema.org/CreativeWork). While any of the properties defined for `CreativeWork` are therefore available for use, the subset listed below, when complemented by the additional OpenActive (`oa:`)-defined properties provided, are proposed as those most applicable to `RouteGuide` modelling.
+Note that `RouteGuide` is a subclass of [`schema:CreativeWork`](https://schema.org/CreativeWork). While any of the properties defined for `CreativeWork` are therefore available for use, the subset listed below, when complemented by the additional OpenActive (`oa:`)- or Routes (`rt:`)-defined properties provided, are proposed as those most applicable to `RouteGuide` modelling.
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
@@ -598,63 +595,63 @@ Note that `RouteGuide` is a subclass of [`schema:CreativeWork`](https://schema.o
 |[schema:author](https://schema.org/author)|OPTIONAL|Array of [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|Individual(s) or group(s) responsible for creating the original Route Guide information|
 |[schema:datePublished](https://schema.org/datePublished)|RECOMMENDED|[schema:Date](https://schema.org/Date)|Date the Route Guide was originally published|
 |[schema:dateModified](https://schema.org/dateModified)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|Last point at which route information was added or edited.|
-|[oa:verificationRecord](https://openactive.io/verificationRecord)|RECOMMENDED|[`oa:VerificationRecord`](https://openactive.io/VerificationRecord)|See below, [Describing Route Verification](#describing-route-verification-oa-verificationrecord).|
+|[rt:verificationRecord](https://openactive.io/verificationRecord)|RECOMMENDED|[`rt:VerificationRecord`](https://openactive.io/VerificationRecord)|See below, [Describing Route Verification](#describing-route-verification-oa-verificationrecord).|
 |[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|A free text description of the Route.|
 |[schema:headline](https://schema.org/headline)|OPTIONAL|[schema:Text](https://schema.org/Text)|A short summary of the Route, for use as a tagline or preview.|
 |[oa:activity](https://openactive.io/activity)|REQUIRED|Array of [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Specifies one or more physical activities that will take place during an event. The activities should ideally be taken from an activity list. In the context of Route Guides, the activity specified will normally be one or more of https://openactive.io/activity-list#_4a19873e-118e-43f4-b86e-05acba8fb1de ("cycling"), https://openactive.io/activity-list#_95092977-5a20-4d6e-b312-8fddabe71544 ("walking") https://openactive.io/activity-list#_72ddb2dc-7d75-424e-880a-d90eabe91381 ("running"), https://openactive.io/activity-list#_45a372d9-baca-4f6c-859f-04de3efae742 ("Horse riding"), or a narrower term within these. For further guidance, see the Opportunity specification, [Describing Physical Activities](https://www.openactive.io/modelling-opportunity-data/EditorsDraft/#describing-physical-activities)|
-|[oa:distance](https://openactive.io/distance)|REQUIRED|[schema:QuantitativeValue](https://schema.org/QuantitativeValue)|Length of Route. Must include both number and unit.|
-|[oa:indicativeDuration](https://openactive.io/indicativeDuration)|RECOMMENDED|Array of [oa:IndicativeDuration](https://openactive.io/IndicativeDuration)|See [Describing Indicative Duration](#describing-indicative-durations-oa-indicativeduration)|
-|[oa:startPoint](https://openactive.io/startPoint)|REQUIRED|[oa:RoutePoint](https://openactive.io/RoutePoint)|On modelling values here, see below: [Describing Route Points](#describing-route-points-start-end-and-of-interest-oa-routepoint).|
-|[oa:endPoint](https://openactive.io/endPoint)|OPTIONAL|[oa:RoutePoint](https://openactive.io/RoutePoint)|REQUIRED if isLoop is 'false'. On modelling values here, see below: [Describing Route Points](#describing-route-points-start-end-and-of-interest-oa-routepoint).|
-|[oa:pointOfInterest](https://openactive.io/pointOfInterest)|OPTIONAL|Array of [oa:RoutePoint](https://openactive.io/RoutePoint)|Noteworthy points along the Route. On modelling values here, see below: [Describing Route Points](#describing-route-points-start-end-and-of-interest-oa-routepoint).|
-|[oa:accessibiltyDescription](https://openactive.io/accessibiltyDescription)|RECOMMENDED|Array of [schema:Text](https://schema.org/Text)|e.g. 'wheelchair friendly', 'hearing loop'|
-|[oa:gradient](https://openactive.io/gradient)|RECOMMENDED|[oa:RouteGradient](https://openactive.io/RouteGradient)||
-|[oa:surface](https://openactive.io/surface)|RECOMMENDED|Array of [schema:URL](https://schema.org/URL) or [schema:Text](https://schema.org/Text)|If a URL, MUST be drawn from https://openactive.io/Gravel, https://openactive.io/Paved, https://openactive.io/BareEarthOrBedrock, https://openactive.io/ShortVegetation, https://openactive.io/RoughVegetationOrCrop, https://openactive.io/HardSurface(Stoney), https://openactive.io/HardSurface(Sealed), and https://openactive.io/BoardwalkOrTimber|
-|[oa:routeDifficulty](https://openactive.io/routeDifficulty)|OPTIONAL|Array of [oa:RouteDifficulty](https://openactive.io/RouteDifficulty)|Although typically only one `RouteDiffulty` is expected, Routes suitable for more than one kind of activity (e.g., walking and horse-riding) may require multiple values here.|
-|[oa:geoPath](https://openactive.io/geoPath)|RECOMMENDED|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no mapImage is provided. URL MUST resolve to a file in a format that natively supports geo encoding, e.g. geoJSON or GPX|
-|[oa:mapImage](https://openactive.io/mapImage)|OPTIONAL|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no geoPath is provided.|
+|[rt:distance](https://openactive.io/distance)|REQUIRED|[schema:QuantitativeValue](https://schema.org/QuantitativeValue)|Length of Route. Must include both number and unit.|
+|[rt:indicativeDuration](https://openactive.io/indicativeDuration)|RECOMMENDED|Array of [rt:IndicativeDuration](https://openactive.io/IndicativeDuration)|See [Describing Indicative Duration](#describing-indicative-durations-oa-indicativeduration)|
+|[rt:startPoint](https://openactive.io/startPoint)|REQUIRED|[rt:RoutePoint](https://openactive.io/RoutePoint)|On modelling values here, see below: [Describing Route Points](#describing-route-points-start-end-and-of-interest-oa-routepoint).|
+|[rt:endPoint](https://openactive.io/endPoint)|OPTIONAL|[rt:RoutePoint](https://openactive.io/RoutePoint)|REQUIRED if isLoop is 'false'. On modelling values here, see below: [Describing Route Points](#describing-route-points-start-end-and-of-interest-oa-routepoint).|
+|[rt:pointOfInterest](https://openactive.io/pointOfInterest)|OPTIONAL|Array of [rt:RoutePoint](https://openactive.io/RoutePoint)|Noteworthy points along the Route. On modelling values here, see below: [Describing Route Points](#describing-route-points-start-end-and-of-interest-oa-routepoint).|
+|[rt:accessibiltyDescription](https://openactive.io/accessibilityDescription)|RECOMMENDED|Array of [schema:Text](https://schema.org/Text)|e.g. 'wheelchair friendly', 'hearing loop'|
+|[rt:gradient](https://openactive.io/gradient)|RECOMMENDED|[rt:RouteGradient](https://openactive.io/RouteGradient)||
+|[rt:surface](https://openactive.io/surface)|RECOMMENDED|Array of [schema:URL](https://schema.org/URL) or [schema:Text](https://schema.org/Text)|If a URL, MUST be drawn from https://openactive.io/Gravel, https://openactive.io/Paved, https://openactive.io/BareEarthOrBedrock, https://openactive.io/ShortVegetation, https://openactive.io/RoughVegetationOrCrop, https://openactive.io/HardSurface(Stoney), https://openactive.io/HardSurface(Sealed), and https://openactive.io/BoardwalkOrTimber|
+|[rt:routeDifficulty](https://openactive.io/routeDifficulty)|OPTIONAL|Array of [rt:RouteDifficulty](https://openactive.io/RouteDifficulty)|Although typically only one `RouteDiffulty` is expected, Routes suitable for more than one kind of activity (e.g., walking and horse-riding) may require multiple values here.|
+|[rt:geoPath](https://openactive.io/geoPath)|RECOMMENDED|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no mapImage is provided. URL MUST resolve to a file in a format that natively supports geo encoding, e.g. geoJSON or GPX|
+|[rt:mapImage](https://openactive.io/mapImage)|OPTIONAL|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no geoPath is provided.|
 |[oa:category](https://openactive.io/category)|OPTIONAL|Array of [schema:Text](https://schema.org/Text) or [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|e.g. "pushchair-friendly", "family", "forest walk"|
-|[oa:additionalInformation](https://openactive.io/additionalInformation)|OPTIONAL|Array of [schema:Article](https://schema.org/Article)|Historical, scientific, or any other information providing interesting background detail regarding the Route. If this information relates to a specific point or structure along the Route, it may be more appropriate to model this as a `pointOfInterest`.|
+|[rt:additionalInformation](https://openactive.io/additionalInformation)|OPTIONAL|Array of [schema:Article](https://schema.org/Article)|Historical, scientific, or any other information providing interesting background detail regarding the Route. If this information relates to a specific point or structure along the Route, it may be more appropriate to model this as a `pointOfInterest`.|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|e.g., “Parking”, “Toilets”. Where an `amenityFeature` may be modelled as a feature either of `RouteGuide` or of a `RoutePoint`, preference should be given to the `RoutePoint` (that is to say, to the more-specific level of modelling). For further guidance on modelling amenities, see [Describing Amenities](https://www.openactive.io/modelling-opportunity-data/#describing-amenities) in the [Opportunity Specification](https://www.openactive.io/modelling-opportunity-data/)|
-|[oa:isLoop](https://openactive.io/isLoop)|OPTIONAL|Boolean|Whether the route returns to its point of origin|
-|[oa:riskInformation](https://openactive.io/riskInformation)|RECOMMENDED|[oa:RouteRiskAdvisory](https://openactive.io/RouteRiskAdvisory)||
-|[oa:legalAdvisory](https://openactive.io/legalAdvisory)|RECOMMENDED|[oa:RouteLegalAdvisory](https://openactive.io/RouteLegalAdvisory)||
-|[oa:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|OPTIONAL|Array of [oa:RouteAccessRestriction](https://openactive.io/RouteAccessRestriction)|Restrictions on or obstacles to use of the route|
-|[oa:suggestedEquipment](https://openactive.io/suggestedEquipment)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Items users of the Route are advised to bring. For Routes intended for novice use, advice on footwear, bicycle frame, etc. may not be out of place here.|
+|[rt:isLoop](https://openactive.io/isLoop)|OPTIONAL|Boolean|Whether the route returns to its point of origin|
+|[rt:riskInformation](https://openactive.io/riskInformation)|RECOMMENDED|[rt:RouteRiskAdvisory](https://openactive.io/RouteRiskAdvisory)||
+|[rt:legalAdvisory](https://openactive.io/legalAdvisory)|RECOMMENDED|[rt:RouteLegalAdvisory](https://openactive.io/RouteLegalAdvisory)||
+|[rt:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|OPTIONAL|Array of [rt:RouteAccessRestriction](https://openactive.io/RouteAccessRestriction)|Restrictions on or obstacles to use of the route|
+|[rt:suggestedEquipment](https://openactive.io/suggestedEquipment)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Items users of the Route are advised to bring. For Routes intended for novice use, advice on footwear, bicycle frame, etc. may not be out of place here.|
 |[schema:image](https://schema.org/image)|OPTIONAL|Array of [schema:ImageObject](https://schema.org/ImageObject)|Images of the Route.|
 |[schema:review](https://schema.org/review)|OPTIONAL|Array of [schema:Review](https://schema.org/Review)|User-submitted ratings of the Route.|
 |[schema:contactPoint](https://schema.org/contactPoint)|OPTIONAL|[schema:ContactPoint](https://schema.org/ContactPoint)|Contact details specifically related to the Route.|
-|[oa:userContributedContent](https://openactive.io/userContributedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
-|[schema:isBasedOn](https://schema.org/isBasedOn)|OPTIONAL|Array of [oa:RouteGuide](https://openactive.io/RouteGuide)|See [Describing `RouteGuide` Provenance](#describing-routeguide-provenance-schema-isbasedon), below.|
-|[oa:isJoinableThroughoutLength](https://openactive.io/isJoinableThroughoutLength)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Indicates whether or not it is possible to join the Route at every point along its length - for instance, as in most urban streets and roads. In cases where joining the Route is only possible at selected points (as for instance in many rural Routes with restricted public thoroughfares), these should be modelled using `RoutePoint`s. Defaults to `false`.|
-|[oa:segments](https://openactive.io/segments)|OPTIONAL|Array of [oa:RouteSegmentGuide](https://openactive.io/RouteSegmentGuide)|See [Segmenting Routes](#segmenting-routes-routes-as-a-collection-of-sub-routes)|
-|[oa:segmentGroups](https://openactive.io/segmentGroupings)|OPTIONAL|Array of [oa:RouteSegmentGroup](https://openactive.io/RouteSegmentGroup)|See [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)
+|[rt:userContributedContent](https://openactive.io/userContributedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
+|[schema:isBasedOn](https://schema.org/isBasedOn)|OPTIONAL|Array of [rt:RouteGuide](https://openactive.io/RouteGuide)|See [Describing `RouteGuide` Provenance](#describing-routeguide-provenance-schema-isbasedon), below.|
+|[rt:isJoinableThroughoutLength](https://openactive.io/isJoinableThroughoutLength)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Indicates whether or not it is possible to join the Route at every point along its length - for instance, as in most urban streets and roads. In cases where joining the Route is only possible at selected points (as for instance in many rural Routes with restricted public thoroughfares), these should be modelled using `RoutePoint`s. Defaults to `false`.|
+|[rt:segments](https://openactive.io/segments)|OPTIONAL|Array of [rt:RouteSegmentGuide](https://openactive.io/RouteSegmentGuide)|See [Segmenting Routes](#segmenting-routes-routes-as-a-collection-of-sub-routes)|
+|[rt:segmentGroups](https://openactive.io/segmentGroupings)|OPTIONAL|Array of [rt:RouteSegmentGroup](https://openactive.io/RouteSegmentGroup)|See [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)
 
-### Describing Maps: `oa:geoPath` and `oa:mapImage`
+### Describing Maps: `rt:geoPath` and `rt:mapImage`
 
 Cartographic representations of Routes ('maps', in common parlance) are typically provided in one of two format families: properly geographic format types, such as [GeoJSON](https://geojson.org/) or the [.osm format](https://learnosm.org/en/osm-data/file-formats/), which support sophisticated geo-specific functionality such as distance calculation or route-tracking; and simple images, such as .jpg files, which provide a visual overview of the relevant area but do not offer any further functionality.
 
-The first kind of map should populate the `oa:geoPath` property; for the second, the `oa:mapImage` property should be used. In both cases, the relevant maps are modelled using the schema.org [`Map`](https://schema.org/Map) class. However, the data-profile of these `Maps` will differ slightly.
+The first kind of map should populate the `rt:geoPath` property; for the second, the `rt:mapImage` property should be used. In both cases, the relevant maps are modelled using the schema.org [`Map`](https://schema.org/Map) class. However, the data-profile of these `Maps` will differ slightly.
 
-#### `oa:geoPath`
+#### `rt:geoPath`
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"Map"|
-|[schema:mapType](https://schema.org/mapType)|OPTIONAL|A schema.org [`MapCategoryType`](https://schema.org/MapCategoryType) or OpenActive enumeration value (see 'Notes')|May be taken from the [`MapCategoryType`](https://schema.org/MapCategoryType) values defined by schema.org; alternatively, `https://openactive.io/RouteMap`, `https://openactive.io/ElevationMap`, or `https://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `oa:geoPath`, this property is REQUIRED for each `Map`|
+|[schema:mapType](https://schema.org/mapType)|OPTIONAL|A schema.org [`MapCategoryType`](https://schema.org/MapCategoryType) or OpenActive enumeration value (see 'Notes')|May be taken from the [`MapCategoryType`](https://schema.org/MapCategoryType) values defined by schema.org; alternatively, `https://openactive.io/RouteMap`, `https://openactive.io/ElevationMap`, or `https://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `rt:geoPath`, this property is REQUIRED for each `Map`|
 |[schema:url](https://schema.org/url)|REQUIRED|[`schema:URL`](https://schema.org/URL)|A link to the file containing the map.|
 |[schema:encodingFormat](https://schema.org/encodingFormat)|REQUIRED|[`schema:Text`](https://schema.org/Text) or [`schema:URL`](https://schema.org/URL)|The MIME format of the associated file.|
 
-#### `oa:mapImage`
+#### `rt:mapImage`
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"Map"|
-|[schema:mapType](https://schema.org/mapType)|OPTIONAL|A schema.org [`mapCategoryType`](https://schema.org/MapCategoryType) enumeration (though see 'Notes')|May be taken from the [`MapCategoryType`](https://schema.org/MapCategoryType) values defined by schema.org; alternatively, `https://openactive.io/RouteMap`, `https://openactive.io/ElevationMap`, and `https://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `oa:geoPath`, this property is REQUIRED for each `Map`|
+|[schema:mapType](https://schema.org/mapType)|OPTIONAL|A schema.org [`mapCategoryType`](https://schema.org/MapCategoryType) enumeration (though see 'Notes')|May be taken from the [`MapCategoryType`](https://schema.org/MapCategoryType) values defined by schema.org; alternatively, `https://openactive.io/RouteMap`, `https://openactive.io/ElevationMap`, and `https://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `rt:geoPath`, this property is REQUIRED for each `Map`|
 |[schema:image](https://schema.org/image)|REQUIRED|[`schema:URL`](https://schema.org/ImageObject)|A link to the image file depicting the map.|
 |[schema:encodingFormat](https://schema.org/encodingFormat)|REQUIRED|[`schema:Text`](https://schema.org/Text) or [`schema:URL`](https://schema.org/URL)|The MIME format of the associated file.|
 
-### Describing Route Points: Start, End, and Of Interest (`oa:RoutePoint`)
+### Describing Route Points: Start, End, and Of Interest (`rt:RoutePoint`)
 
 Routes are typically characterised by a number of points of special significance along their path. At a minimum, a looping Route will requires at least a single `startPoint` to be usable. Often, however, Routes will also have an `endPoint` and sometimes various other `pointsOfInterest` along the way.
 
@@ -665,31 +662,31 @@ Such points, for the purpose of describing Routes, are a specialisation and exte
 |@type|REQUIRED|String|"RoutePoint"|
 |[schema:name](https://schema.org/name)|OPTIONAL|[schema:Text](https://schema.org.Text)||
 |[schema:geo](https://schema.org/geo)|OPTIONAL|[schema:GeoCoordinates](https://schema.org/GeoCoordinates)|The geographic co-ordinates, specified as a latitude and longitude of a Place|
-|[oa:isAccessPoint](https://openactive.io/isAccessPoint)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Whether or not it is possible to join the Route as a whole at this point.|
-|[oa:isRecommendedAccessPoint](https://openactive.io/isRecommendedAccessPoint)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Whether or not it is recommended to join the Route as a whole at this point, because of e.g. particular amentities at this point, or because the `RouteGuide` has been specifically tailored to facilitate this particular experience of it. On `RouteGuide` `startPoint` and `endPoint` attributes this defaults to `true`; otherwise it defaults to `false`.|
-|[oa:mapReference](https://openactive.io/mapReference)|OPTIONAL|Array of [oa:MapReference](https://openactive.io/MapReference)||
-|[oa:transportNote](https://openactive.io/transportNote)|OPTIONAL|Array of [oa:TransportNote](https://openactive.io/TransportNote)|Information about how to reach the `RoutePoint`.|
+|[rt:isAccessPoint](https://openactive.io/isAccessPoint)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Whether or not it is possible to join the Route as a whole at this point.|
+|[rt:isRecommendedAccessPoint](https://openactive.io/isRecommendedAccessPoint)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Whether or not it is recommended to join the Route as a whole at this point, because of e.g. particular amentities at this point, or because the `RouteGuide` has been specifically tailored to facilitate this particular experience of it. On `RouteGuide` `startPoint` and `endPoint` attributes this defaults to `true`; otherwise it defaults to `false`.|
+|[rt:mapReference](https://openactive.io/mapReference)|OPTIONAL|Array of [rt:MapReference](https://openactive.io/MapReference)||
+|[rt:transportNote](https://openactive.io/transportNote)|OPTIONAL|Array of [rt:TransportNote](https://openactive.io/TransportNote)|Information about how to reach the `RoutePoint`.|
 |[schema:headline](https://schema.org/headline)|OPTIONAL|[schema:Text](https://schema.org/Text)|A short summary of the Route, for use as a tagline or preview.|
 |[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|A free text description of the Route.|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|Used to indicate whether specific amenities are available at a location. The value of this property will be an array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification) objects, though for further information see ["Describing Amenities"](https://www.openactive.io/modelling-opportunity-data/#describing-amenities) in the Modelling Opportunity Data specification.|
-|[oa:userContributedContent](https://openactive.io/userContributedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
+|[rt:userContributedContent](https://openactive.io/userContributedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
 |[schema:sameAs](https://schema.org/sameAd)|OPTIONAL|[schema:URL](https://schema.org/URL)|URL of a reference Web page that unambiguously indicates the Place's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.|
 
-### Describing Map References (`oa:MapReference`)
+### Describing Map References (`rt:MapReference`)
 
-An `oa:MapReference` is simply a geographic reference specified in terms of some widely-used map or series of maps. In the UK, for instance, the Ordnance Survey Explorer and Landranger maps are frequently used to indicate the boundaries within which a geographic entity falls.
+An `rt:MapReference` is simply a geographic reference specified in terms of some widely-used map or series of maps. In the UK, for instance, the Ordnance Survey Explorer and Landranger maps are frequently used to indicate the boundaries within which a geographic entity falls.
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"MapReference"|
 |[schema:publisher](https://schema.org/publisher)|REQUIRED|[schema:Organization](https://schema.org/Organization) or [schema:Person](https://schema.org/Person)||
-|[oa:mapSeries](https://openactive.io/mapSeries)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g. 'Explorer', 'Landranger'|
-|[oa:mapNumber](https://openactive.io/mapNumber)|OPTIONAL|[schema:Text](https://schema.org/Text)|REQUIRED if no gridReference supplied|
-|[oa:gridReference](https://openactive.io/gridReference)|OPTIONAL|[schema:Text](https://schema.org/Text)|REQUIRED if no mapNumber supplied|
+|[rt:mapSeries](https://openactive.io/mapSeries)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g. 'Explorer', 'Landranger'|
+|[rt:mapNumber](https://openactive.io/mapNumber)|OPTIONAL|[schema:Text](https://schema.org/Text)|REQUIRED if no gridReference supplied|
+|[rt:gridReference](https://openactive.io/gridReference)|OPTIONAL|[schema:Text](https://schema.org/Text)|REQUIRED if no mapNumber supplied|
 
-### Describing Route Gradients (`oa:RouteGradient`)
+### Describing Route Gradients (`rt:RouteGradient`)
 
-An `oa:RouteGradient` captures the steepness of climb and descent along a Route. Data providers should bear in mind that many descriptors of gradient are mathematical and/or unstandardised in nature (e.g., when specified in terms of percentages), and may convey little to novice users. The provision of a gradient `description` is therefore RECOMMENDED.
+An `rt:RouteGradient` captures the steepness of climb and descent along a Route. Data providers should bear in mind that many descriptors of gradient are mathematical and/or unstandardised in nature (e.g., when specified in terms of percentages), and may convey little to novice users. The provision of a gradient `description` is therefore RECOMMENDED.
 
 In addition, gradient is often used as a component in, or proxy for, description of the difficulty of completing a given Route. Data publishers should therefore give careful thought as to whether their gradient information is better captured using the `RouteGradient` or `RouteDifficulty` models.
 
@@ -698,25 +695,25 @@ It is important that the gradient information conveyed by the `RouteGradient` ob
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"RouteGradient"|
-|[oa:maxGradient](https://openactive.io/maxGradient)|RECOMMENDED|[schema:Text](https://schema.org/Text)|e.g. "7.5%", "4.2°"|
-|[oa:avgGradient](https://openactive.io/avgGradient)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
-|[oa:totalElevationGain](https://openactive.io/totalElevationGain)|OPTIONAL|Integer|Unit is metres.|
-|[oa:totalElevationLoss](https://openactive.io/totalElevationLoss)|OPTIONAL|Integer|Unit is metres.|
-|[oa:gradientTerm](https://openactive.io/gradientTerm)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g. "Easy", "Moderate", "3"|
-|[oa:gradientDefinitionURL](https://openactive.io/gradientDefinitionURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|This will typically be a link to a page describing the meaning of the `gradientTerm` in more detail.|
+|[rt:maxGradient](https://openactive.io/maxGradient)|RECOMMENDED|[schema:Text](https://schema.org/Text)|e.g. "7.5%", "4.2°"|
+|[rt:avgGradient](https://openactive.io/avgGradient)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
+|[rt:totalElevationGain](https://openactive.io/totalElevationGain)|OPTIONAL|Integer|Unit is metres.|
+|[rt:totalElevationLoss](https://openactive.io/totalElevationLoss)|OPTIONAL|Integer|Unit is metres.|
+|[rt:gradientTerm](https://openactive.io/gradientTerm)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g. "Easy", "Moderate", "3"|
+|[rt:gradientDefinitionURL](https://openactive.io/gradientDefinitionURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|This will typically be a link to a page describing the meaning of the `gradientTerm` in more detail.|
 |[schema:description](https://schema.org/description)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
 
-### Describing Transport to and from the Route (`oa:TransportNote`)
+### Describing Transport to and from the Route (`rt:TransportNote`)
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"TransportNote"|
-|[oa:transportMode](https://openactive.io/transportMode)|REQUIRED|[schema:Text](https://schema.org/Text)|It is RECOMMENDED that the value of `oa:transportMode` be taken from the following list: https://openactive.io/Bus, https://openactive.io/Rail, https://openactive.io/Bicycle, https://openactive.io/Road, or https://openactive.io/Foot.|
-|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|Instructions for navigation to the destination by means of the `oa:transportMode`|
+|[rt:transportMode](https://openactive.io/transportMode)|REQUIRED|[schema:Text](https://schema.org/Text)|It is RECOMMENDED that the value of `rt:transportMode` be taken from the following list: https://openactive.io/Bus, https://openactive.io/Rail, https://openactive.io/Bicycle, https://openactive.io/Road, or https://openactive.io/Foot.|
+|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|Instructions for navigation to the destination by means of the `rt:transportMode`|
 
-### Describing Route Difficulty (`oa:RouteDifficulty`)
+### Describing Route Difficulty (`rt:RouteDifficulty`)
 
-The `oa:RouteDifficulty` model describes the effort and level of fitness required to successfully complete a Route. Such assessments necessarily contain a strong subjective component, and data publishers are therefore encouraged to use the [`schema:description`](https://schema.org/description) field to ground their assessment in more concrete terms such as `oa:distance`, `oa:gradient`, or `oa:indicativeDuration`, and/or to provide a `difficultyDefinitionURL` further explaining the rationale behind their assessment of difficulty. In addition, values provided in `oa:category` (such as e.g. 'pushchair-friendly') may provide valuable additional context.
+The `rt:RouteDifficulty` model describes the effort and level of fitness required to successfully complete a Route. Such assessments necessarily contain a strong subjective component, and data publishers are therefore encouraged to use the [`schema:description`](https://schema.org/description) field to ground their assessment in more concrete terms such as `rt:distance`, `rt:gradient`, or `rt:indicativeDuration`, and/or to provide a `difficultyDefinitionURL` further explaining the rationale behind their assessment of difficulty. In addition, values provided in `oa:category` (such as e.g. 'pushchair-friendly') may provide valuable additional context.
 
 <div class="advisement">
   <div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Difficulty Level and Novice Users</span></div>
@@ -728,23 +725,23 @@ Data publishers are advised that prospective Route users - and in particular nov
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"RouteDifficulty"|
-|[oa:difficultyTerm](https://openactive.io/difficultyTerm)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g., 'Easy', 'Strenuous'. If this value is taken from a controlled vocabulary, a `oa:difficultyDefinitionURL` SHOULD be provided pointing to the definition of these terms.|
-|[oa:activity](https://openactive.io/activity)|OPTIONAL|[skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Specifies the physical activity for which the [oa:RouteDifficulty](https://schema.org/duration) is relevant. This activity SHOULD ideally be taken from an activity list.|
+|[rt:difficultyTerm](https://openactive.io/difficultyTerm)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g., 'Easy', 'Strenuous'. If this value is taken from a controlled vocabulary, a `rt:difficultyDefinitionURL` SHOULD be provided pointing to the definition of these terms.|
+|[oa:activity](https://openactive.io/activity)|OPTIONAL|[skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Specifies the physical activity for which the [rt:RouteDifficulty](https://schema.org/duration) is relevant. This activity SHOULD ideally be taken from an activity list.|
 |[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)||
-|[oa:difficultyDefinitionURL](https://openactive.io/difficultyDefinitionURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|e.g. https://www.ramblers.org.uk/go-walking/about-group-walks/walks-difficulty.aspx|
+|[rt:difficultyDefinitionURL](https://openactive.io/difficultyDefinitionURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|e.g. https://www.ramblers.org.uk/go-walking/about-group-walks/walks-difficulty.aspx|
 
-### Describing Route Legal Advisories (`oa:RouteLegalAdvisory`)
+### Describing Route Legal Advisories (`rt:RouteLegalAdvisory`)
 
-Users of Routes, particularly in rural areas, need to be apprised of their legal status - that is to say, whether and under what conditions they are legally allowed to avail themselves of all sections of the Route. In most cases this can be done concisely by indicating the `oa:routeDesignation`. Further nuances or exceptional cases should be dealt with in more detail using the `description` and `legalInformationURL` fields.
+Users of Routes, particularly in rural areas, need to be apprised of their legal status - that is to say, whether and under what conditions they are legally allowed to avail themselves of all sections of the Route. In most cases this can be done concisely by indicating the `rt:routeDesignation`. Further nuances or exceptional cases should be dealt with in more detail using the `description` and `legalInformationURL` fields.
 
 |Property|Status|Type|
 |--- |--- |--- |
 |@type|REQUIRED|String|"RouteLegalAdvisory"|
-|[oa:routeDesignation](https://openactive.io/routeDesignation)|RECOMMENDED|[oa:RouteDesignation](https://openactive.io/RouteDesignation)|
+|[rt:routeDesignation](https://openactive.io/routeDesignation)|RECOMMENDED|[rt:RouteDesignation](https://openactive.io/RouteDesignation)|
 |[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)|
-|[oa:legalInformationURL](https://openactive.io/legalInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|
+|[rt:legalInformationURL](https://openactive.io/legalInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|
 
-### Describing Indicative Durations (`oa:IndicativeDuration`)
+### Describing Indicative Durations (`rt:IndicativeDuration`)
 
 Being able to complete a Route within a given period is important to many users, particularly those who engage infrequently in outdoor activities because they feel pressed for time. While there is considerable variance in individual activity speed, a rough indication of how much time to allow is valued information for many users.
 
@@ -754,14 +751,14 @@ Being able to complete a Route within a given period is important to many users,
 |[oa:activity](https://openactive.io/activity)|REQUIRED|[[skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Specifies the physical activity for which the [schema:duration](https://schema.org/duration) is relevant. This activity SHOULD ideally be taken from an activity list.|
 |[schema:duration](https://schema.org/duration)|REQUIRED|String|The duration of the event given in [[ISO8601]] format.  Durations MUST NOT be zero length.|
 
-### Describing Route Designations (`oa:RouteDesignation`)
+### Describing Route Designations (`rt:RouteDesignation`)
 
-An `oa:RouteDesignation` is a formal, legal declaration of the status of a given Route or Route Segment. As such, any given jurisdiction will define only a finite (usually quite small) number of possible Designations.
+An `rt:RouteDesignation` is a formal, legal declaration of the status of a given Route or Route Segment. As such, any given jurisdiction will define only a finite (usually quite small) number of possible Designations.
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"RouteDesignation"|
-|[oa:routeDesignationTerm](https://openactive.io/routeDesignationTerm)|REQUIRED|Array of [schema:Text](https://schema.org/Text)|See Example below|
+|[rt:routeDesignationTerm](https://openactive.io/routeDesignationTerm)|REQUIRED|Array of [schema:Text](https://schema.org/Text)|See Example below|
 |[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)||
 |[schema:url](https://schema.org/url)|OPTIONAL|[schema:URL](https://schema.org/URL)||
 
@@ -801,11 +798,11 @@ The `url` property is intended to hold a link resolving to a definition or furth
 </p>
 </div>
 
-### Describing Route Risk Advisories (`oa:RouteRiskAdvisory`)
+### Describing Route Risk Advisories (`rt:RouteRiskAdvisory`)
 
-The purpose of the `oa:RouteRiskAdvisory` model is to describe risks in sufficient detail that users are able to weigh these and feel they are making an adequately-informed choice when deciding to avail themselves of a Route.
+The purpose of the `rt:RouteRiskAdvisory` model is to describe risks in sufficient detail that users are able to weigh these and feel they are making an adequately-informed choice when deciding to avail themselves of a Route.
 
-Because the range of risks users may be concerned with is wide, including such disparate topics as personal threat, environmental factors, and shared use of Routes with other traffic; because individuals vary widely in the degree of risk they are prepared to tolerate; and because perceptions of risk involve a subjective component the `oa:RouteRiskAdvisory` model is intentionally eclectic and captures information in a variety of styles.
+Because the range of risks users may be concerned with is wide, including such disparate topics as personal threat, environmental factors, and shared use of Routes with other traffic; because individuals vary widely in the degree of risk they are prepared to tolerate; and because perceptions of risk involve a subjective component the `rt:RouteRiskAdvisory` model is intentionally eclectic and captures information in a variety of styles.
 
 <div class="note">
 <p>
@@ -819,36 +816,36 @@ To avoid potential confusion between absence of risk information and absence of 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"RouteRiskAdvisory"|
-|[oa:knownRisks](https://openactive.io/knownRisks)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g., "crime incidence","harrassment reported", "shared with heavy traffic"|
-|[oa:riskModifiers](https://openactive.io/riskModifiers)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors influencing knownRisks, e.g. "time of day", "season"|
-|[oa:riskMitigators](https://openactive.io/riskMitigators)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors reducing knownRisks, e.g. "guardrails provided", "well-lit"|
-|[oa:riskDescription](https://openactive.io/riskDescription)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
-|[oa:userSafetyFeedback](https://openactive.io/userSafetyFeedback)|OPTIONAL|[schema:Review](https://schema.org/Review)||
-|[oa:isMaintained](https://openactive.io/isMaintained)|OPTIONAL|Boolean|Indicates whether the Route is actively maintained by e.g. a landowner or charitable organisation. Typically does not apply to urban Routes.|
-|[oa:isMaintainedBy](https://openactive.io/isMaintainedBy)|OPTIONAL|[schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|The Organization or or Person responsible for maintaining the Route. MUST NOT have a value if isMaintained is 'false'.|
-|[oa:riskInformationURL](https://openactive.io/riskInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to a formal definition outlining risk and mitigating factors, e.g. https://vscg.org/guiding-principles/risk-control|
-|[oa:trafficDescription](https://openactive.io/trafficDescription)|OPTIONAL|[schema:Text](https://schema.org/Text)||
+|[rt:knownRisks](https://openactive.io/knownRisks)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g., "crime incidence","harrassment reported", "shared with heavy traffic"|
+|[rt:riskModifiers](https://openactive.io/riskModifiers)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors influencing knownRisks, e.g. "time of day", "season"|
+|[rt:riskMitigators](https://openactive.io/riskMitigators)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors reducing knownRisks, e.g. "guardrails provided", "well-lit"|
+|[rt:riskDescription](https://openactive.io/riskDescription)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
+|[rt:userSafetyFeedback](https://openactive.io/userSafetyFeedback)|OPTIONAL|[schema:Review](https://schema.org/Review)||
+|[rt:isMaintained](https://openactive.io/isMaintained)|OPTIONAL|Boolean|Indicates whether the Route is actively maintained by e.g. a landowner or charitable organisation. Typically does not apply to urban Routes.|
+|[rt:isMaintainedBy](https://openactive.io/isMaintainedBy)|OPTIONAL|[schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|The Organization or or Person responsible for maintaining the Route. MUST NOT have a value if isMaintained is 'false'.|
+|[rt:riskInformationURL](https://openactive.io/riskInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to a formal definition outlining risk and mitigating factors, e.g. https://vscg.org/guiding-principles/risk-control|
+|[rt:trafficDescription](https://openactive.io/trafficDescription)|OPTIONAL|[schema:Text](https://schema.org/Text)||
 
-### Describing Route Restrictions (`oa:RouteAccessRestriction`)
+### Describing Route Restrictions (`rt:RouteAccessRestriction`)
 
 Route Access Restrictions convey information regardihg restrictions on use or access to the Route that arising from reasons other than legal status, e.g., social convention, wildlife protection, or seasonal factors.
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"RouteAccessRestriction"|
-|[oa:routeAccessRestrictionTerm](https://openactive.io/routeAccessRestrictionTerm)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g. "Routine maintenance", "Closed in deer mating season", "Dogs not allowed"|
+|[rt:routeAccessRestrictionTerm](https://openactive.io/routeAccessRestrictionTerm)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g. "Routine maintenance", "Closed in deer mating season", "Dogs not allowed"|
 |[schema:description](https://schema.org/description)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
-|[oa:routeAccessRestrictionInformationURL](https://openactive.io/routeAccessRestrictionInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to further advice about the restriction, e.g. https://canalrivertrust.org.uk/notices/winter|
-|[oa:routeAccessRestrictionTimeSpan](https://openactive.io/routeAccessRestrictionTimeSpan)|OPTIONAL|[schema:Text](https://schema.org/Text)|Brief text indicating when the pragmaticRestriction applies, e.g, "Winter", "2020-01-01 to 2020-03-31"|
+|[rt:routeAccessRestrictionInformationURL](https://openactive.io/routeAccessRestrictionInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to further advice about the restriction, e.g. https://canalrivertrust.org.uk/notices/winter|
+|[rt:routeAccessRestrictionTimeSpan](https://openactive.io/routeAccessRestrictionTimeSpan)|OPTIONAL|[schema:Text](https://schema.org/Text)|Brief text indicating when the pragmaticRestriction applies, e.g, "Winter", "2020-01-01 to 2020-03-31"|
 
-### Describing Route Verification (`oa:VerificationRecord`)
+### Describing Route Verification (`rt:VerificationRecord`)
 
 Because the condition and maintenance status of Routes can change over time, it is important where possible to provide information about the currency of Route information.
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
-|[oa:verifiedBy](https://openactive.io/verifiedBy)|REQUIRED|Array of [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|Person or organisation who has confirmed accuracy of Route information|
-|[oa:dateVerified](https://openactive.io/dateVerified)|REQUIRED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|The most recent date upon which accuracy of Route information was verified by the [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization) responsible. |
+|[rt:verifiedBy](https://openactive.io/verifiedBy)|REQUIRED|Array of [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|Person or organisation who has confirmed accuracy of Route information|
+|[rt:dateVerified](https://openactive.io/dateVerified)|REQUIRED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|The most recent date upon which accuracy of Route information was verified by the [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization) responsible. |
 
 ### Segmenting Routes: Routes as a collection of sub-Routes
 
@@ -875,7 +872,7 @@ In addition, the following structural constraints apply:
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|"RouteSegmentGuide"||
-|[oa:sequence](https://openactive.io/sequence)|RECOMMENDED|Integer|Indicates the presentation order of `Route Segment`s within the parent Route. This ordering should normally be present, except for unusual situations such as e.g., modelling `RouteGuide`s that are otherwise unsegmented but for access points. In cases where `RouteSegmentGroup`s are provided, this property is REQUIRED (See below, [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)).|
+|[rt:sequence](https://openactive.io/sequence)|RECOMMENDED|Integer|Indicates the presentation order of `Route Segment`s within the parent Route. This ordering should normally be present, except for unusual situations such as e.g., modelling `RouteGuide`s that are otherwise unsegmented but for access points. In cases where `RouteSegmentGroup`s are provided, this property is REQUIRED (See below, [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)).|
 |[schema:alternativeRouteSegmentGuide](https://schema.org/alternativeSegmentTo)|OPTIONAL|Array of schema:URL|An array of `@id` values pointing to Route Segment Guides describing alternative Route Segments that may be taken in preference to the declaring `Segment`.|
 
 <div class="note">
@@ -904,44 +901,44 @@ The table below indicates which Route Guide properties should be viewed as inher
 |[schema:author](https://schema.org/author)|Yes|
 |[schema:datePublished](https://schema.org/datePublished)|Yes|
 |[schema:dateModified](https://schema.org/dateModified)|Yes|
-|[oa:verificationRecord](https://openactive.io/verificationRecord)|Yes|
+|[rt:verificationRecord](https://openactive.io/verificationRecord)|Yes|
 |[schema:description](https://schema.org/description)|Yes|
 |[schema:headline](https://schema.org/headline)|Yes|
 |[oa:activity](https://openactive.io/activity)|Yes|
-|[oa:distance](https://openactive.io/distance)|No|
-|[oa:indicativeDuration](https://openactive.io/indicativeDuration)|No|
-|[oa:startPoint](https://openactive.io/startPoint)|No|
-|[oa:endPoint](https://openactive.io/endPoint)|No|
-|[oa:pointOfInterest](https://openactive.io/pointOfInterest)|No|
-|[oa:accessibiltyDescription](https://openactive.io/accessibiltyDescription)|Yes|
-|[oa:gradient](https://openactive.io/gradient)|No|
-|[oa:surface](https://openactive.io/surface)|Yes|
-|[oa:routeDifficulty](https://openactive.io/routeDifficulty)|Yes|
-|[oa:geoPath](https://openactive.io/geoPath)|Yes|
-|[oa:mapImage](https://openactive.io/mapImage)|Yes|
+|[rt:distance](https://openactive.io/distance)|No|
+|[rt:indicativeDuration](https://openactive.io/indicativeDuration)|No|
+|[rt:startPoint](https://openactive.io/startPoint)|No|
+|[rt:endPoint](https://openactive.io/endPoint)|No|
+|[rt:pointOfInterest](https://openactive.io/pointOfInterest)|No|
+|[rt:accessibiltyDescription](https://openactive.io/accessibiltyDescription)|Yes|
+|[rt:gradient](https://openactive.io/gradient)|No|
+|[rt:surface](https://openactive.io/surface)|Yes|
+|[rt:routeDifficulty](https://openactive.io/routeDifficulty)|Yes|
+|[rt:geoPath](https://openactive.io/geoPath)|Yes|
+|[rt:mapImage](https://openactive.io/mapImage)|Yes|
 |[oa:category](https://openactive.io/category)|Yes|
-|[oa:additionalInformation](https://openactive.io/additionalInformation)|Yes|
+|[rt:additionalInformation](https://openactive.io/additionalInformation)|Yes|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|No|
-|[oa:isLoop](https://openactive.io/isLoop)|No|
-|[oa:riskInformation](https://openactive.io/riskInformation)|Yes|
-|[oa:legalAdvisory](https://openactive.io/legalAdvisory)|Yes|
-|[oa:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|Yes|
+|[rt:isLoop](https://openactive.io/isLoop)|No|
+|[rt:riskInformation](https://openactive.io/riskInformation)|Yes|
+|[rt:legalAdvisory](https://openactive.io/legalAdvisory)|Yes|
+|[rt:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|Yes|
 |[oa:suggestedEquipment](https://openactive.io/suggestedEquipment)|Yes|
 |[schema:image](https://schema.org/image)|Yes|
 |[schema:review](https://schema.org/review)|Yes|
 |[schema:contactPoint](https://schema.org/contactPoint)|Yes|
-|[oa:userContributedContent](https://openactive.io/userContributedContent)|No|
+|[rt:userContributedContent](https://openactive.io/userContributedContent)|No|
 |[schema:isBasedOn](https://schema.org/isBasedOn)|Yes|
-|[oa:isJoinableThroughoutLength](https://openactive.io/isJoinableThroughoutLength)|Yes|
-|[oa:segments](https://openactive.io/segments)|N/A|
-|[oa:segmentGroups](https://openactive.io/segmentGroupings)|N/A|
-|[oa:alternativeSegmentTo](https://openactive.io/alternativeSegmentTo)|N/A|
+|[rt:isJoinableThroughoutLength](https://openactive.io/isJoinableThroughoutLength)|Yes|
+|[rt:segments](https://openactive.io/segments)|N/A|
+|[rt:segmentGroups](https://openactive.io/segmentGroupings)|N/A|
+|[rt:alternativeSegmentTo](https://openactive.io/alternativeSegmentTo)|N/A|
 
 When it comes to cases where a property may be declared either at the level of the Route or Route Segment Guide, modelling decisions must simply be made on the basis of scope: properties declared at the Route Guide level apply to the Route as a whole, and hence of each Segment within it; those declared on a Segment apply ONLY to that particular Segment.
 
-### Grouping Route Segments (`oa:RouteSegmentGroup`)
+### Grouping Route Segments (`rt:RouteSegmentGroup`)
 
-In the case of exceptionally lengthy routes (see e.g. ExploreKent's [Elham Valley Way](https://s3-eu-west-1.amazonaws.com/explore-kent-bucket/uploads/2015/02/18163918/explore-kent-long-distance-route-elham-valley-way.pdf) walk), individual `Route Segment Guide`s may be grouped together into larger wholes to indicate, e.g., which Segments should ideally be covered in a single day, link together significant sites along the route, etc. In such cases, these larger groupings should be indicated using `oa:RouteSegmentGroup` objects.
+In the case of exceptionally lengthy routes (see e.g. ExploreKent's [Elham Valley Way](https://s3-eu-west-1.amazonaws.com/explore-kent-bucket/uploads/2015/02/18163918/explore-kent-long-distance-route-elham-valley-way.pdf) walk), individual `Route Segment Guide`s may be grouped together into larger wholes to indicate, e.g., which Segments should ideally be covered in a single day, link together significant sites along the route, etc. In such cases, these larger groupings should be indicated using `rt:RouteSegmentGroup` objects.
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
@@ -949,11 +946,11 @@ In the case of exceptionally lengthy routes (see e.g. ExploreKent's [Elham Valle
 |@id|RECOMMENDED|URI|A URI providing a unique, stable identifier for the resource. Note that an `@id` value is REQUIRED if `alternativeGroupTo` is supplied.|
 |[schema:name](https://schema.org/name)|REQUIRED|String|The name of the grouping.|
 |[schema:description](https://schema.org/description)|RECOMMENDED|String|A free text description of the grouping, and the rationale for seeing its member Route Segments as related in some way.|
-|[oa:includesSegments](https://openactive.io/includesSegments)|REQUIRED|Array of [URL](http://schema.org/URL)|The individual `RouteSegmentGuide` objects the `RouteSegmentGroup` comprises, as identified by the value of their `@id`.|
+|[rt:includesSegments](https://openactive.io/includesSegments)|REQUIRED|Array of [URL](http://schema.org/URL)|The individual `RouteSegmentGuide` objects the `RouteSegmentGroup` comprises, as identified by the value of their `@id`.|
 |[alternativeGroupTo](https://openactive.io/isAlternativeGroupTo)|REQUIRED|Array of [URL](http://schema.org/URL)|Used to indicate that this `RouteSegmentGroup`'s collection of `RouteSegmentGuide`s serves as an alternative to the list of Route Segments given in this `Array` and expressed as a list of `RouteSegmentGuide` `@id`s. Where this value is provided, it is RECOMMENDED that the `description` supply reasons why one or another alternative (e.g. distance, accessibility) might be preferred.  |
 <p></p>
 
-### Describing User Generated Content (`oa:userGeneratedContent`)
+### Describing User Generated Content (`rt:userGeneratedContent`)
 
 Users are often prolific in creating a wide range of supplemental material – e.g images, descriptions, GPX track recordings – for Routes, and such contributions can often considerably enrich `RouteGuide` data. The sheer – and open-ended – variety of possible contributions means that they are modelled using `schema:CreativeWork`.
 
@@ -978,7 +975,7 @@ To assist users and curators, it is therefore RECOMMENDED to provide links back 
 |`@type`|REQUIRED|String|`CreativeWork`|
 |[schema:publisher](https://schema.org/publisher)|REQUIRED|[schema:Organization](https://schema.org/Organization) of [schema:Person](https://schema.org/Person)|The Organization or Person originally providing the information about the Route|
 |[schema:url](https://schema.org/url)|RECOMMENDED|[schema:URL](https://schema.org/URL)|Link to original hosting site, which may contain additional or contextual information if available.|
-|[oa:version](https://openactive.io/version)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|The date upon which this `RouteGuide` information was harvested from the providing `schema:publisher`|
+|[rt:version](https://openactive.io/version)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|The date upon which this `RouteGuide` information was harvested from the providing `schema:publisher`|
 |[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)|Any further relevant information relevant to previous publications of the `RouteGuide` - e.g., any paper publications that might exist, etc.|
 
 # Worked Example - The Wildlife Walk at Attingham Park
@@ -1355,13 +1352,10 @@ define their own namespace.
 
   </section>
 
-  <!--  </section> -->
-
-    <section class='appendix informative'>
+<section class="informative">
     Acknowledgements
     ================
 
     The editors thank [all members](http://www.w3.org/community/openactive/participants) of the OpenActive CG for contributions of various kinds.
     </section>
-  </body>
 </html>
