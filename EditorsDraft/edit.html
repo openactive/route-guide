@@ -621,7 +621,7 @@ Note that `RouteGuide` is a subclass of [`schema:CreativeWork`](https://schema.o
 |[schema:image](https://schema.org/image)|OPTIONAL|Array of [schema:ImageObject](https://schema.org/ImageObject)|Images of the Route.|
 |[schema:review](https://schema.org/review)|OPTIONAL|Array of [schema:Review](https://schema.org/Review)|User-submitted ratings of the Route.|
 |[schema:contactPoint](https://schema.org/contactPoint)|OPTIONAL|[schema:ContactPoint](https://schema.org/ContactPoint)|Contact details specifically related to the Route.|
-|[rt:userContributedContent](https://openactive.io/userContributedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
+|[rt:userGeneratedContent](https://openactive.io/userGeneratedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
 |[schema:isBasedOn](https://schema.org/isBasedOn)|OPTIONAL|Array of [rt:RouteGuide](https://openactive.io/RouteGuide)|See [Describing `RouteGuide` Provenance](#describing-routeguide-provenance-schema-isbasedon), below.|
 |[rt:isJoinableThroughoutLength](https://openactive.io/isJoinableThroughoutLength)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Indicates whether or not it is possible to join the Route at every point along its length - for instance, as in most urban streets and roads. In cases where joining the Route is only possible at selected points (as for instance in many rural Routes with restricted public thoroughfares), these should be modelled using `RoutePoint`s. Defaults to `false`.|
 |[rt:segments](https://openactive.io/segments)|OPTIONAL|Array of [rt:RouteSegmentGuide](https://openactive.io/RouteSegmentGuide)|See [Segmenting Routes](#segmenting-routes-routes-as-a-collection-of-sub-routes)|
@@ -669,7 +669,7 @@ Such points, for the purpose of describing Routes, are a specialisation and exte
 |[schema:headline](https://schema.org/headline)|OPTIONAL|[schema:Text](https://schema.org/Text)|A short summary description of the RoutePoint, for use as a tagline or preview.|
 |[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|A free text description of the RoutePoint.|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|Used to indicate whether specific amenities are available at a location. The value of this property will be an array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification) objects, though for further information see ["Describing Amenities"](https://www.openactive.io/modelling-opportunity-data/#describing-amenities) in the Modelling Opportunity Data specification.|
-|[rt:userContributedContent](https://openactive.io/userContributedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images, video, or descriptions of the RoutePoint, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
+|[rt:userGeneratedContent](https://openactive.io/userGeneratedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images, video, or descriptions of the RoutePoint, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
 |[schema:sameAs](https://schema.org/sameAd)|OPTIONAL|[schema:URL](https://schema.org/URL)|URL of a reference Web page that unambiguously indicates the Place's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.|
 
 ### Describing Map References (`rt:MapReference`)
@@ -942,7 +942,7 @@ The table below indicates which Route Guide properties should be viewed as inher
 |[schema:image](https://schema.org/image)|Yes|
 |[schema:review](https://schema.org/review)|Yes|
 |[schema:contactPoint](https://schema.org/contactPoint)|Yes|
-|[rt:userContributedContent](https://openactive.io/userContributedContent)|No|
+|[rt:userGeneratedContent](https://openactive.io/userGeneratedContent)|No|
 |[schema:isBasedOn](https://schema.org/isBasedOn)|Yes|
 |[rt:isJoinableThroughoutLength](https://openactive.io/isJoinableThroughoutLength)|Yes|
 |[rt:segments](https://openactive.io/segments)|N/A|
@@ -965,7 +965,7 @@ In the case of exceptionally lengthy routes (see e.g. ExploreKent's [Elham Valle
 |[alternativeGroupTo](https://openactive.io/isAlternativeGroupTo)|REQUIRED|Array of [URL](http://schema.org/URL)|Used to indicate that this `RouteSegmentGroup`'s collection of `RouteSegmentGuide`s serves as an alternative to the list of Route Segments given in this `Array` and expressed as a list of `RouteSegmentGuide` `@id`s. Where this value is provided, it is RECOMMENDED that the `description` supply reasons why one or another alternative (e.g. distance, accessibility) might be preferred.  |
 <p></p>
 
-### Describing User Generated Content (`rt:userGeneratedContent`)
+### Describing User Contributed Content (`rt:userGeneratedContent`)
 
 Users are often prolific in creating a wide range of supplemental material – e.g images, descriptions, GPX track recordings – for Routes, and such contributions can often considerably enrich `RouteGuide` data. The sheer – and open-ended – variety of possible contributions means that they are modelled using `schema:CreativeWork`.
 
@@ -976,8 +976,8 @@ The `schema:CreativeWork` model is extremely flexible, and implementers are enco
 |@type|REQUIRED|String|"CreativeWork"|
 |[schema:creator](https://schema.org/creator)|RECOMMENDED|[Person](http://schema.org/Person)|The individual, howsoever identified (e.g. full name, user handle), responsible for creating the content.|
 |[schema:accountablePerson](http://schema.org/accountablePerson)|RECOMMENDED|[Person](http://schema.org/Person)|In the context of user-generated content, the `accountablePerson` is the editor, curator, or reviewer who approves and if necessary edits the user-contented submissions prior to publication.|
-|[schema:spatialCoverage](https://schema.org/spatialCoverage)|REQUIRED|String|	The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content - typically, in this context, the location of the Route, or points along it.|
-|[schema:associatedMedia](https://schema.org/spatialCoverage)|REQUIRED|String|	The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content - typically, in this context, the location of the Route, or points along it.|
+|[schema:spatialCoverage](https://schema.org/spatialCoverage)|REQUIRED|`schema:Place`|The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content - typically, in this context, the location of the Route, or points along it.|
+|[schema:associatedMedia](https://schema.org/spatialCoverage)|REQUIRED|`schema:MediaObject`|The video, photograph, or other digital object contributed by the user.|
 
 ### Describing `RouteGuide` Provenance (`schema:isBasedOn`)
 
