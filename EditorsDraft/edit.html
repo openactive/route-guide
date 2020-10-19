@@ -666,10 +666,10 @@ Such points, for the purpose of describing Routes, are a specialisation and exte
 |[rt:isRecommendedAccessPoint](https://openactive.io/isRecommendedAccessPoint)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Whether or not it is recommended to join the Route as a whole at this point, because of e.g. particular amentities at this point, or because the `RouteGuide` has been specifically tailored to facilitate this particular experience of it. On `RouteGuide` `startPoint` and `endPoint` attributes this defaults to `true`; otherwise it defaults to `false`.|
 |[rt:mapReference](https://openactive.io/mapReference)|OPTIONAL|Array of [rt:MapReference](https://openactive.io/MapReference)||
 |[rt:transportNote](https://openactive.io/transportNote)|OPTIONAL|Array of [rt:TransportNote](https://openactive.io/TransportNote)|Information about how to reach the `RoutePoint`.|
-|[schema:headline](https://schema.org/headline)|OPTIONAL|[schema:Text](https://schema.org/Text)|A short summary of the Route, for use as a tagline or preview.|
-|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|A free text description of the Route.|
+|[schema:headline](https://schema.org/headline)|OPTIONAL|[schema:Text](https://schema.org/Text)|A short summary description of the RoutePoint, for use as a tagline or preview.|
+|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|A free text description of the RoutePoint.|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|Used to indicate whether specific amenities are available at a location. The value of this property will be an array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification) objects, though for further information see ["Describing Amenities"](https://www.openactive.io/modelling-opportunity-data/#describing-amenities) in the Modelling Opportunity Data specification.|
-|[rt:userContributedContent](https://openactive.io/userContributedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
+|[rt:userContributedContent](https://openactive.io/userContributedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images, video, or descriptions of the RoutePoint, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
 |[schema:sameAs](https://schema.org/sameAd)|OPTIONAL|[schema:URL](https://schema.org/URL)|URL of a reference Web page that unambiguously indicates the Place's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.|
 
 ### Describing Map References (`rt:MapReference`)
@@ -813,6 +813,21 @@ To avoid potential confusion between absence of risk information and absence of 
 </p>
 </div>
 
+<div class="note" title="Modelling COVID-19 risk">
+<p>
+Data publishers should be aware that the legal and/or recommended use of recreational trails can be affected by COVID-19-related restrictions - as in cases where groups above a certain size or composed of more than one social 'bubble' are involved. Publishers should accoordingly take care to ensure that such constraints are reflected in their Risk Advisories, and provide links to the most current guidance where possible. E.g.,
+</p>
+<code>
+{
+     "@type": "RouteRiskAdvisory",
+     "knownRisks": ["COVID-19 Risk"],
+     "riskDescription": "Official government guidance regarding participation in outdoor activities changes in accordance with the severity of local epidemic conditions. Individuals wishing to use this trail are advised to check all relevant guidance and ensure that they are complying with all applicable restrictions.",
+     "riskInformationURL": "https://www.gov.uk/guidance/local-covid-alert-levels-what-you-need-to-know"
+
+}
+</code>
+</div>
+
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"RouteRiskAdvisory"|
@@ -855,7 +870,7 @@ __Route Segment Guides__ are treated, for the purposes of this specification, as
 
 Route Segment Guides, then, are identical to Route Guides, with the following exceptions:
 
-1. The presence of a `sequence` attribute. The value of this attribute MUST be an integer, and the values of the `sequence` attribute MUST run consecutively for the Route Segments comprising a Route.
+1. The presence of a `position` attribute. The value of this attribute MUST be an integer, and the values of the `position` attribute MUST run consecutively for the Route Segments comprising a Route.
 
 1. The availability of an OPTIONAL `alternativeSegmentTo` attribute, in cases where the end user has two alternative `Route Segment`s or series thereof (e.g., a short and steep `Segment` alongside a longer, more leisurely, alternative) to complete their journey.
 
@@ -872,11 +887,11 @@ In addition, the following structural constraints apply:
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|"RouteSegmentGuide"||
-|[rt:sequence](https://openactive.io/sequence)|RECOMMENDED|Integer|Indicates the presentation order of `Route Segment`s within the parent Route. This ordering should normally be present, except for unusual situations such as e.g., modelling `RouteGuide`s that are otherwise unsegmented but for access points. In cases where `RouteSegmentGroup`s are provided, this property is REQUIRED (See below, [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)).|
+|[schema:positioon](https://schema.org/position)|RECOMMENDED|Integer|Indicates the presentation order of `Route Segment`s within the parent Route. This ordering should normally be present, except for unusual situations such as e.g., modelling `RouteGuide`s that are otherwise unsegmented but for access points. In cases where `RouteSegmentGroup`s are provided, this property is REQUIRED (See below, [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)).|
 |[schema:alternativeRouteSegmentGuide](https://schema.org/alternativeSegmentTo)|OPTIONAL|Array of schema:URL|An array of `@id` values pointing to Route Segment Guides describing alternative Route Segments that may be taken in preference to the declaring `Segment`.|
 
 <div class="note">
-The intention of the `sequence` attribute is to provide a guide regarding presentational order of the `Route Segments` to client applications, which will not necessarily correspond with the physical ordering of `Segments` along the Route. Ordering must thus be sequential even in cases where multiple alternative `Segments` exist.
+The intention of the `position` attribute is to provide a guide regarding presentational order of the `Route Segments` to client applications, which will not necessarily correspond with the physical ordering of `Segments` along the Route. Ordering must thus be sequential even in cases where multiple alternative `Segments` exist.
 </div>
 
 <div class="advisement">
@@ -1105,12 +1120,12 @@ As will be evident from what follows, the intention of the example is not to dem
    "segments":[
       {
          "@type":"RouteSegmentGuide",
-         "sequence":1,
+         "position":1,
          "description":"From the car park make your way to Visitor Reception and through the Stables Courtyard bearing left towards the Walled Garden. As you walk towards the Walled Garden you are on part of the Mile Walk - a hoggin path designed by Thomas Leggett in 1770 for Noel Hill, the first Lord Berwick of Attingham Park. Hoggin is a mix of gravel, sand and clay ideal for building paths. In 2009, we restored the pond in the adjacent paddock and dugout hundreds of tonnes of hoggin to rebuild the Mile Walk."
       },
       {
          "@type":"RouteSegmentGuide",
-         "sequence":2,
+         "position":2,
          "description":"You will pass the Walled Garden on your left as you continue along this section of the Mile Walk. Stop in on your way past to see our historic bee house and new observation bee hive. The observation hive is made of clear acrylic and allows visitors to see the busy bees at work.",
          "pointofInterest":{
             "@type":"RoutePoint",
@@ -1123,12 +1138,12 @@ As will be evident from what follows, the intention of the example is not to dem
       },
       {
          "@type":"RouteSegmentGuide",
-         "sequence":3,
+         "position":3,
          "description":"At this point the path diverges - bear left following signs for the Deer Park Walk."
       },
       {
          "@type":"RouteSegmentGuide",
-         "sequence":4,
+         "position":4,
          "description":"Cross the cable stay bridge over the river Tern. With funding from Natural England this cable stay bridge was constructed in 2009. The new bridge provides improved access for buggies and mobility scooters. Attingham is host to around 5 miles of river, featuring beautiful stretches of the Severn and Tern. Our many ponds are a haven for wildlife of all sorts, from ducks, swans and otters to dragonflies.",
          "pointofInterest":[
             {
@@ -1143,7 +1158,7 @@ As will be evident from what follows, the intention of the example is not to dem
       },
       {
          "@type":"RouteSegmentGuide",
-         "sequence":5,
+         "position":5,
          "alternativeRouteSegment":{
             "@type":"alternativeRouteSegment",
             "alternativeSegmentTo":8
@@ -1159,7 +1174,7 @@ As will be evident from what follows, the intention of the example is not to dem
       },
       {
          "@type":"RouteSegmentGuide",
-         "sequence":6,
+         "position":6,
          "description":"After walking through the woodland the path opens out along the top of the Deer Park, with the woodland on your left and the deer park to your right. Look closely in the bracken and ferns and you might be lucky to spot some of our deer herd! Please note: during parts of the year sections of the Deer Park may be closed, please follow any signed diversions on your route.",
          "pointofInterest":{
             "@type":"RoutePoint",
@@ -1172,7 +1187,7 @@ As will be evident from what follows, the intention of the example is not to dem
       },
       {
          "@type":"RouteSegmentGuide",
-         "sequence":7,
+         "position":7,
          "description":"Keep walking along the grass path with the woodland on your left, until you get to the Repton Oak. Lots of different animals live in the deer park and woodland areas at Attingham, especially in old trees which are havens for wildlife, bats, birds, insects, mosses and lichens. There are five species of bats at Attingham including over 1,000 pipistrelle bats. Family activity: the barn owl, raven and buzzard are the top predators here - can you spot any flying over the deer park?",
          "pointofInterest":[
             {
@@ -1187,7 +1202,7 @@ As will be evident from what follows, the intention of the example is not to dem
       },
       {
          "@type":"RouteSegmentGuide",
-         "sequence":8,
+         "position":8,
          "description":"A short while after passing the Repton Oak the path will begin to lead you down the hill towards the mansion. Go through the gate, across the bridge and turn right to take a look at the Ice House. Please note: There is no light in the ice house and is lit by natural light from its entrance. Be careful walking down the narrow uneven steps into the ice house. After you've visited the ice house follow the path passing the mansion on your right hand side and continue to bear right, past the tea-room and toilets before turning left to return to the Stables Courtyard.",
          "pointofInterest":{
             "@type":"RoutePoint",
