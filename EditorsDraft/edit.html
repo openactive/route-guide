@@ -616,7 +616,7 @@ Note that `RouteGuide` is a subclass of [`schema:CreativeWork`](https://schema.o
 |[rt:geoPath](https://openactive.io/geoPath)|RECOMMENDED|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no mapImage is provided. URL MUST resolve to a file in a format that natively supports geo encoding, e.g. geoJSON or GPX|
 |[rt:mapImage](https://openactive.io/mapImage)|OPTIONAL|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no geoPath is provided.|
 |[oa:category](https://openactive.io/category)|OPTIONAL|Array of [schema:Text](https://schema.org/Text) or [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|e.g. "pushchair-friendly", "family", "forest walk"|
-|[rt:additionalInformation](https://openactive.io/additionalInformation)|OPTIONAL|Array of [schema:Article](https://schema.org/Article)|Historical, scientific, or any other information providing interesting background detail regarding the Route. If this information relates to a specific point or structure along the Route, it may be more appropriate to model this as a `pointOfInterest`.|
+|[rt:additionalInformation](https://openactive.io/additionalInformation)|OPTIONAL|Array of [schema:Article](https://schema.org/Article)|Historical, scientific, or any other information providing interesting background detail regarding the Route. If this information relates to a specific point or structure along the Route, it may be more appropriate to attach this information to a `pointOfInterest`.|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|e.g., “Parking”, “Toilets”. Where an `amenityFeature` may be modelled as a feature either of `RouteGuide` or of a `RoutePoint`, preference should be given to the `RoutePoint` (that is to say, to the more-specific level of modelling). For further guidance on modelling amenities, see [Describing Amenities](https://www.openactive.io/modelling-opportunity-data/#describing-amenities) in the [Opportunity Specification](https://www.openactive.io/modelling-opportunity-data/)|
 |[rt:isLoop](https://openactive.io/isLoop)|OPTIONAL|Boolean|Whether the route returns to its point of origin|
 |[rt:isMaintained](https://openactive.io/isMaintained)|OPTIONAL|Boolean|Indicates whether the Route is actively maintained by e.g. a landowner or charitable organisation. Typically does not apply to urban Routes.|
@@ -627,7 +627,7 @@ Note that `RouteGuide` is a subclass of [`schema:CreativeWork`](https://schema.o
 |[rt:suggestedEquipment](https://openactive.io/suggestedEquipment)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Items users of the Route are advised to bring. For Routes intended for novice use, advice on footwear, bicycle frame, etc. may not be out of place here.|
 |[schema:image](https://schema.org/image)|OPTIONAL|Array of [schema:ImageObject](https://schema.org/ImageObject)|Images of the Route.|
 |[schema:review](https://schema.org/review)|OPTIONAL|Array of [schema:Review](https://schema.org/Review)|User-submitted ratings of the Route.|
-|[schema:contactPoint](https://schema.org/contactPoint)|OPTIONAL|[schema:ContactPoint](https://schema.org/ContactPoint)|Contact details specifically related to the Route.|
+|[schema:contactPoint](https://schema.org/contactPoint)|RECOMMENDED|[schema:ContactPoint](https://schema.org/ContactPoint)|Contact details for those responsible for managing and maintaining the Route. While data-publishers may of course use any attriibutes of `schema:contactPoint` they judge useful, `ContactPoint.telephone`, `ContactPoint.email` and `ContactPoint.url` should be provided as a minimum.|
 |[rt:userGeneratedContent](https://openactive.io/userGeneratedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
 |[schema:isBasedOn](https://schema.org/isBasedOn)|RECOMMENDED|Array of [rt:RouteGuide](https://openactive.io/RouteGuide)|Provides a means of linking back to the `RouteGuide`s originating site and providing context. See [Describing `RouteGuide` Provenance](#describing-routeguide-provenance-schema-isbasedon), below.|
 |[rt:isJoinableThroughoutLength](https://openactive.io/isJoinableThroughoutLength)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Indicates whether or not it is possible to join the Route at every point along its length - for instance, as in most urban streets and roads. In cases where joining the Route is only possible at selected points (as for instance in many rural Routes with restricted public thoroughfares), these should be modelled using `RoutePoint`s. Defaults to `false`.|
@@ -675,7 +675,8 @@ Such points, for the purpose of describing Routes, are a specialisation and exte
 |[rt:transportNote](https://openactive.io/transportNote)|OPTIONAL|Array of [rt:TransportNote](https://openactive.io/TransportNote)|Information about how to reach the `RoutePoint`.|
 |[schema:headline](https://schema.org/headline)|OPTIONAL|[schema:Text](https://schema.org/Text)|A short summary description of the RoutePoint, for use as a tagline or preview.|
 |[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|A free text description of the RoutePoint.|
-|[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|Used to indicate whether specific amenities are available at a location. The value of this property will be an array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification) objects, though for further information see ["Describing Amenities"](https://www.openactive.io/modelling-opportunity-data/#describing-amenities) in the Modelling Opportunity Data specification.|
+|[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|Used to indicate whether specific amenities are available at a location. The value of this property will be an array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification) objects. For examples and further information see ["Describing Amenities"](https://www.openactive.io/modelling-opportunity-data/#describing-amenities) in the Modelling Opportunity Data specification. Other examples of amenties in a `RouteGuide` context might be a cafe or bicycle parking.|
+|[rt:additionalInformation](https://openactive.io/additionalInformation)|OPTIONAL|Array of [schema:Article](https://schema.org/Article)|Historical, scientific, or any other information providing interesting background detail regarding the RoutePoint.|
 |[rt:userGeneratedContent](https://openactive.io/userGeneratedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images, video, or descriptions of the RoutePoint, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
 |[schema:sameAs](https://schema.org/sameAd)|OPTIONAL|[schema:URL](https://schema.org/URL)|URL of a reference Web page that unambiguously indicates the Place's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.|
 
@@ -878,6 +879,7 @@ Because the condition and maintenance status of Routes can change over time, it 
 |[rt:verifiedBy](https://openactive.io/verifiedBy)|REQUIRED|Array of [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|Person or organisation who has confirmed accuracy of Route information|
 |[rt:dateVerified](https://openactive.io/dateVerified)|REQUIRED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|The most recent date upon which accuracy of Route information was verified by the [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization) responsible. |
 
+
 ### Segmenting Routes: Routes as a collection of sub-Routes
 
 In practice, Routes are often broken down into a series of smaller units - so that, for instance, a scenic walk may be described in terms of traversals to various landmarks, or a multi-day cycle tour broken down into individual day or half-day progressions. These smaller units are here referred to as __Route Segments__, and they are described by __Route Segment Guide__.
@@ -982,6 +984,31 @@ In the case of exceptionally lengthy routes (see e.g. ExploreKent's [Elham Valle
 |[rt:includesSegments](https://openactive.io/includesSegments)|REQUIRED|Array of [URL](http://schema.org/URL)|The individual `RouteSegmentGuide` objects the `RouteSegmentGroup` comprises, as identified by the value of their `@id`.|
 |[alternativeGroupTo](https://openactive.io/isAlternativeGroupTo)|REQUIRED|Array of [URL](http://schema.org/URL)|Used to indicate that this `RouteSegmentGroup`'s collection of `RouteSegmentGuide`s serves as an alternative to the list of Route Segments given in this `Array` and expressed as a list of `RouteSegmentGuide` `@id`s. Where this value is provided, it is RECOMMENDED that the `description` supply reasons why one or another alternative (e.g. distance, accessibility) might be preferred.  |
 <p></p>
+
+### Providing additional historical, scientific, or cultural information (`schema:Article`)
+
+Many Routes are designed around locations of particular historical, scientific, or cultural interest - or may even link a number of such locations together (as in the case, e.g., of the Canterbury pilgrimate). In such cases, deeper and contextual information in the form of short notes or essays can be central to the visitor experience.
+
+In the context of RouteGuides, such pieces are modelled as [schema:Articles](https://schema.org/Article). While any of the attributes of `schema:Article` are available for modelling purposes, the below are seen as a useful and simple minimum.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|[schema:headline](https://schema.org/headline)|RECOMMENDED|[schema:Text](https://schema.org/Text)|The title, or headline, of the piece|
+|[schema:image]((https://schema.org/image)|OPTIONAL|Array of [schema:URL](https://schema.org/URL) or [schema:ImageObject](https://schema.org/ImageObject)|Images relevant to the text of the Article.|
+|[schema:author]((https://schema.org/author)|OPTIONAL|[schema:Text](https://schema.org/Text)|The author of the Article.|
+|[schema:articleBody]((https://schema.org/articleBody)|REQUIRED|[schema:Text](https://schema.org/Text)|The actual content of the Article.|
+
+### Describing Reviews (`schema:Review`)
+
+User reviews are central to many applications, and are described using schema.org's `Review` model.
+
+Of the many attributes defined for use with `schema:Review`s, the following are anticipated to be the most useful:
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|[schema:reviewBody](https://schema.org/Review)|RECOMMENDED|[schema:Text](https://schema.org/Text)|A short freetext review of the Route or RouteSegment.|
+|[schema:reviewRating](https://schema.org/reviewRating)|RECOMMENDED|[schema:Text](https://schema.org/Text)|A numerical rating (typically out of five) for the Route or RouteGuide.|
+|[schema:author](https://schema.org/author)|RECOMMENDED|[schema:Person](https://schema.org/Person)|The person responsible for the review.|
 
 ### Describing User Contributed Content (`rt:userGeneratedContent`)
 
