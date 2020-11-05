@@ -287,6 +287,11 @@ Generally, the most convenient form for publishing `RouteGuide` data will be as 
 
 For further information, see the [Realtime Paged Data Exchange 1.0](https://www.w3.org/2017/08/realtime-paged-data-exchange/) specification.
 
+Note one specific implication of publishing RouteGuide data is that:
+
+1. The `lastModfied` attribute **must** be populated
+1. It's value **must** be made available as a Unix 'epoch' value in the `modified` attribute of the RPDE wrapper.
+
 ### The Activity List
 
 The [OpenActive Activity List](https://www.openactive.io/activity-list/) is a curated list of canonical identifiers for use across the physical activity sector. It is RECOMMENDED that data-publishers align their activity descriptions with this where appropriate. It is anticipated that the activities most relevant to `RouteGuide`s will typically be:
