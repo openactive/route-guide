@@ -594,7 +594,7 @@ Note that `RouteGuide` is a subclass of [`schema:CreativeWork`](https://schema.o
 |[schema:url](https://schema.org/url)|OPTIONAL|[schema:url](https://schema.org/url)|A URL to a web page (or section of a page) describing the Route.|
 |[schema:author](https://schema.org/author)|OPTIONAL|Array of [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|Individual(s) or group(s) responsible for creating the original Route Guide information|
 |[schema:datePublished](https://schema.org/datePublished)|RECOMMENDED|[schema:Date](https://schema.org/Date)|Date the Route Guide was originally published|
-|[schema:dateModified](https://schema.org/dateModified)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|Last point at which route information was added or edited.|
+|[schema:dateModified](https://schema.org/dateModified)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|Last point at which route information was added or edited. If this RouteGuide forms an item in an [RPDE feed](https://developer.openactive.io/publishing-data/data-feeds) this value is REQUIRED.|
 |[rt:verificationRecord](https://openactive.io/verificationRecord)|RECOMMENDED|[`rt:VerificationRecord`](https://openactive.io/VerificationRecord)|See below, [Describing Route Verification](#describing-route-verification-oa-verificationrecord).|
 |[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|A free text description of the Route.|
 |[schema:headline](https://schema.org/headline)|OPTIONAL|[schema:Text](https://schema.org/Text)|A short summary of the Route, for use as a tagline or preview.|
@@ -760,7 +760,7 @@ An `rt:RouteDesignation` is a formal, legal declaration of the status of a given
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"RouteDesignation"|
-|[rt:routeDesignationTerm](https://openactive.io/routeDesignationTerm)|REQUIRED|Array of [schema:Text](https://schema.org/Text)|See Example below|
+|[rt:routeDesignationTerm](https://openactive.io/routeDesignationTerm)|REQUIRED|[schema:Text](https://schema.org/Text)|See Example below|
 |[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)||
 |[schema:url](https://schema.org/url)|OPTIONAL|[schema:URL](https://schema.org/URL)||
 
