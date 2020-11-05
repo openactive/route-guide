@@ -231,7 +231,7 @@ and pull requests. The source code is available on [GitHub](https://github.com/o
 
 </section>
 
-    <section class="informative">
+<section class="informative">
 ## Introduction
 
 The [W3C OpenActive Community Group](http://www.w3.org/community/openactive/) was
@@ -856,7 +856,11 @@ Route Access Restrictions convey information regardihg restrictions on use or ac
 |[rt:routeAccessRestrictionTerm](https://openactive.io/routeAccessRestrictionTerm)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g. "Routine maintenance", "Closed in deer mating season", "Dogs not allowed"|
 |[schema:description](https://schema.org/description)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
 |[rt:routeAccessRestrictionInformationURL](https://openactive.io/routeAccessRestrictionInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to further advice about the restriction, e.g. https://canalrivertrust.org.uk/notices/winter|
-|[rt:routeAccessRestrictionTimeSpan](https://openactive.io/routeAccessRestrictionTimeSpan)|OPTIONAL|[schema:Text](https://schema.org/Text)|Brief text indicating when the pragmaticRestriction applies, e.g, "Winter", "2020-01-01 to 2020-03-31"|
+|[rt:routeAccessRestrictionTimeSpan](https://openactive.io/routeAccessRestrictionTimeSpan)|OPTIONAL|[schema:Text](https://schema.org/Text)|Brief text indicating when the AccessRestriction applies, e.g, "Winter", "2020-01-01 to 2020-03-31"|
+
+<div class="note" title="Legal and access restrictions">
+Note that `RouteAccessRestriction` and `RouteLegalAdvisory` are intended to be orthogonal. That is to say, `RouteLegalAdvisory` is intended to capture **only** the legal status of the route, while `RouteAccessRestriction` encompasses all other access barriers, **excluding** legal restrictions. 
+</div>
 
 ### Describing Route Verification (`rt:VerificationRecord`)
 
