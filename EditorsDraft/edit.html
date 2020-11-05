@@ -629,7 +629,7 @@ Note that `RouteGuide` is a subclass of [`schema:CreativeWork`](https://schema.o
 |[schema:review](https://schema.org/review)|OPTIONAL|Array of [schema:Review](https://schema.org/Review)|User-submitted ratings of the Route.|
 |[schema:contactPoint](https://schema.org/contactPoint)|OPTIONAL|[schema:ContactPoint](https://schema.org/ContactPoint)|Contact details specifically related to the Route.|
 |[rt:userGeneratedContent](https://openactive.io/userGeneratedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
-|[schema:isBasedOn](https://schema.org/isBasedOn)|OPTIONAL|Array of [rt:RouteGuide](https://openactive.io/RouteGuide)|See [Describing `RouteGuide` Provenance](#describing-routeguide-provenance-schema-isbasedon), below.|
+|[schema:isBasedOn](https://schema.org/isBasedOn)|RECOMMENDED|Array of [rt:RouteGuide](https://openactive.io/RouteGuide)|Provides a means of linking back to the `RouteGuide`s originating site and providing context. See [Describing `RouteGuide` Provenance](#describing-routeguide-provenance-schema-isbasedon), below.|
 |[rt:isJoinableThroughoutLength](https://openactive.io/isJoinableThroughoutLength)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Indicates whether or not it is possible to join the Route at every point along its length - for instance, as in most urban streets and roads. In cases where joining the Route is only possible at selected points (as for instance in many rural Routes with restricted public thoroughfares), these should be modelled using `RoutePoint`s. Defaults to `false`.|
 |[rt:segments](https://openactive.io/segments)|OPTIONAL|Array of [rt:RouteSegmentGuide](https://openactive.io/RouteSegmentGuide)|See [Segmenting Routes](#segmenting-routes-routes-as-a-collection-of-sub-routes)|
 |[rt:segmentGroups](https://openactive.io/segmentGroupings)|OPTIONAL|Array of [rt:RouteSegmentGroup](https://openactive.io/RouteSegmentGroup)|See [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)
@@ -765,9 +765,9 @@ An `rt:RouteDesignation` is a formal, legal declaration of the status of a given
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"RouteDesignation"|
-|[rt:routeDesignationTerm](https://openactive.io/routeDesignationTerm)|REQUIRED|[schema:Text](https://schema.org/Text)|See Example below|
-|[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)||
-|[schema:url](https://schema.org/url)|OPTIONAL|[schema:URL](https://schema.org/URL)||
+|[rt:routeDesignationTerm](https://openactive.io/routeDesignationTerm)|REQUIRED|[schema:Text](https://schema.org/Text)|See example below.|
+|[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)|See example below.|
+|[schema:url](https://schema.org/url)|OPTIONAL|[schema:URL](https://schema.org/URL)|See example below.|
 
 <div class="example">
   <strong>Example: Route Designations in the UK</strong>
@@ -1007,7 +1007,7 @@ To assist users and curators, it is therefore RECOMMENDED to provide links back 
 |--- |--- |--- |--- |
 |`@type`|REQUIRED|String|`CreativeWork`|
 |[schema:publisher](https://schema.org/publisher)|REQUIRED|[schema:Organization](https://schema.org/Organization) of [schema:Person](https://schema.org/Person)|The Organization or Person originally providing the information about the Route|
-|[schema:url](https://schema.org/url)|RECOMMENDED|[schema:URL](https://schema.org/URL)|Link to original hosting site, which may contain additional or contextual information if available.|
+|[schema:url](https://schema.org/url)|RECOMMENDED|[schema:URL](https://schema.org/URL)|Link to a webpage displaying the `RouteGuide`. For a more precise semantics linking the `RouteGuide` to its originating site, see `isBasedOn`, beloow.|
 |[rt:version](https://openactive.io/version)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|The date upon which this `RouteGuide` information was harvested from the providing `schema:publisher`|
 |[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)|Any further relevant information relevant to previous publications of the `RouteGuide` - e.g., any paper publications that might exist, etc.|
 
