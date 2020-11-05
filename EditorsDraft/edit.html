@@ -614,8 +614,10 @@ Note that `RouteGuide` is a subclass of [`schema:CreativeWork`](https://schema.o
 |[rt:additionalInformation](https://openactive.io/additionalInformation)|OPTIONAL|Array of [schema:Article](https://schema.org/Article)|Historical, scientific, or any other information providing interesting background detail regarding the Route. If this information relates to a specific point or structure along the Route, it may be more appropriate to model this as a `pointOfInterest`.|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|e.g., “Parking”, “Toilets”. Where an `amenityFeature` may be modelled as a feature either of `RouteGuide` or of a `RoutePoint`, preference should be given to the `RoutePoint` (that is to say, to the more-specific level of modelling). For further guidance on modelling amenities, see [Describing Amenities](https://www.openactive.io/modelling-opportunity-data/#describing-amenities) in the [Opportunity Specification](https://www.openactive.io/modelling-opportunity-data/)|
 |[rt:isLoop](https://openactive.io/isLoop)|OPTIONAL|Boolean|Whether the route returns to its point of origin|
-|[rt:riskInformation](https://openactive.io/riskInformation)|RECOMMENDED|[rt:RouteRiskAdvisory](https://openactive.io/RouteRiskAdvisory)||
-|[rt:legalAdvisory](https://openactive.io/legalAdvisory)|RECOMMENDED|[rt:RouteLegalAdvisory](https://openactive.io/RouteLegalAdvisory)||
+|[rt:isMaintained](https://openactive.io/isMaintained)|OPTIONAL|Boolean|Indicates whether the Route is actively maintained by e.g. a landowner or charitable organisation. Typically does not apply to urban Routes.|
+|[rt:isMaintainedBy](https://openactive.io/isMaintainedBy)|OPTIONAL|[schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|The Organization or or Person responsible for maintaining the Route. MUST NOT have a value if isMaintained is 'false'.|
+|[rt:riskInformation](https://openactive.io/riskInformation)|RECOMMENDED|Array of [rt:RouteRiskAdvisory](https://openactive.io/RouteRiskAdvisory)||
+|[rt:legalAdvisory](https://openactive.io/legalAdvisory)|RECOMMENDED|Array of [rt:RouteLegalAdvisory](https://openactive.io/RouteLegalAdvisory)||
 |[rt:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|OPTIONAL|Array of [rt:RouteAccessRestriction](https://openactive.io/RouteAccessRestriction)|Restrictions on or obstacles to use of the route|
 |[rt:suggestedEquipment](https://openactive.io/suggestedEquipment)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Items users of the Route are advised to bring. For Routes intended for novice use, advice on footwear, bicycle frame, etc. may not be out of place here.|
 |[schema:image](https://schema.org/image)|OPTIONAL|Array of [schema:ImageObject](https://schema.org/ImageObject)|Images of the Route.|
@@ -831,13 +833,11 @@ Data publishers should be aware that the legal and/or recommended use of recreat
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"RouteRiskAdvisory"|
-|[rt:knownRisks](https://openactive.io/knownRisks)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g., "crime incidence","harrassment reported", "shared with heavy traffic"|
+|[rt:knownRisk](https://openactive.io/knownRisk)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g., "crime incidence","harrassment reported", "shared with heavy traffic"|
 |[rt:riskModifiers](https://openactive.io/riskModifiers)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors influencing knownRisks, e.g. "time of day", "season"|
 |[rt:riskMitigators](https://openactive.io/riskMitigators)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors reducing knownRisks, e.g. "guardrails provided", "well-lit"|
 |[rt:riskDescription](https://openactive.io/riskDescription)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
 |[rt:userSafetyFeedback](https://openactive.io/userSafetyFeedback)|OPTIONAL|[schema:Review](https://schema.org/Review)||
-|[rt:isMaintained](https://openactive.io/isMaintained)|OPTIONAL|Boolean|Indicates whether the Route is actively maintained by e.g. a landowner or charitable organisation. Typically does not apply to urban Routes.|
-|[rt:isMaintainedBy](https://openactive.io/isMaintainedBy)|OPTIONAL|[schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|The Organization or or Person responsible for maintaining the Route. MUST NOT have a value if isMaintained is 'false'.|
 |[rt:riskInformationURL](https://openactive.io/riskInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to a formal definition outlining risk and mitigating factors, e.g. https://vscg.org/guiding-principles/risk-control|
 |[rt:trafficDescription](https://openactive.io/trafficDescription)|OPTIONAL|[schema:Text](https://schema.org/Text)||
 
@@ -848,7 +848,7 @@ Route Access Restrictions convey information regardihg restrictions on use or ac
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"RouteAccessRestriction"|
-|[rt:routeAccessRestrictionTerm](https://openactive.io/routeAccessRestrictionTerm)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g. "Routine maintenance", "Closed in deer mating season", "Dogs not allowed"|
+|[rt:routeAccessRestrictionTerm](https://openactive.io/routeAccessRestrictionTerm)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g. "Routine maintenance", "Closed in deer mating season", "Dogs not allowed"|
 |[schema:description](https://schema.org/description)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
 |[rt:routeAccessRestrictionInformationURL](https://openactive.io/routeAccessRestrictionInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to further advice about the restriction, e.g. https://canalrivertrust.org.uk/notices/winter|
 |[rt:routeAccessRestrictionTimeSpan](https://openactive.io/routeAccessRestrictionTimeSpan)|OPTIONAL|[schema:Text](https://schema.org/Text)|Brief text indicating when the pragmaticRestriction applies, e.g, "Winter", "2020-01-01 to 2020-03-31"|
@@ -935,6 +935,8 @@ The table below indicates which Route Guide properties should be viewed as inher
 |[rt:additionalInformation](https://openactive.io/additionalInformation)|Yes|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|No|
 |[rt:isLoop](https://openactive.io/isLoop)|No|
+|[rt:isMaintained](https://openactive.io/isMaintained)|Yes|
+|[rt:isMaintainedBy](https://openactive.io/isMaintainedBy)|Yes|
 |[rt:riskInformation](https://openactive.io/riskInformation)|Yes|
 |[rt:legalAdvisory](https://openactive.io/legalAdvisory)|Yes|
 |[rt:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|Yes|
