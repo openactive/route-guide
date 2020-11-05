@@ -818,6 +818,13 @@ Because the range of risks users may be concerned with is wide, including such d
 <p>
 To avoid potential confusion between absence of risk information and absence of risk, in cases where no risk information is available it is RECOMMENDED that publishers indicate this explicitly.
 </p>
+<code>
+{
+     "@type": "RouteRiskAdvisory",
+     "identifiedRisk": "No risk information available",
+     "riskDescription": "No active monitoring or risk-assessment activities have been undertaken for this area."
+}
+</code>
 </div>
 
 <div class="note" title="Modelling COVID-19 risk">
@@ -827,7 +834,7 @@ Data publishers should be aware that the legal and/or recommended use of recreat
 <code>
 {
      "@type": "RouteRiskAdvisory",
-     "knownRisks": ["COVID-19 Risk"],
+     "identifiedRisk": "COVID-19 Risk",
      "riskDescription": "Official government guidance regarding participation in outdoor activities changes in accordance with the severity of local epidemic conditions. Individuals wishing to use this trail are advised to check all relevant guidance and ensure that they are complying with all applicable restrictions.",
      "riskInformationURL": "https://www.gov.uk/guidance/local-covid-alert-levels-what-you-need-to-know"
 
@@ -838,9 +845,9 @@ Data publishers should be aware that the legal and/or recommended use of recreat
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|String|"RouteRiskAdvisory"|
-|[rt:knownRisk](https://openactive.io/knownRisk)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g., "crime incidence","harrassment reported", "shared with heavy traffic"|
-|[rt:riskModifiers](https://openactive.io/riskModifiers)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors influencing knownRisks, e.g. "time of day", "season"|
-|[rt:riskMitigators](https://openactive.io/riskMitigators)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors reducing knownRisks, e.g. "guardrails provided", "well-lit"|
+|[rt:identifiedRisk](https://openactive.io/identifiedRisk)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g., "crime incidence","harrassment reported", "shared with heavy traffic"|
+|[rt:riskModifiers](https://openactive.io/riskModifiers)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors influencing identifiedRisks, e.g. "time of day", "season"|
+|[rt:riskMitigators](https://openactive.io/riskMitigators)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors reducing identifiedRisks, e.g. "guardrails provided", "well-lit"|
 |[rt:riskDescription](https://openactive.io/riskDescription)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
 |[rt:userSafetyFeedback](https://openactive.io/userSafetyFeedback)|OPTIONAL|[schema:Review](https://schema.org/Review)||
 |[rt:riskInformationURL](https://openactive.io/riskInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to a formal definition outlining risk and mitigating factors, e.g. https://vscg.org/guiding-principles/risk-control|
