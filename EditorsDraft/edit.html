@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
+  <head>
+    <meta charset='utf-8'/>
+    <title>Route Guide Specification - Editor's Draft</title>
+
+    <script type="text/javascript" class='remove'>
+  var respecConfig = {
+    // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
+    specStatus:     "CG-DRAFT",
+
+    // the specification's short name, as in http://www.w3.org/TR/short-name/
+    shortName:"route-guide-specification",
+
+    // if you wish the publication date to be other than today, set this
+    // publishDate:  "2009-08-06",
+
+    // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
+    // and its maturity status
+    // previousPublishDate:  "1977-03-15",
+    // previousMaturity:  "ED",
+    // previousPublishDate:  "2018-07-29",
+
+    // if there a publicly available Editor's Draft, this is the link
+    // edDraftURI:   "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/",
+    // previousURI:  "https://www.openactive.io/modelling-opportunity-data",
+    //prevED:  "https://www.openactive.io/spec-template/",
+    //previousURI:  "https://www.openactive.io/realtime-paged-data-exchange/0.2.3/",
+    //testSuiteURI: "https://www.openactive.io/endpoint-validator/",
+    copyrightStart: 2018,
+
+    // if this is a LCWD, uncomment and set the end of its review period
+    // lcEnd: "2009-08-05",
+
+    // editors, add as many as you like
+    // only "name" is required
+    editors: [
+    { name: "Timothy Hill", url: "https://theodi.org/person/timothy-hill/",
+company: "Open Data Institute", companyURL: "http://opendata.institute/",
+w3cid: 114402 }
+    ],
+
+    // authors, add as many as you like.
+    // This is optional, uncomment if you have authors as well as editors.
+    // only "name" is required. Same format as editors.
+
+    //authors: [
+    //],
+
+    otherLinks: [
+{
+    key: "Version",
+    value: "1.1 Editor's DRAFT",
+    href: "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/"
+}
+    ],
+
+    logos: [
+{
+  src: 'https://www.openactive.io/assets/openactive-logo-large.png',
+  href: "https://www.openactive.io",
+  alt: "openactive.io",
+  width: 255, //170
+  height: 43, //22
+  id: 'logo'
+}
+    ],
+
+    // extend the bibliography entries
+    //localBiblio: {},
+
+    // name of the WG
+    wg:     "OpenActive Community Group",
+
+    // URI of the public WG page
+    wgURI:  "https://www.w3.org/community/openactive/",
+
+    // name (with the @w3c.org) of the public mailing to which comments are due
+    wgPublicList: "public-openactive",
+
+    // URI of the patent status for this WG, for Rec-track documents
+    // !!!! IMPORTANT !!!!
+    // This is important for Rec-track documents, do not copy a patent URI from a random
+    // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+    // Team Contact.
+    maxTocLevel: 4,
+    preProcess: [ ],
+    isRecTrack:   true,
+    isNoTrack:    true,
+    github: "https://github.com/openactive/routes/",
+    format: "markdown",
+    localBiblio: {
+"JSON-LD": {
+    "href": "https://www.w3.org/TR/json-ld/",
+    "title": "JSON-LD 1.0",
+    "status": "REC",
+    "publisher": "W3C",
+},
+"SCHEMA-ORG": {
+    "href": "https://schema.org/",
+    "title": "Schema.org"
+
+},
+"SKOS": {
+    "href": "https://www.w3.org/TR/skos-primer",
+    "title": "SKOS Simple Knowledge Organization System Primer",
+    "status": "NOTE",
+    "publisher": "W3C",
+},
+"BasicGeo":{
+    "href": "https://www.w3.org/2003/01/geo/",
+    "title": "W3C Semantic Web Interest Group: Basic Geo",
+    "publisher": "SWIG"
+},
+"Publishing-Opportunity-Data": {
+    "href": "https://www.openactive.io/opportunity-data-primer/",
+    "title": "Publishing Opportunity Data: A Primer",
+    "publisher": "OpenActive Community Group",
+},
+"OpenActive-Beta-Namespace": {
+    "href": "https://www.openactive.io/ns-beta/",
+    "title": "OpenActive Beta Namespace",
+    "publisher": "OpenActive Community Group",
+},
+"OpenActive-Vocabulary": {
+    "href": "https://www.openactive.io/ns/",
+    "title": "OpenActive Vocabulary",
+    "publisher": "OpenActive Community Group",
+},
+"Open-Booking-API": {
+    "href": "https://www.openactive.io/open-booking-api/EditorsDraft/index.html",
+    "title": "OpenActive Open Booking API",
+    "publisher": "OpenActive Community Group",
+},
+"OpenActive-Activity-List": {
+    "href": "https://openactive.io/activity-list",
+    "title": "OpenActive Activity List",
+    "publisher": "OpenActive Community Group",
+}
+    }
+  };
+    </script>
+
+    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
+
+    <style>
+    table {border-collapse: collapse; border: 1px solid #bec9d9}
+    td, th {padding: 3px 0.5em; border-left:1px solid black; border-right: 1px solid black; border-bottom:1px solid #E2EDFE;}
+    tr th[colspan] {color: #005A9C; background-color: #FEEDE2; text-align: center}
+    th {color: #005A9C; background-color: #E2EDFE; font-weight: normal;border-bottom:1px solid #BEC9D9;}
+    tbody tr th {text-align: left;}
+    td.nb { font-size: smaller;}
+    .rec, .pr {color: #005A9C; background-color: #99EE99}
+    .ext {background-color: #FFFFFF}
+    .cr, .lcwd {color: #005A9C; background-color: #EEEE99}
+    .wd {color: #005A9C; background-color: #EE9999}
+    .ed, .fpwd  {color: #005A9C; background-color: #FF7777}
+    code {white-space: pre;}
+
+    html {
+background-image: none !important;
+    }
+    body {
+background: white top left fixed no-repeat !important;
+background-size: 25px auto !important;
+background-image: url('https://www.openactive.io/assets/openactive-label-specification.png') !important;
+    }
+    h1 {
+font-family: 'Open Sans',sans-serif !important;
+font-weight: 300 !important;
+color: #3B3089 !important;
+font-size: 220%;
+    }
+    #toc {
+padding-top: 0px !important;
+    }
+    .remove {
+background-colour: yellow;
+    }
+    code {
+  color: #C83500;
+    }
+    em.rfc2119 {
+font-variant: small-caps;
+    }
+
+    </style>
+    <style>
+    body {
+background-size: 25px auto !important;
+    }
+    body.toc-sidebar #toc {
+background-size: 25px auto !important;
+background-attachment: fixed !important;
+    }
+    em.rfc2119 {
+        text-transform:     lowercase;
+        font-variant:       small-caps;
+        font-style:         normal;
+        color:              #900;
+    }
+    </style>
+  </head>
+
+<section id='abstract'>
+This specification introduces a data model to support the publication of data describing
+paths and trails for recreational use. In broad terms it models the kind of information found in a guidebook or trail guide regarding the navigation, use, and enjoyment of recreational routes.
+
+Within this and related documents, the paths, trails, and routes that form the subject of this information are referred to generically as Routes.
+
+The specification is intended to support the publication of such data as open data
+for anyone to access, use and share. It will also guide reusers of this data,
+introducing them to the key concepts relevant to this domain.
+
+Though it is not in itself a geo-representation standard, the model may prove useful in relation to applications with a geo focus, such as apps for routefinding and other kinds of navigation support and guidance.
+
+The specification is an output of the [OpenActive Community Group](http://www.w3.org/community/openactive/)
+and serves as a common reference point for other specifications and outputs of that activity.
+
+The data model introduced in this document has been mapped to existing standards and vocabularies, including
+SKOS ([[SKOS]]) and the Schema.org ([[SCHEMA-ORG]]) types and properties. This existing work provides a
+useful existing framework around which the
+[OpenActive Community Group](http://www.w3.org/community/openactive/) can build additional data standards.
+    </section>
+<section id="sotd" class="introductory"><h2>Status of This Document</h2><p><em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this technical report can be found in the <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at https://www.w3.org/TR/.</em></p>
+  <p>
+User contributions to this document are not only welcomed but are actively solicited and
+should be made via [GitHub Issues](https://github.com/openactive/routes/issues)
+and pull requests. The source code is available on [GitHub](https://github.com/openactive/routes).
+</p>
+
+</section>
+
+<section class="informative">
+## Introduction
+
+The [W3C OpenActive Community Group](http://www.w3.org/community/openactive/) was
+established with the objective of facilitating the sharing and use of
+physical activity data. Open publishing of this data has enormous potential to increase
+participation in physical activities of all kinds. Within this larger concern, routes data occupies a distinctive place, often serving both as an opportunity for self-guided activity and as a site for directed group activities, such as e.g. foot- or bike-races, guided walks, or training routines.
+
+## Requirements
+
+This specification has been developed to meet a broad set of requirements.
+
+### Support continuous curation
+
+Very often, route data is developed incrementally: initially, a bare framework of information is provided, which subsequent users or authorities fill in over time or as part of an organised campaign. The specification thus contains very few REQUIRED fields, but a large number of RECOMMENDED ones, on the assumption that this can help to guide prioritisation of information collection.
+
+### Support a wide variety of route types
+
+In the course of development, it has become apparent that the requirements for different kinds of routes vary greatly - in particular, urban and rural routes have very different profiles. The aim of this specification is to support all forms of non-motorised recreational route use. Thus, while it is unlikely that any one route will leverage all or even the majority of this specification's features, all should ultimately prove useful within the broad spectrum of existing route types.
+
+### Support a wide variety of users
+
+The purpose of the OpenActive initiative is to increase participation in physical activity, particularly amongst those who are currently less active than they would like to be due to barriers of access or enjoyment. Issues of accessibility, safety, and amenities accordingly play an large role in the specification. Though it may be the case that few publishers can currently populate all accessibility and safety fields with sufficient data, the model is deliberately designed prospectively, to support rich modelling in these areas and guide future data-gathering (see 'continuous curation', above).
+
+### Be agnostic to formats and APIs
+
+Reflecting the wide variety of tools and platforms in use, and also that the sector is at an
+early stage in sharing its data more widely, this specification does not prescribe specific
+data formats or APIs. Ideally opportunity data could be published as JSON, XML, CSV or other formats.
+
+### Create an extensible framework
+
+This specification should support extensions to allow it to be customised and revised to meet future
+requirements, as well as the needs of specific communities of data publishers and consumers.
+
+## Scope
+
+This specification defines a data model for information that gives a user guidance for navigation around and enjoyment of a geographic entity, a 'route'. As noted under the opening [Abstract](#abstract), it broadly models the kind of information typically found in a guidebook or pamphlet for a recreational trail, and does not attempt to model the route as a geographical entity __per se__.
+
+The following items are therefore out of scope for this specification:
+
+* Annotation of geo representations such as e.g. shapefiles or GeoJSON files
+* Sophisticated modelling of geographical and topographical features
+
+While `RouteGuide`s may (and in most cases will) be associated with and point to files or representations that  support advanced geo features, the `RouteGuide` standard itself does not; its purpose is enrichment and description of a geographic entity (a 'Route') rather than cartographic representation of this.
+
+## Relationship to other OpenActive standards
+
+Many publishers of `RouteGuide`s will have only this kind of data, and there is no barrier to publishing `RouteGuide`s as standalone data objects in whatever format the publisher deems appropriate. However, for many use-cases data-publishers may find it useful to integrate their `RouteGuide` data with other OpenActive standards.
+
+### Realtime Paged Data Exchange (RPDE)
+
+Generally, the most convenient form for publishing `RouteGuide` data will be as an RPDE feed. This is particularly true in cases where `RouteGuide` data is to be harvested alongside other OpenActive data and/or is frequently updated.
+
+For further information, see the [Realtime Paged Data Exchange 1.0](https://www.w3.org/2017/08/realtime-paged-data-exchange/) specification.
+
+Note one specific implication of publishing RouteGuide data is that:
+
+1. The `lastModfied` attribute **must** be populated
+1. It's value **must** be made available as a Unix 'epoch' value in the `modified` attribute of the RPDE wrapper.
+
+### The Activity List
+
+The [OpenActive Activity List](https://www.openactive.io/activity-list/) is a curated list of canonical identifiers for use across the physical activity sector. It is RECOMMENDED that data-publishers align their activity descriptions with this where appropriate. It is anticipated that the activities most relevant to `RouteGuide`s will typically be:
+
+* [Walking](https://activity-list-editor.openactive.io/en/concepts/_95092977-5a20-4d6e-b312-8fddabe71544.html)
+* [Running](https://activity-list-editor.openactive.io/en/concepts/_72ddb2dc-7d75-424e-880a-d90eabe91381.html)
+* [Cycling](https://activity-list-editor.openactive.io/en/concepts/_4a19873e-118e-43f4-b86e-05acba8fb1de.html)
+* [Equestrian](https://activity-list-editor.openactive.io/en/concepts/_45a372d9-baca-4f6c-859f-04de3efae742.html)
+
+Various sub-classes of these top-level concepts may also be appropriate.
+
+### Modelling Opportunity Data
+
+In cases where a recreational route serves as the site of some planned group activity, this recreational route is best modelled using the `routeGuide` property of the `Event` class, as outlined in the current Modelling Opportunity Data[Editors Draft](https://www.openactive.io/modelling-opportunity-data/EditorsDraft/).
+
+The `RouteGuide` data object itself may be fully represented as the value of this property. Alternatively, it may be populated by a URL that resolves to such a data object.
+
+### The Booking API
+
+Recreational routes are not normally 'bookable', in the sense that one must reserve access to them at a given time, place, and/or price. In cases where this functionality is required, the `RouteGuide` should normally be modelled as a property of an `Event` (or one of its subclasses), and the `Event` then be treated as the bookable entity.
+
+Modelling booking can be complex. Readers with this use-case in mind are advised to consult both the [Modelling Opportunities Data](https://www.openactive.io/modelling-opportunity-data/EditorsDraft) standard and the [Open Booking API](https://www.openactive.io/open-booking-api/EditorsDraft/) standard documentation in detail
+
+## Structure of this document
+
+This specification is divided into three main sections:
+
+1. **Introduction** - provides a broad definition of Route Guide data and goals for this specification
+2. **Data Model** - a data model that maps the key concepts to some standard vocabularies
+3. **Worked Example** - in order to ground the specification and illustrate its application, an extensive worked example (The Avebury Archaeology Walk) is provided.
+
+  </section>
+
+<section id="conformance">
+This specification makes use of the compact IRI Syntax; please refer to the [Compact IRIs](http://www.w3.org/TR/json-ld/#compact-iris) from [[JSON-LD]].
+</section>
+
+  <section>
+# Typographical Conventions
+
+The following typographic conventions are used in this specification:
+
+<dl class="typography">
+  <dt><code>markup</code></dt>
+  <dd>Markup (elements, attributes, properties), machine processable
+values (string, characters, media types), property name, or a
+file name is in a monospace font.</dd>
+  <dt><a href="#" class="internalDFN">Definition</a></strong></dt>
+  <dd>A definition of a term, to be used elsewhere in this or other
+specifications, is underlined and in black.</dd>
+  <dt><a href="">hyperlink</a></dt>
+  <dd>A hyperlink is underlined and in blue.</dd>
+  <dt>&#x5B;<a href="">reference</a>&#x5D;</dt>
+  <dd>A document reference (normative or informative) is enclosed in
+square brackets and links to the references section.</dd>
+</dl>
+
+
+<div class="note">
+Notes are in light green boxes with a green left border and with a "Note" header in green. Notes are normative or informative depending on the whether they are in a normative or informative section, respectively.
+</div>
+<pre class="example">
+Examples are in light khaki boxes, with khaki left border, and with a
+numbered "Example" header in khaki. Examples are always informative.
+The content of the example is in monospace font and may be syntax colored.
+</pre>
+<div class="advisement">
+  <div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Advisement</span></div>
+Advisements are used to highlight important normative statements, in particular best practices.
+</div>
+
+  </section>
+  <section>
+# Data Model
+
+The data model described in the following sections reuses existing standards and vocabularies which
+have then been extended to cover the additional requirements needs to support the publication of
+opportunity data.
+
+The Simple Knowledge Organisation System ([[SKOS]]) is a W3C standard for publishing taxonomies and
+category schemes. It can be used to help publish and organise Activity Lists and to describe
+Physical Activities.
+
+Schema.org [[SCHEMA-ORG]] provides an existing well-used and documented data model for publishing
+data to the web. It provides an existing model for describing Events, Organisations, People, and
+Places.
+
+Both standards are widely used, and can be used to publish data in a variety of structured formats, including
+[[JSON-LD]].
+
+This __[*OpenActive Vocabulary*](https://www.openactive.io/ns/)__ [[OpenActive-Vocabulary]] is a custom vocabulary designed to support the publication of `RouteGuide` data. It defines a number of new terms that extend SKOS and Schema.org to cover additional requirements highlighted in this specification.
+
+Note that the fundamental object-type described in this document (`RouteGuide`) is itself a specialisation and extension of schema.org's [`CreativeWork`](https://schema.org/CreativeWork) type.
+
+## Namespaces
+
+The rest of this specification makes use of the following namespaces:
+
+<dl>
+<dt>`dc:`</dt>
+<dd>`http://purl.org/dc/terms/`</dd>
+<dt>`schema:`</dt>
+<dd>`https://schema.org/`</dd>
+<dt>`skos:`</dt>
+<dd>`http://www.w3.org/2004/02/skos/core#`</dd>
+<dt>`geo:`</dt>
+<dd>`http://www.w3.org/2003/01/geo/wgs84_pos#`<dd>
+<dt>`oa:`</dt>
+<dd>`https://openactive.io/`</dd>
+<dt>`rt:`</dt>
+<dd>`https://openactive.io/routes/`</dd>
+</dl>
+
+<div class="note">
+<p>
+In the following sections all referenced terms have been qualified using their namespace prefix. This highlights the
+source vocabulary in which they have been defined. Terms have also been linked to their definitionsrt:/ad.
+</p>
+<p>
+The examples in each section use [[JSON-LD]] syntax and reference the [OpenActive JSON-LD context](https://openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]], which is accessible at `https://openactive.io/` when using an `Accept` header that includes `application/ld+json`.
+</p>
+<p>
+The context removes the need to use explicit namespace prefixes in the JSON documents. The context also maps the JSON-LD [@type](https://www.w3.org/TR/json-ld/#specifying-the-type) and [@id](https://www.w3.org/TR/json-ld/#node-identifiers) properties to simple keys (`type` and `id`). This further limits the amount of JSON-LD syntax exposed to developers.
+</p>
+</div>
+
+## Data Model Overview
+
+The following table provides a high-level summary of how the concepts introduced in the previous sections map to
+definitions in SKOS, Schema.org and the OpenActive Vocabulary ([[OpenActive-Vocabulary]]).
+
+|Concept|Mapping|Notes|
+|--- |--- |--- |
+|Activity List|[skos:ConceptScheme](https://www.w3.org/2009/08/skos-reference/skos.html#ConceptScheme)|Activity lists are controlled vocabularies and map well to the definition of a SKOS Concept Scheme.|
+|Physical Activity|[skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Individual Physical Activities can be represented as individual SKOS concepts|
+|Place|[schema:Place](https://schema.org/Place)|As well as the general definition of a Place, Schema.org defines sub-types including
+|Organization|[schema:Organization](https://schema.org/Organization)|Covers all types of organisations, including companies, clubs, etc|
+|Person|[schema:Person](https://schema.org/Person)|An individual person|
+
+## Identifying and Linking Resources
+
+This specification adopts the same approach as Schema.org and encourages the use of URLs as unique identifiers for resources.
+
+Where information about Events, Places, Organizations and other types of resource has already been published online, their existing URLs should be used as identifiers to avoid the need to create new identifier
+schemes.
+
+There will generally be a single canonical URL for a resource, e.g. the homepage for an Organization or Place, or
+a public web page advertising an Event.
+
+If there are several different URLs that may be used to identify a resource, it is recommended that systems use:
+
+* a direct link to the resource that avoids redirects
+* a stable link that will resolve to a public web page, accessible to both web browsers and applications
+* a consistent link that will allow reusers to rely on the URL as an identifier, e.g. to merge in updated data
+
+This specification provides three properties for identifying resources:
+
+* `@id` - is used to [assign a globally unique URI to a resource](https://www.w3.org/TR/json-ld/#node-identifiers). This may resolve to further machine-readable
+ information about the resource, e.g. as a reference to an API endpoint. When supplied, this URI <em class="rfc2119">MUST</em> be stable and unchanging over time. Applications harvesting and
+ indexing opportunity data <em class="rfc2119">SHOULD</em> use this as the unique identifier for the resource
+* [schema:url](https://schema.org/url) - provides a link to a public web page about the resource. Further machine-readable metadata
+<em class="rfc2119">MAY</em> be discoverable from that web page. Applications <em class="rfc2119">MUST</em> be able to use this URL as a means for providing users with a link to more information about a resource
+* [schema:identifier](https://schema.org/identifier) - provides a means of sharing other identifiers for a resource, e.g. a company or registration number for an Organization, or an internal identifier for an Event. Other public identifiers can be via a [schema:PropertyValue](https://schema.org/PropertyValue). Applications <em class="rfc2119">MAY</em> use this
+as a unique identifier for the resource, if there is no `@id` available.
+
+In short, the `@id` property provides a unique global identifier, while the `schema:url` provides a means to provide a link to
+a public web page about a resource.
+
+If applicable then publishers may choose to use the same URI for these two properties. If an `@id` property is not provided then
+applications <em class="rfc2119">MAY</em> choose to rely on the value of the [schema:url](https://schema.org/url) property as a unique identifier.
+
+The option to use two different URLs is useful when there is a need to distinguish between a unique identifier and a
+public resource. For example a platform hosting opportunity data may need to assign a unique identifier to a resource that is separate to its public web page.
+
+<pre class="example" title="Simple route description"><code>
+  {
+    "@context": "https://openactive.io/",
+    "type": "RouteGuide",
+    "id": "http://routes.openactive.io/id/12345",
+    "url": "https://www.nationaltrust.org.uk/avebury/trails/avebury-archaeology-walk",
+    "name": "Avebury Archaeology Walk"
+  }
+</code>
+</pre>
+
+In the above example the `@id` property provides a unique identifier across
+the hosting application. But the public URL for the RouteGuide uses a separate,
+customer-specific domain.
+
+## Publishing Route Guide Data
+
+As [noted above](#realtime-paged-data-exchange-rpde), it is possible (and in many cases desirable) to publish Route Guide data as an RPDE feed. In this case, the Route Guide will necessarily be expressed in JSON in a manner conformant to the RPDE specification.
+
+However, the Route Guide specification is in itself format-agnostic. Route Guide data may be published through a variety of channels (downloaded in .zip file, embedded on a web-page, etc.) and in a variety of formats (JSON, XML, microformats, etc.). Considered in terms of the specification itself, the following two expressions are identical:
+
+<pre class="example" title="Simple route description as JSON">
+<code>
+  {
+    "@context": "https://openactive.io/",
+    "@type": "RouteGuide",
+    "@id": "https://routes.openactive.io/id/12345",
+    "url": "https://www.nationaltrust.org.uk/avebury/trails/avebury-archaeology-walk",
+    "name": "Avebury Archaeology Walk"
+  }
+</code>
+</pre>
+
+<pre class="example" title="Simple route description as XML">
+  &lt;rt:RouteGuide xmlns:oa="https://openactive.io/routes/" xmlns:schema="https://schema.org"&gt;
+      &lt;oa:id&gt;https://routes.openactive.io/id/12345&lt;/oa:id&gt;
+      &lt;schema:name&gt;Avebury Archaeology Walk&lt;/schema:name&gt;
+      &lt;schema:url&gt;https://www.nationaltrust.org.uk/avebury/trails/avebury-archaeology-walk&lt;/schema:url&gt;
+  &lt;/rt:RouteGuide&gt;
+</pre>
+It is expected that data publishers will adopt whatever format best suits their use-case and supports their frequency of updating.
+
+<div class="note" title="Embedding RouteGuide JSON in an HTML 5 page">
+In cases where publication is as a JSON object within an HTML 5 page, it is RECOMMENDED that the object be encoded as the contents of a [script element](https://html.spec.whatwg.org/#the-script-element) with a `type` value of `application/json`.
+
+E.g.:
+
+<code>
+  &lt;script type="application/json" id="example"&gt;
+  {
+    "@context": "https://openactive.io/",
+    "@type": "RouteGuide",
+    "@id": "https://routes.openactive.io/id/12345",
+    "url": "https://www.nationaltrust.org.uk/avebury/trails/avebury-archaeology-walk",
+    "name": "Avebury Archaeology Walk"
+  }
+  &lt;/script&gt;
+
+</code>
+</div>
+
+## Required and Optional Properties
+
+The following sections include more detail about the properties available to
+describe each type of resource. Some properties are considered to be essential
+to ensure the provision of a minimally useful set of information about each
+resource. These <em class="rfc2119">REQUIRED</em> properties
+<em class="rfc2119">MUST</em> be provided.
+
+All other properties are considered to be <em class="rfc2119">OPTIONAL</em>.
+Some properties have been marked as <em class="rfc2119">RECOMMENDED</em>.
+Publishers <em class="rfc2119">SHOULD</em> provide these properties if it is
+feasible to do so, as they will improve the quality and usability of their data.
+
+Where data is not available to populate <em class="rfc2119">RECOMMENDED</em> and
+<em class="rfc2119">OPTIONAL</em> properties, publishers
+<em class="rfc2119">MUST</em> exclude these from their data. Published data
+<em class="rfc2119">MUST</em> not include properties with null values, empty
+strings or empty arrays.
+
+Data publishers <em class="rfc2119">MAY</em> include additional properties,
+e.g. from Schema.org or other vocabularies when helpful to describe their data.
+See the section on **Extending the Model** for more information.
+
+Applications that consume opportunity data <em class="rfc2119">MUST</em> ignore
+any properties that they don't understand. This allows data publishing practices
+within the sector to evolve as required.
+
+## Controlled Vocabularies
+
+When the value of a property might be one of a fixed set of values, it can be useful
+to publish that list of values as a "controlled vocabulary".
+
+This allows a publisher to publish the list of values, with supporting documentation
+and definitions in a machine-readable format. We use the existing [[SKOS]]
+standard as a means of publishing these vocabularies.
+
+A number of properties in this data model allow data publishers to use values
+from a controlled vocabulary, e.g. `oa:activity`, `oa:level`, `oa:category`, etc.
+
+Publishers <em class="rfc2119">SHOULD</em> publish the controlled vocabularies referenced from
+their data in a machine-readable format, under an open licence.
+
+The OpenActive Community group MAY create and recommend the use of specific
+controlled vocabularies to help improve the consistency of how data is published.
+
+Publishers SHOULD use values from standard vocabularies where available.
+
+For example, the community group is developing a controlled vocabulary that defines
+a standard activity list. Values from this vocabulary can be used in the `oa:activity`
+property.
+
+The OpenActive Community Group may decide to define and recommend
+some controlled vocabularies for use in these properties. At present the
+values of these properties are left deliberately open to encourage publication
+of open data that may inform future standardisation.
+
+## Describing Route Guides (`rt:RouteGuide`)
+
+The purpose of the __Route Guide__ model is to describe a __Route__: that is to say, while it concerns and points to geographic information, it is not itself a geo-information type.
+
+Route Guides are often generated over an extended period of curation: that is to say, initially sparse information about a Route is  augmented over time, until a full description of the Route emerges. While the Route Guide model is rich, then, the number of REQUIRED fields is relatively small, in keeping with this curation workflow.
+
+Note that `RouteGuide` is a subclass of [`schema:CreativeWork`](https://schema.org/CreativeWork). While any of the properties defined for `CreativeWork` are therefore available for use, the subset listed below, when complemented by the additional OpenActive (`oa:`)- or Routes (`rt:`)-defined properties provided, are proposed as those most applicable to `RouteGuide` modelling.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|`RouteGuide`|
+|@id|REQUIRED|[schema:url](https://schema.org/url)|A URI providing a unique identifier for the resource|
+|[schema:name](https://schema.org/name)|REQUIRED|[schema:Text](https://schema.org/Text)|The name of the Route|
+|[schema:url](https://schema.org/url)|OPTIONAL|[schema:url](https://schema.org/url)|A URL to a web page (or section of a page) describing the Route.|
+|[schema:author](https://schema.org/author)|OPTIONAL|Array of [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|Individual(s) or group(s) responsible for creating the original Route Guide information|
+|[schema:datePublished](https://schema.org/datePublished)|RECOMMENDED|[schema:Date](https://schema.org/Date)|Date the Route Guide was originally published|
+|[schema:dateModified](https://schema.org/dateModified)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|Last point at which route information was added or edited. If this RouteGuide forms an item in an [RPDE feed](https://developer.openactive.io/publishing-data/data-feeds) this value is REQUIRED.|
+|[rt:verificationRecord](https://openactive.io/verificationRecord)|RECOMMENDED|[`rt:VerificationRecord`](https://openactive.io/VerificationRecord)|See below, [Describing Route Verification](#describing-route-verification-oa-verificationrecord).|
+|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|A free text description of the Route.|
+|[schema:headline](https://schema.org/headline)|OPTIONAL|[schema:Text](https://schema.org/Text)|A short summary of the Route, for use as a tagline or preview.|
+|[oa:activity](https://openactive.io/activity)|REQUIRED|Array of [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Specifies one or more physical activities that will take place during an event. The activities should ideally be taken from an activity list. In the context of Route Guides, the activity specified will normally be one or more of https://openactive.io/activity-list#_4a19873e-118e-43f4-b86e-05acba8fb1de ("cycling"), https://openactive.io/activity-list#_95092977-5a20-4d6e-b312-8fddabe71544 ("walking") https://openactive.io/activity-list#_72ddb2dc-7d75-424e-880a-d90eabe91381 ("running"), https://openactive.io/activity-list#_45a372d9-baca-4f6c-859f-04de3efae742 ("Horse riding"), or a narrower term within these. For further guidance, see the Opportunity specification, [Describing Physical Activities](https://www.openactive.io/modelling-opportunity-data/EditorsDraft/#describing-physical-activities)|
+|[rt:distance](https://openactive.io/distance)|REQUIRED|[schema:QuantitativeValue](https://schema.org/QuantitativeValue)|Length of Route. Must include both number and unit.|
+|[rt:indicativeDuration](https://openactive.io/indicativeDuration)|RECOMMENDED|Array of [rt:IndicativeDuration](https://openactive.io/IndicativeDuration)|See [Describing Indicative Duration](#describing-indicative-durations-oa-indicativeduration)|
+|[rt:startPoint](https://openactive.io/startPoint)|REQUIRED|[rt:RoutePoint](https://openactive.io/RoutePoint)|On modelling values here, see below: [Describing Route Points](#describing-route-points-start-end-and-of-interest-oa-routepoint).|
+|[rt:endPoint](https://openactive.io/endPoint)|OPTIONAL|[rt:RoutePoint](https://openactive.io/RoutePoint)|REQUIRED if isLoop is 'false'. On modelling values here, see below: [Describing Route Points](#describing-route-points-start-end-and-of-interest-oa-routepoint).|
+|[rt:pointOfInterest](https://openactive.io/pointOfInterest)|OPTIONAL|Array of [rt:RoutePoint](https://openactive.io/RoutePoint)|Noteworthy points along the Route. On modelling values here, see below: [Describing Route Points](#describing-route-points-start-end-and-of-interest-oa-routepoint).|
+|[rt:accessibiltyDescription](https://openactive.io/accessibilityDescription)|RECOMMENDED|Array of [schema:Text](https://schema.org/Text)|e.g. 'wheelchair friendly', 'hearing loop'|
+|[rt:gradient](https://openactive.io/gradient)|RECOMMENDED|[rt:RouteGradient](https://openactive.io/RouteGradient)||
+|[rt:surface](https://openactive.io/surface)|RECOMMENDED|Array of [schema:Text](https://schema.org/Text)|Should be drawn from the values "Gravel", "Paved", "Bare Earth or Bedrock", "Short Vegetation", "Rough Vegetation or Crop", "Hard Surface (Stoney)", "Hard Surface (Sealed)", or "Boardwalk or Timber".|
+|[rt:routeDifficulty](https://openactive.io/routeDifficulty)|OPTIONAL|Array of [rt:RouteDifficulty](https://openactive.io/RouteDifficulty)|Although typically only one `RouteDiffulty` is expected, Routes suitable for more than one kind of activity (e.g., walking and horse-riding) may require multiple values here.|
+|[rt:geoPath](https://openactive.io/geoPath)|RECOMMENDED|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no mapImage is provided. URL MUST resolve to a file in a format that natively supports geo encoding, e.g. geoJSON or GPX|
+|[rt:mapImage](https://openactive.io/mapImage)|OPTIONAL|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no geoPath is provided.|
+|[oa:category](https://openactive.io/category)|OPTIONAL|Array of [schema:Text](https://schema.org/Text) or [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|e.g. "pushchair-friendly", "family", "forest walk"|
+|[rt:additionalInformation](https://openactive.io/additionalInformation)|OPTIONAL|Array of [schema:Article](https://schema.org/Article)|Historical, scientific, or any other information providing interesting background detail regarding the Route. If this information relates to a specific point or structure along the Route, it may be more appropriate to attach this information to a `pointOfInterest`.|
+|[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|e.g., “Parking”, “Toilets”. Where an `amenityFeature` may be modelled as a feature either of `RouteGuide` or of a `RoutePoint`, preference should be given to the `RoutePoint` (that is to say, to the more-specific level of modelling). For further guidance on modelling amenities, see [Describing Amenities](https://www.openactive.io/modelling-opportunity-data/#describing-amenities) in the [Opportunity Specification](https://www.openactive.io/modelling-opportunity-data/)|
+|[rt:isLoop](https://openactive.io/isLoop)|OPTIONAL|Boolean|Whether the route returns to its point of origin|
+|[rt:isMaintained](https://openactive.io/isMaintained)|OPTIONAL|Boolean|Indicates whether the Route is actively maintained by e.g. a landowner or charitable organisation. Typically does not apply to urban Routes.|
+|[rt:isMaintainedBy](https://openactive.io/isMaintainedBy)|OPTIONAL|[schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|The Organization or or Person responsible for maintaining the Route. MUST NOT have a value if isMaintained is 'false'.|
+|[rt:riskInformation](https://openactive.io/riskInformation)|RECOMMENDED|Array of [rt:RouteRiskAdvisory](https://openactive.io/RouteRiskAdvisory)||
+|[rt:legalAdvisory](https://openactive.io/legalAdvisory)|RECOMMENDED|Array of [rt:RouteLegalAdvisory](https://openactive.io/RouteLegalAdvisory)||
+|[rt:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|OPTIONAL|Array of [rt:RouteAccessRestriction](https://openactive.io/RouteAccessRestriction)|Restrictions on or obstacles to use of the route|
+|[rt:suggestedEquipment](https://openactive.io/suggestedEquipment)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Items users of the Route are advised to bring. For Routes intended for novice use, advice on footwear, bicycle frame, etc. may not be out of place here.|
+|[schema:image](https://schema.org/image)|OPTIONAL|Array of [schema:ImageObject](https://schema.org/ImageObject)|Images of the Route.|
+|[schema:review](https://schema.org/review)|OPTIONAL|Array of [schema:Review](https://schema.org/Review)|User-submitted ratings of the Route.|
+|[schema:contactPoint](https://schema.org/contactPoint)|RECOMMENDED|[schema:ContactPoint](https://schema.org/ContactPoint)|Contact details for those responsible for managing and maintaining the Route. While data-publishers may of course use any attriibutes of `schema:contactPoint` they judge useful, `ContactPoint.telephone`, `ContactPoint.email` and `ContactPoint.url` should be provided as a minimum.|
+|[rt:userGeneratedContent](https://openactive.io/userGeneratedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
+|[schema:isBasedOn](https://schema.org/isBasedOn)|RECOMMENDED|Array of [rt:RouteGuide](https://openactive.io/RouteGuide)|Provides a means of linking back to the `RouteGuide`s originating site and providing context. See [Describing `RouteGuide` Provenance](#describing-routeguide-provenance-schema-isbasedon), below.|
+|[rt:isJoinableThroughoutLength](https://openactive.io/isJoinableThroughoutLength)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Indicates whether or not it is possible to join the Route at every point along its length - for instance, as in most urban streets and roads. In cases where joining the Route is only possible at selected points (as for instance in many rural Routes with restricted public thoroughfares), these should be modelled using `RoutePoint`s. Defaults to `false`.|
+|[rt:segments](https://openactive.io/segments)|OPTIONAL|Array of [rt:RouteSegmentGuide](https://openactive.io/RouteSegmentGuide)|See [Segmenting Routes](#segmenting-routes-routes-as-a-collection-of-sub-routes)|
+|[rt:segmentGroups](https://openactive.io/segmentGroupings)|OPTIONAL|Array of [rt:RouteSegmentGroup](https://openactive.io/RouteSegmentGroup)|See [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)
+
+### Describing Maps: `rt:geoPath` and `rt:mapImage`
+
+Cartographic representations of Routes ('maps', in common parlance) are typically provided in one of two format families: properly geographic format types, such as [GeoJSON](https://geojson.org/) or the [.osm format](https://learnosm.org/en/osm-data/file-formats/), which support sophisticated geo-specific functionality such as distance calculation or route-tracking; and simple images, such as .jpg files, which provide a visual overview of the relevant area but do not offer any further functionality.
+
+The first kind of map should populate the `rt:geoPath` property; for the second, the `rt:mapImage` property should be used. In both cases, the relevant maps are modelled using the schema.org [`Map`](https://schema.org/Map) class. However, the data-profile of these `Maps` will differ slightly.
+
+#### `rt:geoPath`
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"Map"|
+|[schema:mapType](https://schema.org/mapType)|OPTIONAL|A schema.org [`MapCategoryType`](https://schema.org/MapCategoryType) or OpenActive enumeration value (see 'Notes')|May be taken from the [`MapCategoryType`](https://schema.org/MapCategoryType) values defined by schema.org; alternatively, `https://openactive.io/RouteMap`, `https://openactive.io/ElevationMap`, or `https://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `rt:geoPath`, this property is REQUIRED for each `Map`|
+|[schema:url](https://schema.org/url)|REQUIRED|[`schema:URL`](https://schema.org/URL)|A link to the file containing the map.|
+|[schema:encodingFormat](https://schema.org/encodingFormat)|REQUIRED|[`schema:Text`](https://schema.org/Text) or [`schema:URL`](https://schema.org/URL)|The MIME format of the associated file.|
+
+#### `rt:mapImage`
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"Map"|
+|[schema:mapType](https://schema.org/mapType)|OPTIONAL|A schema.org [`mapCategoryType`](https://schema.org/MapCategoryType) enumeration (though see 'Notes')|May be taken from the [`MapCategoryType`](https://schema.org/MapCategoryType) values defined by schema.org; alternatively, `https://openactive.io/RouteMap`, `https://openactive.io/ElevationMap`, and `https://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `rt:geoPath`, this property is REQUIRED for each `Map`|
+|[schema:image](https://schema.org/image)|REQUIRED|[`schema:URL`](https://schema.org/ImageObject)|A link to the image file depicting the map.|
+|[schema:encodingFormat](https://schema.org/encodingFormat)|REQUIRED|[`schema:Text`](https://schema.org/Text) or [`schema:URL`](https://schema.org/URL)|The MIME format of the associated file.|
+
+### Describing Route Points: Start, End, and Of Interest (`rt:RoutePoint`)
+
+Routes are typically characterised by a number of points of special significance along their path. At a minimum, a looping Route will requires at least a single `startPoint` to be usable. Often, however, Routes will also have an `endPoint` and sometimes various other `pointsOfInterest` along the way.
+
+Such points, for the purpose of describing Routes, are a specialisation and extension of Schema.org's  [Place](https://schema.org/Place) type. While all properties defined for [schema:Place](https://schema.org/Place) are thus available to implementers, those listed below are considered to be most applicable to `RouteGuide`s.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"RoutePoint"|
+|[schema:name](https://schema.org/name)|OPTIONAL|[schema:Text](https://schema.org.Text)||
+|[schema:geo](https://schema.org/geo)|OPTIONAL|[schema:GeoCoordinates](https://schema.org/GeoCoordinates)|The geographic co-ordinates, specified as a latitude and longitude of a Place|
+|[rt:isAccessPoint](https://openactive.io/isAccessPoint)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Whether or not it is possible to join the Route as a whole at this point.|
+|[rt:isRecommendedAccessPoint](https://openactive.io/isRecommendedAccessPoint)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Whether or not it is recommended to join the Route as a whole at this point, because of e.g. particular amentities at this point, or because the `RouteGuide` has been specifically tailored to facilitate this particular experience of it. On `RouteGuide` `startPoint` and `endPoint` attributes this defaults to `true`; otherwise it defaults to `false`.|
+|[rt:mapReference](https://openactive.io/mapReference)|OPTIONAL|Array of [rt:MapReference](https://openactive.io/MapReference)||
+|[rt:transportNote](https://openactive.io/transportNote)|OPTIONAL|Array of [rt:TransportNote](https://openactive.io/TransportNote)|Information about how to reach the `RoutePoint`.|
+|[schema:headline](https://schema.org/headline)|OPTIONAL|[schema:Text](https://schema.org/Text)|A short summary description of the RoutePoint, for use as a tagline or preview.|
+|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|A free text description of the RoutePoint.|
+|[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|Used to indicate whether specific amenities are available at a location. The value of this property will be an array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification) objects. For examples and further information see ["Describing Amenities"](https://www.openactive.io/modelling-opportunity-data/#describing-amenities) in the Modelling Opportunity Data specification. Other examples of amenties in a `RouteGuide` context might be a cafe or bicycle parking.|
+|[rt:additionalInformation](https://openactive.io/additionalInformation)|OPTIONAL|Array of [schema:Article](https://schema.org/Article)|Historical, scientific, or any other information providing interesting background detail regarding the RoutePoint.|
+|[rt:userGeneratedContent](https://openactive.io/userGeneratedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images, video, or descriptions of the RoutePoint, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
+|[schema:sameAs](https://schema.org/sameAd)|OPTIONAL|[schema:URL](https://schema.org/URL)|URL of a reference Web page that unambiguously indicates the Place's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.|
+
+### Describing Map References (`rt:MapReference`)
+
+An `rt:MapReference` is simply a geographic reference specified in terms of some widely-used map or series of maps. In the UK, for instance, the Ordnance Survey Explorer and Landranger maps are frequently used to indicate the boundaries within which a geographic entity falls.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"MapReference"|
+|[schema:publisher](https://schema.org/publisher)|REQUIRED|[schema:Organization](https://schema.org/Organization) or [schema:Person](https://schema.org/Person)||
+|[rt:mapSeries](https://openactive.io/mapSeries)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g. 'Explorer', 'Landranger'|
+|[rt:mapNumber](https://openactive.io/mapNumber)|OPTIONAL|[schema:Text](https://schema.org/Text)|REQUIRED if no gridReference supplied|
+|[rt:gridReference](https://openactive.io/gridReference)|OPTIONAL|[schema:Text](https://schema.org/Text)|REQUIRED if no mapNumber supplied|
+
+### Describing Route Gradients (`rt:RouteGradient`)
+
+An `rt:RouteGradient` captures the steepness of climb and descent along a Route. Data providers should bear in mind that many descriptors of gradient are mathematical and/or unstandardised in nature (e.g., when specified in terms of percentages), and may convey little to novice users. The provision of a gradient `description` is therefore RECOMMENDED.
+
+In addition, gradient is often used as a component in, or proxy for, description of the difficulty of completing a given Route. Data publishers should therefore give careful thought as to whether their gradient information is better captured using the `RouteGradient` or `RouteDifficulty` models.
+
+It is important that the gradient information conveyed by the `RouteGradient` object should apply to the entirety of the Route or Route Segment to which it is attached; that is to say, for instance, that gradient averages and total elevation gains and losses MUST be calculated across the entire length of the relevant Route or Route Segment in order to be useful. Where this is not the case, gradient data should either be omitted (as misleading) or additional Route Segments should be created, scoped strictly to the applicability of the gradient data.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"RouteGradient"|
+|[rt:maxGradient](https://openactive.io/maxGradient)|RECOMMENDED|[schema:Text](https://schema.org/Text)|e.g. "7.5%", "4.2°"|
+|[rt:avgGradient](https://openactive.io/avgGradient)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
+|[rt:totalElevationGain](https://openactive.io/totalElevationGain)|OPTIONAL|Integer|Unit is metres.|
+|[rt:totalElevationLoss](https://openactive.io/totalElevationLoss)|OPTIONAL|Integer|Unit is metres.|
+|[rt:gradientTerm](https://openactive.io/gradientTerm)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g. "Easy", "Moderate", "3"|
+|[rt:gradientDefinitionURL](https://openactive.io/gradientDefinitionURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|This will typically be a link to a page describing the meaning of the `gradientTerm` in more detail.|
+|[schema:description](https://schema.org/description)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
+
+### Describing Transport to and from the Route (`rt:TransportNote`)
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"TransportNote"|
+|[rt:transportMode](https://openactive.io/transportMode)|REQUIRED|[schema:Text](https://schema.org/Text)|It is RECOMMENDED that the value of `rt:transportMode` be taken from the following list: https://openactive.io/Bus, https://openactive.io/Rail, https://openactive.io/Bicycle, https://openactive.io/Road, or https://openactive.io/Foot.|
+|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|Instructions for navigation to the destination by means of the `rt:transportMode`|
+
+### Describing Route Difficulty (`rt:RouteDifficulty`)
+
+The `rt:RouteDifficulty` model describes the effort and level of fitness required to successfully complete a Route. Such assessments necessarily contain a strong subjective component, and data publishers are therefore encouraged to use the [`schema:description`](https://schema.org/description) field to ground their assessment in more concrete terms such as `rt:distance`, `rt:gradient`, or `rt:indicativeDuration`, and/or to provide a `difficultyDefinitionURL` further explaining the rationale behind their assessment of difficulty. In addition, values provided in `oa:category` (such as e.g. 'pushchair-friendly') may provide valuable additional context.
+
+<div class="advisement">
+  <div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Difficulty Level and Novice Users</span></div>
+Data publishers are advised that prospective Route users - and in particular novice or beginning walkers - often have difficulty assessing the degree of challenge involved in traversing a Route, either being readily discouraged from Routes they are in fact capable of or, more rarely, finding themselves exhausted or lost in the midst of difficult Routes they are as yet unprepared for. Publishers are accordingly recommended to devote care and attention to the difficulty information they provide, in particular to articulating the significance of the different components (gradient, distance, conditions, etc.) involved in accurately conveying difficulty.
+</div>
+
+
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"RouteDifficulty"|
+|[rt:difficultyTerm](https://openactive.io/difficultyTerm)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g., 'Easy', 'Strenuous'. If this value is taken from a controlled vocabulary, a `rt:difficultyDefinitionURL` SHOULD be provided pointing to the definition of these terms.|
+|[oa:activity](https://openactive.io/activity)|OPTIONAL|[skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Specifies the physical activity for which the [rt:RouteDifficulty](https://schema.org/duration) is relevant. This activity SHOULD ideally be taken from an activity list.|
+|[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)||
+|[rt:difficultyDefinitionURL](https://openactive.io/difficultyDefinitionURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|e.g. https://www.ramblers.org.uk/go-walking/about-group-walks/walks-difficulty.aspx|
+
+### Describing Route Legal Advisories (`rt:RouteLegalAdvisory`)
+
+Users of Routes, particularly in rural areas, need to be apprised of their legal status - that is to say, whether and under what conditions they are legally allowed to avail themselves of all sections of the Route. In most cases this can be done concisely by indicating the `rt:routeDesignation`. Further nuances or exceptional cases should be dealt with in more detail using the `description` and `legalInformationURL` fields.
+
+|Property|Status|Type|
+|--- |--- |--- |
+|@type|REQUIRED|String|"RouteLegalAdvisory"|
+|[rt:routeDesignation](https://openactive.io/routeDesignation)|RECOMMENDED|[rt:RouteDesignation](https://openactive.io/RouteDesignation)|
+|[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)|
+|[rt:legalInformationURL](https://openactive.io/legalInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|
+
+### Describing Indicative Durations (`rt:IndicativeDuration`)
+
+Being able to complete a Route within a given period is important to many users, particularly those who engage infrequently in outdoor activities because they feel pressed for time. While there is considerable variance in individual activity speed, a rough indication of how much time to allow is valued information for many users.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"IndicativeDuration"|
+|[oa:activity](https://openactive.io/activity)|REQUIRED|[[skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Specifies the physical activity for which the [schema:duration](https://schema.org/duration) is relevant. This activity SHOULD ideally be taken from an activity list.|
+|[schema:duration](https://schema.org/duration)|REQUIRED|String|The duration of the event given in [[ISO8601]] format.  Durations MUST NOT be zero length.|
+
+### Describing Route Designations (`rt:RouteDesignation`)
+
+An `rt:RouteDesignation` is a formal, legal declaration of the status of a given Route or Route Segment. As such, any given jurisdiction will define only a finite (usually quite small) number of possible Designations.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"RouteDesignation"|
+|[rt:routeDesignationTerm](https://openactive.io/routeDesignationTerm)|REQUIRED|[schema:Text](https://schema.org/Text)|See example below.|
+|[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)|See example below.|
+|[schema:url](https://schema.org/url)|OPTIONAL|[schema:URL](https://schema.org/URL)|See example below.|
+
+<div class="example">
+  <strong>Example: Route Designations in the UK</strong>
+  <p>
+In the UK, the number of legal statuses a Route might have is quite small,
+and all Routes will therefore be some assortment of:
+</p>
+<ul>
+<li>Footpath</li>
+<li>Bridleway</li>
+<li>Byway Open to All Traffic</li>
+<li>Restricted Byway</li>
+<li>Recreational Route</li>
+<li>National Trail</li>
+<li>Highway Cycle Route</li>
+<li>Other Public Access Route</li>
+<li>Permissive Footpath</li>
+<li>Permissive Bridleway</li>
+<li>Traffic-free Cycle Route</li>
+<li>National Cycle Network</li>
+<li>Danger Area</li>
+<li>Managed Access</li>
+<li>Open Access Land</li>
+<li>Right To Roam</li>
+</ul>
+<p>
+The `routeDesignationTerm` field is reserved for strictly-defined terms such as these, and the `RouteDesignation` `description` property is then intended to hold a formal, legal definition of this `routeDesignationTerm`: for example,
+</p>
+
+<blockquote>
+<b>Restricted byway</b> – on these routes there are restrictions on how you can travel the route. You are permitted to use the route on foot, horseback, bicycle or horse drawn carriage. You cannot use any motorised vehicles along this route.
+</blockquote>
+<p>
+The `url` property is intended to hold a link resolving to a definition or further explanation of this term: see for instance <a href="https://www.ordnancesurvey.co.uk/blog/2011/08/rights-of-way/">https://www.ordnancesurvey.co.uk/blog/2011/08/rights-of-way/</a>.
+</p>
+</div>
+
+### Describing Route Risk Advisories (`rt:RouteRiskAdvisory`)
+
+The purpose of the `rt:RouteRiskAdvisory` model is to describe risks in sufficient detail that users are able to weigh these and feel they are making an adequately-informed choice when deciding to avail themselves of a Route.
+
+Because the range of risks users may be concerned with is wide, including such disparate topics as personal threat, environmental factors, and shared use of Routes with other traffic; because individuals vary widely in the degree of risk they are prepared to tolerate; and because perceptions of risk involve a subjective component the `rt:RouteRiskAdvisory` model is intentionally eclectic and captures information in a variety of styles.
+
+<div class="note">
+<p>
+  While modelling risk is challenging, user research also indicates it is a paramount concern, particularly amongst those who are inexperienced with or hesitant to engage in outdoor activities. Data publishers are RECOMMENDED to provide any and all risk information they can.
+</p>
+<p>
+To avoid potential confusion between absence of risk information and absence of risk, in cases where no risk information is available it is RECOMMENDED that publishers indicate this explicitly.
+</p>
+<code>
+{
+     "@type": "RouteRiskAdvisory",
+     "identifiedRisk": "No risk information available",
+     "riskDescription": "No active monitoring or risk-assessment activities have been undertaken for this area."
+}
+</code>
+</div>
+
+<div class="note" title="Modelling COVID-19 risk">
+<p>
+Data publishers should be aware that the legal and/or recommended use of recreational trails can be affected by COVID-19-related restrictions - as in cases where groups above a certain size or composed of more than one social 'bubble' are involved. Publishers should accoordingly take care to ensure that such constraints are reflected in their Risk Advisories, and provide links to the most current guidance where possible. E.g.,
+</p>
+<code>
+{
+     "@type": "RouteRiskAdvisory",
+     "identifiedRisk": "COVID-19 Risk",
+     "riskDescription": "Official government guidance regarding participation in outdoor activities changes in accordance with the severity of local epidemic conditions. Individuals wishing to use this trail are advised to check all relevant guidance and ensure that they are complying with all applicable restrictions.",
+     "riskInformationURL": "https://www.gov.uk/guidance/local-covid-alert-levels-what-you-need-to-know"
+
+}
+</code>
+</div>
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"RouteRiskAdvisory"|
+|[rt:identifiedRisk](https://openactive.io/identifiedRisk)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g., "crime incidence","harrassment reported", "shared with heavy traffic"|
+|[rt:riskModifiers](https://openactive.io/riskModifiers)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors influencing identifiedRisks, e.g. "time of day", "season"|
+|[rt:riskMitigators](https://openactive.io/riskMitigators)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors reducing identifiedRisks, e.g. "guardrails provided", "well-lit"|
+|[rt:riskDescription](https://openactive.io/riskDescription)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
+|[rt:userSafetyFeedback](https://openactive.io/userSafetyFeedback)|OPTIONAL|[schema:Review](https://schema.org/Review)||
+|[rt:riskInformationURL](https://openactive.io/riskInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to a formal definition outlining risk and mitigating factors, e.g. https://vscg.org/guiding-principles/risk-control|
+|[rt:trafficDescription](https://openactive.io/trafficDescription)|OPTIONAL|[schema:Text](https://schema.org/Text)|A freetext description of the kinds of traffic (e.g. foot, bicycle, equestrian) likely to be encountered on the route, along with any other relevant information - e.g., busy or peak periods, etc.|
+
+### Describing Route Restrictions (`rt:RouteAccessRestriction`)
+
+Route Access Restrictions convey information regardihg restrictions on use or access to the Route that arising from reasons other than legal status, e.g., social convention, wildlife protection, or seasonal factors.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"RouteAccessRestriction"|
+|[rt:routeAccessRestrictionTerm](https://openactive.io/routeAccessRestrictionTerm)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g. "Routine maintenance", "Closed in deer mating season", "Dogs not allowed"|
+|[schema:description](https://schema.org/description)|RECOMMENDED|[schema:Text](https://schema.org/Text)|Further information regarding the nature of the restriction, in the event that the `routeAccessRestrictionTerm` is not sufficiently clear or full on its own.|
+|[rt:routeAccessRestrictionInformationURL](https://openactive.io/routeAccessRestrictionInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to further advice about the restriction, e.g. https://canalrivertrust.org.uk/notices/winter|
+|[rt:routeAccessRestrictionTimeSpan](https://openactive.io/routeAccessRestrictionTimeSpan)|OPTIONAL|[schema:Text](https://schema.org/Text)|Brief text indicating when the AccessRestriction applies, e.g, "Winter", "2020-01-01 to 2020-03-31"|
+
+<div class="note" title="Legal and access restrictions">
+Note that `RouteAccessRestriction` and `RouteLegalAdvisory` are intended to be orthogonal. That is to say, `RouteLegalAdvisory` is intended to capture **only** the legal status of the route, while `RouteAccessRestriction` encompasses all other access barriers, **excluding** legal restrictions. 
+</div>
+
+### Describing Route Verification (`rt:VerificationRecord`)
+
+Because the condition and maintenance status of Routes can change over time, it is important where possible to provide information about the currency of Route information.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|[rt:verifiedBy](https://openactive.io/verifiedBy)|REQUIRED|Array of [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|Person or organisation who has confirmed accuracy of Route information|
+|[rt:dateVerified](https://openactive.io/dateVerified)|REQUIRED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|The most recent date upon which accuracy of Route information was verified by the [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization) responsible. |
+
+
+### Segmenting Routes: Routes as a collection of sub-Routes
+
+In practice, Routes are often broken down into a series of smaller units - so that, for instance, a scenic walk may be described in terms of traversals to various landmarks, or a multi-day cycle tour broken down into individual day or half-day progressions. These smaller units are here referred to as __Route Segments__, and they are described by __Route Segment Guide__.
+
+__Route Segment Guides__ are treated, for the purposes of this specification, as essentially identical to __Route Guides__: that is to say, they are themselves simply small __Route Guides__ that happen to fall in a particular sequence and thereby comprise a larger whole.
+
+Route Segment Guides, then, are identical to Route Guides, with the following exceptions:
+
+1. The presence of a `position` attribute. The value of this attribute MUST be an integer, and the values of the `position` attribute MUST run consecutively for the Route Segments comprising a Route.
+
+1. The availability of an OPTIONAL `alternativeSegmentTo` attribute, in cases where the end user has two alternative `Route Segment`s or series thereof (e.g., a short and steep `Segment` alongside a longer, more leisurely, alternative) to complete their journey.
+
+1. Segments MUST NOT themselves contains Segments. That is to say, the `segments` attribute is FORBIDDEN for Route Segment Guides.
+
+1. Because the parent Route Guide can be assumed to convey the necessary information to users, all attributes are OPTIONAL for Route Segment Guides, even those that marked as REQUIRED for Route Guides.
+
+In addition, the following structural constraints apply:
+
+1. If a Route contains Route Segments at all, it must contain AT LEAST two Segments. That is to say, a Route cannot consist of only a single Segment.
+
+1.  If a Route contains Route Segments at all, these Segments MUST describe the entirety of the Route: there MUST NOT be any 'gaps' left unaccounted for by the Segments.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|"RouteSegmentGuide"||
+|[schema:positioon](https://schema.org/position)|RECOMMENDED|Integer|Indicates the presentation order of `Route Segment`s within the parent Route. This ordering should normally be present, except for unusual situations such as e.g., modelling `RouteGuide`s that are otherwise unsegmented but for access points. In cases where `RouteSegmentGroup`s are provided, this property is REQUIRED (See below, [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)).|
+|[schema:alternativeRouteSegmentGuide](https://schema.org/alternativeSegmentTo)|OPTIONAL|Array of schema:URL|An array of `@id` values pointing to Route Segment Guides describing alternative Route Segments that may be taken in preference to the declaring `Segment`.|
+
+<div class="note">
+The intention of the `position` attribute is to provide a guide regarding presentational order of the `Route Segments` to client applications, which will not necessarily correspond with the physical ordering of `Segments` along the Route. Ordering must thus be sequential even in cases where multiple alternative `Segments` exist.
+</div>
+
+<div class="advisement">
+  <div role="heading" class="note-title marker" id="h-note" aria-level="3"><span>Alternative Segments and Route Properties</span></div>
+Data publishers are cautioned to ensure that properties defined for the `RouteGuide` as a whole - in particular, `routeDifficulty` - remain applicable even once alternative segments are taken into account. If, for instance, one segment is quite difficult and another fairly easy, this SHOULD be indicated clearly at both the Route and Route Segment levels.
+</div>
+
+#### Inheritance semantics between Route Guides and Route Segment Guides
+
+Given that, for the most part, Route Guides and Route Segment Guides contain the same properties, how are they to be distributed between these two similar, but not identical, objects?
+
+Modelling here is to be guided by the principle that some properties (e.g., `publisher`, `author`) are relatively generic, and hence heritable downwards from parent Route Guides to their Route Segment Guide children. Others, however, are specific to one level or another (for example, `distance`: the total length of a Route will necessarily be different from that of its individual Segments).
+
+The table below indicates which Route Guide properties should be viewed as inherited, and which not. A 'Yes' value indicates that values for these properties defined on the parent `Route Guide` should be assumed to be shared by and relevant to children, unless values these properties are also declared on the children. `Route Segment Guide`s. A 'No' indicates they should not: the values given at the `Route Guide` level can be assumed to be untrue or inaccurate in relation to individual Segments.
+
+|Property|Inherited?|
+|--- |--- |
+|`@type`|No|
+|`@id`|Yes|
+|[schema:name](https://schema.org/name)|Yes|
+|[schema:url](https://schema.org/url)|Yes|
+|[schema:author](https://schema.org/author)|Yes|
+|[schema:datePublished](https://schema.org/datePublished)|Yes|
+|[schema:dateModified](https://schema.org/dateModified)|Yes|
+|[rt:verificationRecord](https://openactive.io/verificationRecord)|Yes|
+|[schema:description](https://schema.org/description)|Yes|
+|[schema:headline](https://schema.org/headline)|Yes|
+|[oa:activity](https://openactive.io/activity)|Yes|
+|[rt:distance](https://openactive.io/distance)|No|
+|[rt:indicativeDuration](https://openactive.io/indicativeDuration)|No|
+|[rt:startPoint](https://openactive.io/startPoint)|No|
+|[rt:endPoint](https://openactive.io/endPoint)|No|
+|[rt:pointOfInterest](https://openactive.io/pointOfInterest)|No|
+|[rt:accessibiltyDescription](https://openactive.io/accessibiltyDescription)|Yes|
+|[rt:gradient](https://openactive.io/gradient)|No|
+|[rt:surface](https://openactive.io/surface)|Yes|
+|[rt:routeDifficulty](https://openactive.io/routeDifficulty)|Yes|
+|[rt:geoPath](https://openactive.io/geoPath)|Yes|
+|[rt:mapImage](https://openactive.io/mapImage)|Yes|
+|[oa:category](https://openactive.io/category)|Yes|
+|[rt:additionalInformation](https://openactive.io/additionalInformation)|Yes|
+|[schema:amenityFeature](https://schema.org/amenityFeature)|No|
+|[rt:isLoop](https://openactive.io/isLoop)|No|
+|[rt:isMaintained](https://openactive.io/isMaintained)|Yes|
+|[rt:isMaintainedBy](https://openactive.io/isMaintainedBy)|Yes|
+|[rt:riskInformation](https://openactive.io/riskInformation)|Yes|
+|[rt:legalAdvisory](https://openactive.io/legalAdvisory)|Yes|
+|[rt:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|Yes|
+|[oa:suggestedEquipment](https://openactive.io/suggestedEquipment)|Yes|
+|[schema:image](https://schema.org/image)|Yes|
+|[schema:review](https://schema.org/review)|Yes|
+|[schema:contactPoint](https://schema.org/contactPoint)|Yes|
+|[rt:userGeneratedContent](https://openactive.io/userGeneratedContent)|No|
+|[schema:isBasedOn](https://schema.org/isBasedOn)|Yes|
+|[rt:isJoinableThroughoutLength](https://openactive.io/isJoinableThroughoutLength)|Yes|
+|[rt:segments](https://openactive.io/segments)|N/A|
+|[rt:segmentGroups](https://openactive.io/segmentGroupings)|N/A|
+|[rt:alternativeSegmentTo](https://openactive.io/alternativeSegmentTo)|N/A|
+
+When it comes to cases where a property may be declared either at the level of the Route or Route Segment Guide, modelling decisions must simply be made on the basis of scope: properties declared at the Route Guide level apply to the Route as a whole, and hence of each Segment within it; those declared on a Segment apply ONLY to that particular Segment.
+
+### Grouping Route Segments (`rt:RouteSegmentGroup`)
+
+In the case of exceptionally lengthy routes (see e.g. ExploreKent's [Elham Valley Way](https://s3-eu-west-1.amazonaws.com/explore-kent-bucket/uploads/2015/02/18163918/explore-kent-long-distance-route-elham-valley-way.pdf) walk), individual `Route Segment Guide`s may be grouped together into larger wholes to indicate, e.g., which Segments should ideally be covered in a single day, link together significant sites along the route, etc. In such cases, these larger groupings should be indicated using `rt:RouteSegmentGroup` objects.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"RouteSegmentGroup"|
+|@id|RECOMMENDED|URI|A URI providing a unique, stable identifier for the resource. Note that an `@id` value is REQUIRED if `alternativeGroupTo` is supplied.|
+|[schema:name](https://schema.org/name)|REQUIRED|String|The name of the grouping.|
+|[schema:description](https://schema.org/description)|RECOMMENDED|String|A free text description of the grouping, and the rationale for seeing its member Route Segments as related in some way.|
+|[rt:includesSegments](https://openactive.io/includesSegments)|REQUIRED|Array of [URL](http://schema.org/URL)|The individual `RouteSegmentGuide` objects the `RouteSegmentGroup` comprises, as identified by the value of their `@id`.|
+|[alternativeGroupTo](https://openactive.io/isAlternativeGroupTo)|REQUIRED|Array of [URL](http://schema.org/URL)|Used to indicate that this `RouteSegmentGroup`'s collection of `RouteSegmentGuide`s serves as an alternative to the list of Route Segments given in this `Array` and expressed as a list of `RouteSegmentGuide` `@id`s. Where this value is provided, it is RECOMMENDED that the `description` supply reasons why one or another alternative (e.g. distance, accessibility) might be preferred.  |
+<p></p>
+
+### Providing additional historical, scientific, or cultural information (`schema:Article`)
+
+Many Routes are designed around locations of particular historical, scientific, or cultural interest - or may even link a number of such locations together (as in the case, e.g., of the Canterbury pilgrimate). In such cases, deeper and contextual information in the form of short notes or essays can be central to the visitor experience.
+
+In the context of RouteGuides, such pieces are modelled as [schema:Articles](https://schema.org/Article). While any of the attributes of `schema:Article` are available for modelling purposes, the below are seen as a useful and simple minimum.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|[schema:headline](https://schema.org/headline)|RECOMMENDED|[schema:Text](https://schema.org/Text)|The title, or headline, of the piece|
+|[schema:image]((https://schema.org/image)|OPTIONAL|Array of [schema:URL](https://schema.org/URL) or [schema:ImageObject](https://schema.org/ImageObject)|Images relevant to the text of the Article.|
+|[schema:author]((https://schema.org/author)|OPTIONAL|[schema:Text](https://schema.org/Text)|The author of the Article.|
+|[schema:articleBody]((https://schema.org/articleBody)|REQUIRED|[schema:Text](https://schema.org/Text)|The actual content of the Article.|
+
+### Describing Reviews (`schema:Review`)
+
+User reviews are central to many applications, and are described using schema.org's `Review` model.
+
+Of the many attributes defined for use with `schema:Review`s, the following are anticipated to be the most useful:
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|[schema:reviewBody](https://schema.org/Review)|RECOMMENDED|[schema:Text](https://schema.org/Text)|A short freetext review of the Route or RouteSegment.|
+|[schema:reviewRating](https://schema.org/reviewRating)|RECOMMENDED|[schema:Text](https://schema.org/Text)|A numerical rating (typically out of five) for the Route or RouteGuide.|
+|[schema:author](https://schema.org/author)|RECOMMENDED|[schema:Person](https://schema.org/Person)|The person responsible for the review.|
+
+### Describing User Contributed Content (`rt:userGeneratedContent`)
+
+Users are often prolific in creating a wide range of supplemental material – e.g images, descriptions, GPX track recordings – for Routes, and such contributions can often considerably enrich `RouteGuide` data. The sheer – and open-ended – variety of possible contributions means that they are modelled using `schema:CreativeWork`.
+
+The `schema:CreativeWork` model is extremely flexible, and implementers are encouraged to avail themselves of as much of this flexibility as desired; the properties and usage given below are provided simply as guidance and as potentially useful starting-points.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|String|"CreativeWork"|
+|[schema:creator](https://schema.org/creator)|RECOMMENDED|[Person](http://schema.org/Person)|The individual, howsoever identified (e.g. full name, user handle), responsible for creating the content.|
+|[schema:accountablePerson](http://schema.org/accountablePerson)|RECOMMENDED|[Person](http://schema.org/Person)|In the context of user-generated content, the `accountablePerson` is the editor, curator, or reviewer who approves and if necessary edits the user-contented submissions prior to publication.|
+|[schema:spatialCoverage](https://schema.org/spatialCoverage)|REQUIRED|`schema:Place`|The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content - typically, in this context, the location of the Route, or points along it.|
+|[schema:associatedMedia](https://schema.org/spatialCoverage)|REQUIRED|`schema:MediaObject`|The video, photograph, or other digital object contributed by the user.|
+
+### Describing `RouteGuide` Provenance (`schema:isBasedOn`)
+
+As noted above, `RouteGuide`s are often highly curated, with new information being added by Route maintainers, by users, or by other authors and editors. Because of this, there is a considerable chance of divergence in cases where a single `RouteGuide` has been republished by various organisations or on different websites.
+
+To assist users and curators, it is therefore RECOMMENDED to provide links back to any earlier publications of the `RouteGuide` from which information has been harvested.  Because each earlier publications is also a `RouteGuide`, and hence a [`schema:CreativeWork`], any of the properties characteristic of a `schema:CreativeWork` may be used here. The list below provides a recommended minimum.
+
+|Property|Status|Format|Notes|
+|--- |--- |--- |--- |
+|`@type`|REQUIRED|String|`CreativeWork`|
+|[schema:publisher](https://schema.org/publisher)|REQUIRED|[schema:Organization](https://schema.org/Organization) of [schema:Person](https://schema.org/Person)|The Organization or Person originally providing the information about the Route|
+|[schema:url](https://schema.org/url)|RECOMMENDED|[schema:URL](https://schema.org/URL)|Link to a webpage displaying the `RouteGuide`. For a more precise semantics linking the `RouteGuide` to its originating site, see `isBasedOn`, beloow.|
+|[rt:version](https://openactive.io/version)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|The date upon which this `RouteGuide` information was harvested from the providing `schema:publisher`|
+|[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)|Any further relevant information relevant to previous publications of the `RouteGuide` - e.g., any paper publications that might exist, etc.|
+
+# Worked Example - The Wildlife Walk at Attingham Park
+
+As the specification above is complex and somewhat abstract, a worked, real-life example illustrating one approach to Route Guide modelling is provided here. The data is drawn from The National Trust's Wildlife Walk at Attingham Park; to follow the example, it may be helpful to consult [the originating website](https://www.nationaltrust.org.uk/attingham-park/trails/wildlife-walk-at-attingham-park).
+
+As will be evident from what follows, the intention of the example is not to demonstrate every aspect of the specification's use, nor to indicate how to resolve particularly problematic aspects of modelling e.g. complex paths. It is simply to illustrate a general approach to representation supporting a common use-case, and hence to provide concrete starting points for further work and consideration.
+
+<pre class="example">
+{
+   "@context": ["https://openactive.io", "https://schema.org"],
+   "@id":"https://routes.openactive.io/nt/12345",
+   "@type":"RouteGuide",
+   "name":"Wildlife walk at Attingham Park",
+   "publisher":{
+      "@type":"Organization",
+      "name":"National Trust",
+      "url":"https://www.nationaltrust.org.uk/"
+   },
+   "url":"https://www.nationaltrust.org.uk/attingham-park/trails/wildlife-walk-at-attingham-park",
+   "distance":{
+      "@type":"QuantitativeValue",
+      "value":4,
+      "unitCode":"KTM"
+   },
+   "activity":"https://activity-list-editor.openactive.io/_95092977-5a20-4d6e-b312-8fddabe71544",
+   "mapReference":[
+      {
+         "@type":"MapReference",
+         "publisher":"Ordnance Survey",
+         "mapSeries":"Landranger",
+         "mapNumber":"126"
+      }
+   ],
+   "gradient":{
+      "@type":"RouteGradient",
+      "gradientTerm":"Moderate"
+   },
+   "category":[
+      "Dog-friendly"
+   ],
+   "indicativeDuration":[
+      {
+         "@type":"IndicativeDuration",
+         "activity":"https://activity-list-editor.openactive.io/_95092977-5a20-4d6e-b312-8fddabe71544",
+         "duration":"P45M"
+      },
+      {
+         "@type":"IndicativeDuration",
+         "activity":"https://activity-list-editor.openactive.io/_95092977-5a20-4d6e-b312-8fddabe71544",
+         "duration":"P1H"
+      }
+   ],
+   "image":"https://nt.global.ssl.fastly.net/images/1431730349476-attinghamparkwildlifewalk.jpg?width=1920&auto=webp&crop=16:7",
+   "startPoint":{
+      "@type":"RoutePoint",
+      "landmark":"Attingham Park",
+      "village":"Atcham",
+      "town":"Shrewsbury",
+      "region":"Shropshire",
+      "postalCode":"SY4 4TP",
+      "description":"Visitor Reception",
+      "mapReference":{
+         "@type":"MapReference",
+         "publisher":"Ordnance Survey",
+         "gridReference":"SJ5501109896"
+      },
+      "transportNote":[
+         {
+            "@type":"TransportNote",
+            "transportMode":"https://openactive.io/Foot",
+            "description":"0.5 miles (0.8km) along drive from main gates"
+         },
+         {
+            "@type":"TransportNote",
+            "transportMode":"https://openactive.io/Train",
+            "description":"Shrewsbury, 5 miles (8km)"
+         },
+         {
+            "@type":"TransportNote",
+            "transportMode":"https://openactive.io/Bus",
+            "description":"Please check routes with Arriva bus services, then 0.5 miles (0.8km) walk along drive from main gates"
+         },
+         {
+            "@type":"TransportNote",
+            "transportMode":"https://openactive.io/Road",
+            "description":"The main entrance to Attingham Park is on the B43850 in the village of Atcham, 4 miles (6.4km) south of Shrewsbury"
+         }
+      ]
+   },
+   "isLoop":true,
+   "mapImage":{
+      "@type":"Map",
+      "mapType":"https://openactive.io/RouteMap",
+      "encodingFormat":"image/jpeg",
+      "url":"https://nt.global.ssl.fastly.net/images/mapattinghamwildlifewalkmap.jpg?width=1170&auto=webp&crop=16:9"
+   },
+   "amenityFeature":[
+      {
+         "@type":"LocationFeatureSpecification",
+         "value":"Toilets are in the Stables Courtyard, Bothy and Brewhouse."
+      },
+      {
+         "@type":"LocationFeatureSpecification",
+         "value":"Carriage House café and Mansion tea-room serve a range of food and drink."
+      },
+      {
+         "@type":"LocationFeatureSpecification",
+         "value":"Car parking is free (disabled bays available)."
+      },
+      {
+         "@type":"LocationFeatureSpecification",
+         "value":"Mobility scooters are available to borrow (first come, first served)."
+      },
+      {
+         "@type":"LocationFeatureSpecification",
+         "value":"Normal admission charges to the park apply."
+      }
+   ],
+   "contactPoint":{
+      "telephone":"01743 708162",
+      "email":"attingham@nationaltrust.org.uk",
+      "url":"http://www.nationaltrust.org.uk/attingham-park/"
+   },
+   "description":"This circular walk starts in the Stables Courtyard at Attingham Park and follows the Deer Park walk in the beautiful parkland of this great estate.",
+   "surface":"Walking on a mixture of grass, hoggin and woodland paths, this route is on a combination of level terrain and a few short inclines in the deer park. Paths may be uneven in places and may not be suitable for buggies or mobility scooters in muddy conditions. Please be careful on steps to the ice house.",
+   "segments":[
+      {
+         "@type":"RouteSegmentGuide",
+         "position":1,
+         "description":"From the car park make your way to Visitor Reception and through the Stables Courtyard bearing left towards the Walled Garden. As you walk towards the Walled Garden you are on part of the Mile Walk - a hoggin path designed by Thomas Leggett in 1770 for Noel Hill, the first Lord Berwick of Attingham Park. Hoggin is a mix of gravel, sand and clay ideal for building paths. In 2009, we restored the pond in the adjacent paddock and dugout hundreds of tonnes of hoggin to rebuild the Mile Walk."
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "position":2,
+         "description":"You will pass the Walled Garden on your left as you continue along this section of the Mile Walk. Stop in on your way past to see our historic bee house and new observation bee hive. The observation hive is made of clear acrylic and allows visitors to see the busy bees at work.",
+         "pointofInterest":{
+            "@type":"RoutePoint",
+            "landmark":"Walled Garden",
+            "description":"Attingham's walled garden and orchard were probably built at the same time as the mansion in the 1780s for the first Lord Berwick. This productive area provided the Berwicks with a constant supply of fruit, flowers, vegetables and honey. It is still home to the Attingham bees who can safely be seen hard at work in the observation hive. Family activity: make your way through the orchard to the Shoulder of Mutton playfield to run off some steam or head to the frame yard to help our gardeners water the flowers, fruits and vegetables growing here.",
+            "category":[
+               "Garden"
+            ]
+         }
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "position":3,
+         "description":"At this point the path diverges - bear left following signs for the Deer Park Walk."
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "position":4,
+         "description":"Cross the cable stay bridge over the river Tern. With funding from Natural England this cable stay bridge was constructed in 2009. The new bridge provides improved access for buggies and mobility scooters. Attingham is host to around 5 miles of river, featuring beautiful stretches of the Severn and Tern. Our many ponds are a haven for wildlife of all sorts, from ducks, swans and otters to dragonflies.",
+         "pointofInterest":[
+            {
+               "@type":"RoutePoint",
+               "landmark":"River Tern",
+               "description":"The River Tern is only 30 miles long flowing into the River Severn about a mile downstream. Its source is considered to be a lake in the grounds of Maer Hall in Staffordshire. Family activity: otters have been spotted from the bridge. Is there one in the river or on the river banks today?",
+               "category":[
+                  "Natural"
+               ]
+            }
+         ]
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "position":5,
+         "alternativeRouteSegment":{
+            "@type":"alternativeRouteSegment",
+            "alternativeSegmentTo":8
+         },
+         "description":"At this fork in the path carry straight on up a gentle incline to continue with the walk. At further forks in the path follow signs for the 'Deer Park Walk'. For buggies (in muddy conditions) and mobility scooters follow the right fork labelled 'Shortcut' through the gate which takes you along the bank of the Tern to rejoin the walk at point 8.",
+         "pointofInterest":{
+            "@type":"RoutePoint",
+            "description":"At this point, just through the gate to the deer park you will see an area where families have been building dens. Why not have a go as part of our '50 Things to do before you're 11&#190;'? Please stay in front of the signs that ask you to not go any further into the area due to the deer sanctuary.",
+            "category":[
+               "Activity"
+            ]
+         }
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "position":6,
+         "description":"After walking through the woodland the path opens out along the top of the Deer Park, with the woodland on your left and the deer park to your right. Look closely in the bracken and ferns and you might be lucky to spot some of our deer herd! Please note: during parts of the year sections of the Deer Park may be closed, please follow any signed diversions on your route.",
+         "pointofInterest":{
+            "@type":"RoutePoint",
+            "landmark":"Attingham Deer",
+            "description":"Attingham is home to approximately 250 semi-wild fallow deer, all direct descendents of the fallow deer here at the creation of the Deer Park in 1797. Attingham's last lord Thomas was particularly fond of the deer and fed them daily, with special favourites eating from his hand. Family activity: during the winter you can watch the deer being fed at 2pm on Saturdays, Sundays and every day in the Christmas and half term school holidays (except 25 December).",
+            "category":[
+               "Wildlife"
+            ]
+         }
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "position":7,
+         "description":"Keep walking along the grass path with the woodland on your left, until you get to the Repton Oak. Lots of different animals live in the deer park and woodland areas at Attingham, especially in old trees which are havens for wildlife, bats, birds, insects, mosses and lichens. There are five species of bats at Attingham including over 1,000 pipistrelle bats. Family activity: the barn owl, raven and buzzard are the top predators here - can you spot any flying over the deer park?",
+         "pointofInterest":[
+            {
+               "@type":"RoutePoint",
+               "landmark":"The Repton Oak",
+               "description":"This venerable oak may have started life in the reign of King Edward III (1327-1377), our best guess is that it is about 650 years old. Originally marking the boundary between the parishes of Wroxeter and Atcham this old oak is now one of the wonders of Attingham park.",
+               "category":[
+                  "Historic"
+               ]
+            }
+         ]
+      },
+      {
+         "@type":"RouteSegmentGuide",
+         "position":8,
+         "description":"A short while after passing the Repton Oak the path will begin to lead you down the hill towards the mansion. Go through the gate, across the bridge and turn right to take a look at the Ice House. Please note: There is no light in the ice house and is lit by natural light from its entrance. Be careful walking down the narrow uneven steps into the ice house. After you've visited the ice house follow the path passing the mansion on your right hand side and continue to bear right, past the tea-room and toilets before turning left to return to the Stables Courtyard.",
+         "pointofInterest":{
+            "@type":"RoutePoint",
+            "landmark":"The ice house",
+            "description":"This mound was an ice house probably built for Noel Hill, the first Lord Berwick in the late 18th century; it was converted in 1850 when a wheel pump was installed to provide the mansion with water from the River Tern. Before that, there was a corn mill on this site from the 13th century. Family activity: the ice house is dark and damp and the perfect home for lots of insects - can you find any?",
+            "category":[
+               "Historic"
+            ]
+         },
+         "amenityFeature":[
+            {
+               "@type":"Toilets",
+               "name":"Toilets",
+               "value":true
+            },
+            {
+               "@type":"LocationFeatureSpecification",
+               "name":"Stables Courtyard",
+               "value":true
+            },
+            {
+               "@type":"LocationFeatureSpecification",
+               "name":"Tea-room",
+               "value":true
+            }
+         ]
+      }
+   ]
+}
+</pre>
+
+All example data provided by kind permission of the National Trust
+
+## Extending the Model
+
+The previous sections describe how to publish opportunity data using a combination of existing and new vocabularies.
+But this approach may not address every requirement. Specific applications may need custom extensions and the community may need to
+revise or improve the core model presented here.
+
+Future versions of the specification may have a wider scope, e.g. to support description of facilities, equipment,
+event booking or accreditation schemes for sporting organisations.
+
+With this in mind, the following sections briefly outline some expected ways in which this specification and the practice of
+publishing of opportunity data may evolve.
+
+To support changing practice, consumers of opportunity data <em class="rfc2119">SHOULD</em> be liberal in what they accept
+from data publishers, to allow the use of additional properties.
+
+### Versioning Policy
+
+The broad goal is to ensure that future versions of this specification
+remain backwards compatible. This will ensure that published data remains valid.
+
+The question of how versioning of this specification will relate to other OpenActive standards is currently an open question, and one to be debated in the [W3C OpenActive Group](https://w3c.openactive.io/).
+
+
+### Relationship with Schema.org and SKOS
+
+This specification draws heavily on [[SCHEMA-ORG]] and [[SKOS]] to define its
+core data model. This is supplemented with additional custom types and properties
+that capture additional requirements for the physical activity sector.
+
+The [[SCHEMA-ORG]] and [[SKOS]] specifications define additional properties
+that are not directly referenced in this document.
+
+Rather than reflect the whole of these specifications in this document, we have
+chosen to include those types and properties that:
+
+* are necessary to document a basic framework for publishing opportunity data
+* are useful to highlight to encourage consistent usage across the community
+* have stricter conformance rules that used by [[SCHEMA-ORG]]. For example where
+we have agreed to specific uses of properties to increase quality and consistency
+in how data is being published
+
+However data publishers are free to use any additional types and properties
+where useful. [[SCHEMA-ORG]] in particular provides a source of a wide range
+of additional properties for describing Events, Places, Organisations, etc.
+
+For example an application may wish to share reviews of events, places or
+clubs. The [schema:review](https://schema.org/review) property and its
+related data model can be used for this purpose, without requiring revisions
+to this specification.
+
+### Defining Custom Vocabularies
+
+Individual publishers, or members of the community may identify new requirements
+for publishing opportunity data that are not covered by this specification or
+[[SCHEMA-ORG]].
+
+These new requirements might result in:
+
+* submission of proposals to the OpenActive Community Group for revisions to this
+specification
+* creation of new specifications that support the needs fo specific types of publisher.
+For example a group of publishers might wish to define a detailed specification for
+describing the characteristics of cycle tracks
+* creation of bespoke properties that support the needs of a specific publisher
+and their data users
+
+In all of these cases we encourage discussion of requirements and extensions via
+the OpenActive Community Group, as the primary forum for standarding the
+publication of opportunity data.
+
+#### Defining and Using Custom Namespaces
+
+The data model described in this specification is defined in
+the [OpenActive JSON-LD context](https://openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]].
+
+They <em class="rfc2119">SHOULD</em> also:
+
+* publish public, human-readable documentation that describes their extension,
+including any custom properties, types and controlled vocabularies that are
+being used
+* share the documentation with the OpenActive community group
+* look for opportunities to align their data model with revisions to the
+standard and other extensions defined in the community
+
+Publish <em class="rfc2119">MUST</em> also
+
+* avoid using names for custom types or properties that clash with the core
+data model
+* publish a custom [JSON-LD context](https://www.w3.org/TR/json-ld/#the-context) to provide a machine-readable version of their extension
+* include a reference to their context in their published data
+
+A full tutorial on creating JSON-LD contexts is outside the scope of this specification.
+
+[[JSON-LD]] allows data to be [published with reference to multiple contexts](https://www.w3.org/TR/json-ld/#advanced-context-usage).
+
+Assuming that a JSON-LD context using the prefix `ext:` was published to `https://example.org/custom.jsonld`, then
+the following example shows how to use this extension:
+
+<pre class="example" title="Example of a custom context"><code>
+  {
+    "@context": [
+"https://openactive.io/",
+"https://example.org/custom.jsonld"
+    ],
+    "type": "Event",
+    "ext:myCustomProperty": "foo"
+  }
+</code></pre>
+
+Publishers <em class="rfc2119">MUST NOT</em> use unprefixed property and type
+names.
+
+Using a separate context and prefixed names will help to clarify for users when
+a dataset is referencing one or more extensions.
+
+#### Beta Namespace
+
+The [[OpenActive-Beta-Namespace]] provides a custom namespace that can be used
+by publishers experimenting with new properties that are likely to be added to
+the core specification.
+
+It is defined as a convenience to help document properties that are in active
+testing and review by the community. Publishers <em class="rfc2119">SHOULD NOT</em>
+assume that properties in the `beta` namespace will either be added to the core
+specification or be included in the namespace over the long term.
+
+Publishers needing additional custom properties <em class="rfc2119">SHOULD</em>
+define their own namespace.
+
+  </section>
+
+<section class="informative">
+    Acknowledgements
+    ================
+
+    The editors thank [all members](http://www.w3.org/community/openactive/participants) of the OpenActive CG for contributions of various kinds.
+    </section>
+</html>
