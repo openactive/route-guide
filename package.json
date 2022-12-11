@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "connect-livereload": "^0.5.4",
-    "express": "^4.13.4",
+    "express": "^4.17.3",
     "gulp": "^3.9.1",
     "livereload": "^0.4.1",
     "respec": "github:w3c/respec",
