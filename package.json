@@ -1,19 +1,22 @@
 {
+  "name": "route-guide",
   "version": "0.0.1",
   "homepage": "https://www.openactive.io/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openactive/modelling-opportunity-data/"
+    "url": "https://github.com/openactive/route-guide/"
   },
   "bugs": {
-    "url": "https://github.com/openactive/modelling-opportunity-data/issues"
+    "url": "https://github.com/openactive/route-guide/issues"
+  },
+  "engines": {
+    "node": ">=20 <21"
+  },
+  "scripts": {
+    "dev": "browser-sync start --config bs-config.js"
   },
   "devDependencies": {
-    "connect-livereload": "^0.5.4",
-    "express": "^4.13.4",
-    "gulp": "^3.9.1",
-    "livereload": "^0.4.1",
-    "respec": "github:w3c/respec",
-    "tiny-lr": "^0.2.1"
+    "browser-sync": "^3.0.4",
+    "respec": "^35.6.1"
   }
 }
