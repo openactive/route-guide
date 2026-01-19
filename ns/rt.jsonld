@@ -1,0 +1,210 @@
+{
+  "@context": {
+    "rt": "https://openactive.io/route-guide/ns#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "schema": "https://schema.org/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "rt:accessibiltyDescription",
+      "@type": "rdf:Property",
+      "rdfs:label": "accessibiltyDescription",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "schema:Text",
+      "rdfs:comment": "e.g. 'wheelchair friendly', 'hearing loop'"
+    },
+    {
+      "@id": "rt:additionalInformation",
+      "@type": "rdf:Property",
+      "rdfs:label": "additionalInformation",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "schema:Article",
+      "rdfs:comment": "Historical, scientific, or any other information providing interesting background detail regarding the Route. If this information relates to a specific point or structure along the Route, it may be more appropriate to attach this information to a pointOfInterest."
+    },
+    {
+      "@id": "rt:distance",
+      "@type": "rdf:Property",
+      "rdfs:label": "distance",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "schema:QuantitativeValue",
+      "rdfs:comment": "Length of Route. Must include both number and unit."
+    },
+    {
+      "@id": "rt:endPoint",
+      "@type": "rdf:Property",
+      "rdfs:label": "endPoint",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:RoutePoint",
+      "rdfs:comment": "REQUIRED if isLoop is 'false'. On modelling values here, see below: Describing Route Points."
+    },
+    {
+      "@id": "rt:geoPath",
+      "@type": "rdf:Property",
+      "rdfs:label": "geoPath",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "schema:Map",
+      "rdfs:comment": "REQUIRED if no mapImage is provided. URL MUST resolve to a file in a format that natively supports geo encoding, e.g. geoJSON or GPX"
+    },
+    {
+      "@id": "rt:gradient",
+      "@type": "rdf:Property",
+      "rdfs:label": "gradient",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:RouteGradient"
+    },
+    {
+      "@id": "rt:indicativeDuration",
+      "@type": "rdf:Property",
+      "rdfs:label": "indicativeDuration",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:IndicativeDuration",
+      "rdfs:comment": "See Describing Indicative Duration"
+    },
+    {
+      "@id": "rt:isJoinableThroughoutLength",
+      "@type": "rdf:Property",
+      "rdfs:label": "isJoinableThroughoutLength",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "schema:Boolean",
+      "rdfs:comment": "Indicates whether or not it is possible to join the Route at every point along its length - for instance, as in most urban streets and roads. In cases where joining the Route is only possible at selected points (as for instance in many rural Routes with restricted public thoroughfares), these should be modelled using RoutePoints. Defaults to false."
+    },
+    {
+      "@id": "rt:isLoop",
+      "@type": "rdf:Property",
+      "rdfs:label": "isLoop",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "schema:Boolean",
+      "rdfs:comment": "Whether the route returns to its point of origin"
+    },
+    {
+      "@id": "rt:isMaintained",
+      "@type": "rdf:Property",
+      "rdfs:label": "isMaintained",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "schema:Boolean",
+      "rdfs:comment": "Indicates whether the Route is actively maintained by e.g. a landowner or charitable organisation. Typically does not apply to urban Routes."
+    },
+    {
+      "@id": "rt:isMaintainedBy",
+      "@type": "rdf:Property",
+      "rdfs:label": "isMaintainedBy",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": [
+        "schema:Person",
+        "schema:Organization"
+      ],
+      "rdfs:comment": "The Organization or or Person responsible for maintaining the Route. MUST NOT have a value if isMaintained is 'false'."
+    },
+    {
+      "@id": "rt:legalAdvisory",
+      "@type": "rdf:Property",
+      "rdfs:label": "legalAdvisory",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:RouteLegalAdvisory"
+    },
+    {
+      "@id": "rt:mapImage",
+      "@type": "rdf:Property",
+      "rdfs:label": "mapImage",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "schema:Map",
+      "rdfs:comment": "REQUIRED if no geoPath is provided."
+    },
+    {
+      "@id": "rt:pointOfInterest",
+      "@type": "rdf:Property",
+      "rdfs:label": "pointOfInterest",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:RoutePoint",
+      "rdfs:comment": "Noteworthy points along the Route. On modelling values here, see below: Describing Route Points."
+    },
+    {
+      "@id": "rt:riskInformation",
+      "@type": "rdf:Property",
+      "rdfs:label": "riskInformation",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:RouteRiskAdvisory"
+    },
+    {
+      "@id": "rt:routeAccessRestriction",
+      "@type": "rdf:Property",
+      "rdfs:label": "routeAccessRestriction",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:RouteAccessRestriction",
+      "rdfs:comment": "Restrictions on or obstacles to use of the route"
+    },
+    {
+      "@id": "rt:routeDifficulty",
+      "@type": "rdf:Property",
+      "rdfs:label": "routeDifficulty",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:RouteDifficulty",
+      "rdfs:comment": "Although typically only one RouteDiffulty is expected, Routes suitable for more than one kind of activity (e.g., walking and horse-riding) may require multiple values here."
+    },
+    {
+      "@id": "rt:RouteGuide",
+      "@type": "rdfs:Class",
+      "rdfs:label": "RouteGuide",
+      "rdfs:subClassOf": "schema:CreativeWork",
+      "rdfs:comment": "The purpose of the Route Guide model is to describe a Route: that is to say, while it concerns and points to geographic information, it is not itself a geo-information type."
+    },
+    {
+      "@id": "rt:segmentGroups",
+      "@type": "rdf:Property",
+      "rdfs:label": "segmentGroups",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:RouteSegmentGroup"
+    },
+    {
+      "@id": "rt:segments",
+      "@type": "rdf:Property",
+      "rdfs:label": "segments",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:RouteSegmentGuide",
+      "rdfs:comment": "See Segmenting Routes"
+    },
+    {
+      "@id": "rt:startPoint",
+      "@type": "rdf:Property",
+      "rdfs:label": "startPoint",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:RoutePoint",
+      "rdfs:comment": "On modelling values here, see below: Describing Route Points."
+    },
+    {
+      "@id": "rt:suggestedEquipment",
+      "@type": "rdf:Property",
+      "rdfs:label": "suggestedEquipment",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "schema:Text",
+      "rdfs:comment": "Items users of the Route are advised to bring. For Routes intended for novice use, advice on footwear, bicycle frame, etc. may not be out of place here."
+    },
+    {
+      "@id": "rt:surface",
+      "@type": "rdf:Property",
+      "rdfs:label": "surface",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "schema:Text",
+      "rdfs:comment": "Should be drawn from the values \"Gravel\", \"Paved\", \"Bare Earth or Bedrock\", \"Short Vegetation\", \"Rough Vegetation or Crop\", \"Hard Surface (Stoney)\", \"Hard Surface (Sealed)\", or \"Boardwalk or Timber\"."
+    },
+    {
+      "@id": "rt:userGeneratedContent",
+      "@type": "rdf:Property",
+      "rdfs:label": "userGeneratedContent",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "schema:CreativeWork",
+      "rdfs:comment": "Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication."
+    },
+    {
+      "@id": "rt:verificationRecord",
+      "@type": "rdf:Property",
+      "rdfs:label": "verificationRecord",
+      "schema:domainIncludes": "rt:RouteGuide",
+      "schema:rangeIncludes": "rt:VerificationRecord",
+      "rdfs:comment": "See below, Describing Route Verification."
+    }
+  ]
+}
