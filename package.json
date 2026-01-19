@@ -13,10 +13,13 @@
     "node": ">=20 <21"
   },
   "scripts": {
-    "dev": "browser-sync start --config bs-config.js"
+    "dev": "browser-sync start --config bs-config.js",
+    "ns:extract": "node ns/scripts/ns-extract.mjs",
+    "ns:build": "node ns/scripts/ns-build.mjs"
   },
   "devDependencies": {
     "browser-sync": "^3.0.4",
+    "cheerio": "^1.0.0-rc.12",
     "respec": "^35.6.1"
   }
 }

@@ -47,6 +47,9 @@ cd ..
 # Regenerate file for EditorsDraft only
 respec2html "file://$PWD/EditorsDraft/edit.html" "$PWD/out/EditorsDraft/index.html" "EditorsDraft"
 
+# Build namespace site into out/ns
+npm run ns:build
+
 cd out
 
 # The first and only commit to this new Git repo contains all the
