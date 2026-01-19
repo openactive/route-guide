@@ -1,7 +1,10 @@
 module.exports = {
-  server: true,
-  startPath: "EditorsDraft/edit.html",
-  files: ["EditorsDraft/**/*"],
+  server: {
+    baseDir: ".",
+    directory: true,
+  },
+  startPath: ".",
+  files: ["EditorsDraft/**/*", "out/**/*"],
   ui: false,
   notify: false,
 };
