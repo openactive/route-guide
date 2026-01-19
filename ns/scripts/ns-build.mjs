@@ -2,6 +2,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import jsonld from "jsonld";
+import { Parser as N3Parser, Writer as N3Writer } from "n3";
+
 const THIS_FILE = fileURLToPath(import.meta.url);
 const THIS_DIR = path.dirname(THIS_FILE);
 const ROOT = path.resolve(THIS_DIR, "..", "..");
@@ -113,9 +116,44 @@ function sortByName(a, b) {
   return an.localeCompare(bn);
 }
 
+function termKey(t) {
+  if (!t) return "";
+  return `${t.termType}:${t.value || ""}`;
+}
+
+function quadKey(q) {
+  return `${termKey(q.subject)} ${termKey(q.predicate)} ${termKey(q.object)} ${termKey(q.graph)}`;
+}
+
+async function jsonldToTurtle(doc) {
+  const nquads = await jsonld.toRDF(doc, { format: "application/n-quads" });
+  const parser = new N3Parser({ format: "N-Quads" });
+  const quads = parser.parse(nquads).sort((a, b) => quadKey(a).localeCompare(quadKey(b)));
+
+  const context = doc && typeof doc === "object" ? doc["@context"] : null;
+  const prefixes = context && typeof context === "object" && !Array.isArray(context) ? context : undefined;
+
+  const writer = new N3Writer({ format: "Turtle", prefixes });
+  writer.addQuads(quads);
+
+  const ttl = await new Promise((resolve, reject) => {
+    writer.end((err, result) => {
+      if (err) reject(err);
+      else resolve(result);
+    });
+  });
+
+  return ttl.endsWith("\n") ? ttl : `${ttl}\n`;
+}
+
 async function writeFileEnsured(filePath, content) {
   await fs.mkdir(path.dirname(filePath), { recursive: true });
   await fs.writeFile(filePath, content, "utf8");
+}
+
+async function copyFileEnsured(srcPath, destPath) {
+  await fs.mkdir(path.dirname(destPath), { recursive: true });
+  await fs.copyFile(srcPath, destPath);
 }
 
 async function main() {
@@ -706,6 +744,13 @@ a.ext.ext-attic:hover {
 `;
 
   await writeFileEnsured(path.join(OUT_DIR, "assets", "namespace.css"), css);
+
+  // Copy the authoritative JSON-LD into the published namespace folder.
+  await copyFileEnsured(INPUT, path.join(OUT_DIR, "rt.jsonld"));
+
+  // Generate a Turtle representation alongside JSON-LD.
+  // const ttl = await jsonldToTurtle(json);
+  // await writeFileEnsured(path.join(OUT_DIR, "rt.ttl"), ttl);
 
   // index.html
   const classesList = classes

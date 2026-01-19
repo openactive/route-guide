@@ -20,6 +20,8 @@
   "devDependencies": {
     "browser-sync": "^3.0.4",
     "cheerio": "^1.0.0-rc.12",
+    "jsonld": "^8.3.3",
+    "n3": "^1.26.0",
     "respec": "^35.6.1"
   }
 }
